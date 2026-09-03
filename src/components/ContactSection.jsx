@@ -40,36 +40,25 @@ export const ContactSection = () => {
     
     // Save to central enquiry store for Admin Dashboard
     addEnquiry({
-      name: formData.name,
-      phone: formData.phone,
-      pickup: formData.pickup,
-      drop: formData.drop,
-      date: formData.date,
-      category: formData.category,
-      model: formData.model
-    });
-
-    let vehicleText = 'Custom Travel Enquiry';
-    if (formData.category && formData.model) {
-      vehicleText = `${formData.model} (${formData.category})`;
-    } else if (formData.category) {
-      vehicleText = formData.category;
-    }
-
-    const whatsappUrl = formatWhatsAppMessage({
-      name: formData.name,
-      phone: formData.phone,
-      pickup: formData.pickup,
-      drop: formData.drop,
-      date: formData.date,
-      vehicle: vehicleText
+      name: formData.name || 'Travel Guest',
+      phone: formData.phone || 'N/A',
+      pickup: formData.pickup || 'N/A',
+      drop: formData.drop || 'N/A',
+      date: formData.date || new Date().toISOString().split('T')[0],
+      category: formData.category || 'General',
+      model: formData.model || 'Any Model'
     });
     
     setSubmitted(true);
-    setTimeout(() => {
-      window.open(whatsappUrl, '_blank');
-      setSubmitted(false);
-    }, 300);
+    setFormData({
+      name: '',
+      phone: '',
+      pickup: '',
+      drop: '',
+      date: '',
+      category: '',
+      model: ''
+    });
   };
 
   return (
@@ -326,6 +315,42 @@ export const ContactSection = () => {
         </div>
 
       </div>
+
+      {/* SUBMITTED SUCCESS TICK POPUP MODAL */}
+      {submitted && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity animate-smooth-enter">
+          <div className="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center space-y-4 shadow-2xl border border-slate-100 relative">
+            
+            {/* ANIMATED GREEN TICK CIRCLE */}
+            <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-xs">
+              <svg className="w-9 h-9 stroke-emerald-600 fill-none stroke-[3]" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 13l4 4L19 7"
+                  className="animate-checkmark"
+                />
+              </svg>
+            </div>
+
+            <div className="space-y-1.5">
+              <h3 className="text-xl font-black text-slate-900 tracking-tight">Enquiry Submitted!</h3>
+              <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                Thank you! Your travel details have been logged and sent to our dispatch desk. Our team will contact you shortly.
+              </p>
+            </div>
+
+            <button
+              onClick={() => setSubmitted(false)}
+              className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white text-xs font-extrabold rounded-xl transition-all cursor-pointer shadow-md"
+            >
+              OK, Got it
+            </button>
+
+          </div>
+        </div>
+      )}
+
     </section>
   );
 };

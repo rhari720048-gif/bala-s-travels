@@ -11,6 +11,8 @@ export const FloatingEnquiryCard = ({ className = '' }) => {
   const [selectedModel, setSelectedModel] = useState('');
   const [error, setError] = useState('');
 
+  const [submitted, setSubmitted] = useState(false);
+
   // Available car models based on selected category
   const availableModels = useMemo(() => {
     if (!selectedCategory) return [];
@@ -36,26 +38,17 @@ export const FloatingEnquiryCard = ({ className = '' }) => {
     addEnquiry({
       name: 'Quick Route Guest',
       phone: 'Direct WhatsApp',
-      pickup: pickup,
-      drop: drop,
+      pickup: pickup || 'N/A',
+      drop: drop || 'N/A',
       category: selectedCategory || 'General',
       model: selectedModel || 'Any Model'
     });
     
-    let vehicleText = 'Custom Enquiry';
-    if (selectedCategory && selectedModel) {
-      vehicleText = `${selectedModel} (${selectedCategory})`;
-    } else if (selectedCategory) {
-      vehicleText = selectedCategory;
-    }
-
-    const whatsappUrl = formatWhatsAppMessage({
-      pickup,
-      drop,
-      vehicle: vehicleText
-    });
-    
-    window.open(whatsappUrl, '_blank');
+    setSubmitted(true);
+    setPickup('');
+    setDrop('');
+    setSelectedCategory('');
+    setSelectedModel('');
   };
 
   return (
@@ -199,6 +192,41 @@ export const FloatingEnquiryCard = ({ className = '' }) => {
         </div>
 
       </form>
+
+      {/* SUBMITTED SUCCESS TICK POPUP MODAL */}
+      {submitted && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity animate-smooth-enter">
+          <div className="bg-white rounded-3xl p-6 max-w-xs w-full text-center space-y-3.5 shadow-2xl border border-slate-100 relative">
+            
+            {/* ANIMATED GREEN TICK CIRCLE */}
+            <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-xs">
+              <svg className="w-8 h-8 stroke-emerald-600 fill-none stroke-[3]" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 13l4 4L19 7"
+                  className="animate-checkmark"
+                />
+              </svg>
+            </div>
+
+            <div className="space-y-1">
+              <h4 className="text-lg font-black text-slate-900 tracking-tight">Enquiry Sent!</h4>
+              <p className="text-[11px] text-slate-600 font-medium leading-relaxed">
+                Your route details have been logged in our dispatch desk. We will update you shortly!
+              </p>
+            </div>
+
+            <button
+              onClick={() => setSubmitted(false)}
+              className="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-extrabold rounded-xl transition-all cursor-pointer shadow-md"
+            >
+              OK, Got it
+            </button>
+
+          </div>
+        </div>
+      )}
     </div>
   );
 };
