@@ -1,5 +1,6 @@
 // Central Fleet & Custom Vehicle Store for Bala's Travels Admin & Public Site
 import { fullFleetCategories as defaultCategories } from '../data/fleetData';
+import { db } from './tidb';
 
 const CUSTOM_VEHICLES_KEY = 'balas_travels_custom_vehicles_v1';
 const DELETED_VEHICLES_KEY = 'balas_travels_deleted_vehicles_v1';
@@ -124,6 +125,24 @@ export const addCustomVehicle = (vehicleData) => {
 
     const updated = [newVehicle, ...existing];
     localStorage.setItem(CUSTOM_VEHICLES_KEY, JSON.stringify(updated));
+
+    // Save to TiDB Cloud Database in background
+    db.execute({
+      sql: `INSERT INTO custom_vehicles (id, name, category_title, tagline, seats, ac, luggage, image, description)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON DUPLICATE KEY UPDATE name=VALUES(name);`,
+      args: [
+        newVehicle.id,
+        newVehicle.name,
+        newVehicle.categoryTitle,
+        newVehicle.tagline,
+        newVehicle.specs.seats,
+        newVehicle.specs.ac,
+        newVehicle.specs.luggage,
+        newVehicle.image,
+        newVehicle.description
+      ]
+    }).catch(err => console.warn('TiDB Custom Vehicle Note:', err?.message || err));
 
     // Also ensure category is recorded in custom categories if new
     if (vehicleData.categoryTitle) {
