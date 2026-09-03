@@ -14,10 +14,11 @@ import FleetPage from './pages/FleetPage';
 import VehicleDetailsPage from './pages/VehicleDetailsPage';
 import LocationsPage from './pages/LocationsPage';
 import AboutPage from './pages/AboutPage';
+import BlogsPage from './pages/BlogsPage';
 import AdminPage from './pages/AdminPage';
 
 export function App() {
-  const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'fleet' | 'locations' | 'about' | 'admin'
+  const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'fleet' | 'locations' | 'about' | 'blogs' | 'admin'
   const [selectedVehicleData, setSelectedVehicleData] = useState(null); // { vehicle, categoryTitle }
   const [activeSection, setActiveSection] = useState('home');
 
@@ -79,6 +80,9 @@ export function App() {
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     } else if (sectionId === 'about') {
       setCurrentPage('about');
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    } else if (sectionId === 'blogs') {
+      setCurrentPage('blogs');
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     } else if (sectionId === 'admin') {
       setCurrentPage('admin');
@@ -148,6 +152,8 @@ export function App() {
             ? 'locations'
             : currentPage === 'about'
             ? 'about'
+            : currentPage === 'blogs'
+            ? 'blogs'
             : activeSection
         } 
         onNavigate={handleNavigate} 
@@ -194,6 +200,16 @@ export function App() {
             }}
             onExploreFleet={() => {
               setCurrentPage('fleet');
+              window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+            }}
+          />
+        </div>
+      ) : currentPage === 'blogs' ? (
+        <div className="animate-smooth-enter">
+          <BlogsPage
+            onBackToHome={() => {
+              setCurrentPage('home');
+              window.history.pushState({}, '', '/');
               window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
             }}
           />

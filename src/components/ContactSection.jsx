@@ -294,13 +294,13 @@ export const ContactSection = () => {
                 />
               </div>
 
+              {/* SUBMIT BUTTON */}
               <button
                 type="submit"
-                disabled={submitted}
-                className="w-full py-4 bg-brand-red hover:bg-brand-darkRed text-white font-extrabold text-xs rounded-xl shadow-md transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full py-4 bg-brand-red hover:bg-brand-darkRed text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Send className="w-4 h-4" />
-                <span>{submitted ? 'Opening WhatsApp...' : 'Submit & Enquire via WhatsApp'}</span>
+                <span>Submit Travel Enquiry</span>
               </button>
 
               <p className="text-[10px] text-slate-500 text-center flex items-center justify-center gap-1">
@@ -316,14 +316,20 @@ export const ContactSection = () => {
 
       </div>
 
-      {/* SUBMITTED SUCCESS TICK POPUP MODAL */}
+      {/* SUBMITTED SUCCESS TICK POPUP MODAL (COMPACT MOBILE FRIENDLY) */}
       {submitted && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity animate-smooth-enter">
-          <div className="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center space-y-4 shadow-2xl border border-slate-100 relative">
+        <div 
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-smooth-enter"
+          onClick={() => setSubmitted(false)}
+        >
+          <div 
+            className="bg-white rounded-3xl p-6 max-w-[320px] w-full text-center space-y-4 shadow-2xl border border-slate-100 relative"
+            onClick={(e) => e.stopPropagation()}
+          >
             
             {/* ANIMATED GREEN TICK CIRCLE */}
-            <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-xs">
-              <svg className="w-9 h-9 stroke-emerald-600 fill-none stroke-[3]" viewBox="0 0 24 24">
+            <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-xs">
+              <svg className="w-8 h-8 stroke-emerald-600 fill-none stroke-[3]" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -333,16 +339,16 @@ export const ContactSection = () => {
               </svg>
             </div>
 
-            <div className="space-y-1.5">
-              <h3 className="text-xl font-black text-slate-900 tracking-tight">Enquiry Submitted!</h3>
+            <div className="space-y-1">
+              <h3 className="text-lg font-black text-slate-900 tracking-tight">Form Submitted!</h3>
               <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                Thank you! Your travel details have been logged and sent to our dispatch desk. Our team will contact you shortly.
+                Thank you! Your travel enquiry has been received and sent to our 24/7 dispatch desk. We will contact you shortly.
               </p>
             </div>
 
             <button
               onClick={() => setSubmitted(false)}
-              className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white text-xs font-extrabold rounded-xl transition-all cursor-pointer shadow-md"
+              className="w-full py-2.5 bg-brand-red hover:bg-brand-darkRed text-white text-xs font-extrabold rounded-xl transition-all cursor-pointer shadow-md"
             >
               OK, Got it
             </button>

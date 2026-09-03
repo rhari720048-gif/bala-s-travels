@@ -31,6 +31,7 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
     { id: 'about', label: 'About', href: '#about' },
     { id: 'fleet', label: 'Fleet', href: '#fleet' },
     { id: 'locations', label: 'Locations', href: '#locations' },
+    { id: 'blogs', label: 'Blogs', href: '#blogs' },
     { id: 'customers', label: 'Customers', href: '#customers' },
     { id: 'contact', label: 'Contact', href: '#contact' },
   ];
@@ -41,8 +42,8 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
     if (onNavigate) {
       onNavigate(id);
     }
-    // Only scroll into view for home sections, NOT for standalone Fleet page
-    if (id !== 'fleet') {
+    // Only scroll into view for home sections, NOT for standalone pages
+    if (id !== 'fleet' && id !== 'locations' && id !== 'about' && id !== 'blogs') {
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
