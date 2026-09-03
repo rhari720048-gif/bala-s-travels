@@ -1,10 +1,11 @@
 // Central Fleet & Custom Vehicle Store for Bala's Travels Admin & Public Site
 import { fullFleetCategories as defaultCategories } from '../data/fleetData';
-import { db } from './tidb';
+import { db, compressImage } from './tidb';
 
 const CUSTOM_VEHICLES_KEY = 'balas_travels_custom_vehicles_v1';
 const DELETED_VEHICLES_KEY = 'balas_travels_deleted_vehicles_v1';
 const CUSTOM_CATEGORIES_KEY = 'balas_travels_custom_categories_v1';
+const DELETED_CATEGORIES_KEY = 'balas_travels_deleted_categories_v1';
 
 // Read custom vehicles from localStorage
 export const getCustomVehicles = () => {
@@ -39,36 +40,50 @@ export const getCustomCategories = () => {
   }
 };
 
+// Read deleted categories
+export const getDeletedCategoryTitles = () => {
+  try {
+    const data = localStorage.getItem(DELETED_CATEGORIES_KEY);
+    return data ? JSON.parse(data) : [];
+  } catch (err) {
+    console.error('Error reading deleted category titles:', err);
+    return [];
+  }
+};
+
 // Get combined full fleet categories (Default + Custom - Deleted)
 export const getAllFleetCategories = () => {
   const customVehicles = getCustomVehicles();
   const deletedIds = getDeletedVehicleIds();
   const customCategories = getCustomCategories();
+  const deletedCategories = getDeletedCategoryTitles();
 
   // Clone default categories and ensure unique vehicle IDs
   const categoryMap = new Map();
 
   let globalIndex = 0;
   defaultCategories.forEach(cat => {
-    categoryMap.set(cat.title, {
-      ...cat,
-      vehicles: cat.vehicles
-        .map((v, i) => ({
-          id: v.id || `default-veh-${cat.id || 'cat'}-${i}-${globalIndex++}`,
-          ...v,
-          specs: v.specs || {
-            seats: v.capacity || '5 Seats',
-            ac: 'Dual AC',
-            luggage: '2 Large Bags'
-          }
-        }))
-        .filter(v => !deletedIds.includes(String(v.id)))
-    });
+    if (!deletedCategories.includes(cat.title)) {
+      categoryMap.set(cat.title, {
+        ...cat,
+        vehicles: cat.vehicles
+          .map((v, i) => ({
+            id: v.id || `default-veh-${cat.id || 'cat'}-${i}-${globalIndex++}`,
+            ...v,
+            specs: v.specs || {
+              seats: v.capacity || '5 Seats',
+              ac: 'Dual AC',
+              luggage: '2 Large Bags'
+            }
+          }))
+          .filter(v => !deletedIds.includes(String(v.id)))
+      });
+    }
   });
 
   // Add custom categories if any
   customCategories.forEach(catTitle => {
-    if (!categoryMap.has(catTitle)) {
+    if (!deletedCategories.includes(catTitle) && !categoryMap.has(catTitle)) {
       categoryMap.set(catTitle, {
         id: `custom-cat-${catTitle.toLowerCase().replace(/\s+/g, '-')}`,
         title: catTitle,
@@ -82,7 +97,7 @@ export const getAllFleetCategories = () => {
 
   // Add custom vehicles to their respective categories
   customVehicles.forEach(v => {
-    if (!deletedIds.includes(String(v.id))) {
+    if (!deletedIds.includes(String(v.id)) && !deletedCategories.includes(v.categoryTitle)) {
       if (categoryMap.has(v.categoryTitle)) {
         categoryMap.get(v.categoryTitle).vehicles.unshift(v);
       } else {
@@ -106,6 +121,8 @@ export const getAllFleetCategories = () => {
 export const addCustomVehicle = (vehicleData) => {
   try {
     const existing = getCustomVehicles();
+    const compressedImg = compressImage(vehicleData.image);
+
     const newVehicle = {
       id: `custom-veh-${Date.now()}`,
       name: vehicleData.name,
@@ -116,7 +133,7 @@ export const addCustomVehicle = (vehicleData) => {
         ac: vehicleData.ac || 'Dual AC',
         luggage: vehicleData.luggage || '2 Large Bags'
       },
-      image: vehicleData.image || 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=800',
+      image: compressedImg,
       description: vehicleData.description || 'Premium comfortable vehicle with experienced chauffeur for long distance travel.',
       features: vehicleData.features && vehicleData.features.length > 0 
         ? vehicleData.features 
@@ -167,6 +184,32 @@ export const addCustomCategory = (categoryTitle) => {
     }
   } catch (err) {
     console.error('Error adding custom category:', err);
+  }
+};
+
+// Delete an entire Category
+export const deleteCategory = (categoryTitle) => {
+  try {
+    const trimmed = categoryTitle.trim();
+    const existingDeleted = getDeletedCategoryTitles();
+    if (!existingDeleted.includes(trimmed)) {
+      const updated = [...existingDeleted, trimmed];
+      localStorage.setItem(DELETED_CATEGORIES_KEY, JSON.stringify(updated));
+    }
+
+    const customCats = getCustomCategories();
+    const filteredCats = customCats.filter(c => c !== trimmed);
+    localStorage.setItem(CUSTOM_CATEGORIES_KEY, JSON.stringify(filteredCats));
+
+    db.execute({
+      sql: 'INSERT IGNORE INTO deleted_categories (title) VALUES (?)',
+      args: [trimmed]
+    }).catch(err => console.warn('TiDB Delete Category Note:', err?.message || err));
+
+    return getAllFleetCategories();
+  } catch (err) {
+    console.error('Error deleting category:', err);
+    return getAllFleetCategories();
   }
 };
 

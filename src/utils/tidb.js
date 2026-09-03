@@ -1,4 +1,5 @@
 import { connect } from '@tidbcloud/serverless';
+import { fullFleetCategories } from '../data/fleetData';
 
 // TiDB Cloud Serverless Connection Config
 const host = import.meta.env.VITE_TIDB_HOST || 'gateway01.ap-southeast-1.prod.aws.tidbcloud.com';
@@ -13,7 +14,17 @@ export const db = connect({
   database
 });
 
-// Auto-initialize Database Tables on Startup
+// Helper to compress image data URIs or long URLs
+export const compressImage = (imageStr) => {
+  if (!imageStr) return '/images/crysta.png';
+  if (imageStr.length > 500000) {
+    // Truncate or use lightweight webp fallback if payload is extremely huge
+    return imageStr.slice(0, 300000);
+  }
+  return imageStr;
+};
+
+// Auto-initialize Database Tables and Seed Initial Data
 export const initTiDBTables = async () => {
   try {
     // 1. Enquiries Table
@@ -31,9 +42,9 @@ export const initTiDBTables = async () => {
       );
     `);
 
-    // 2. Custom Vehicles Table
+    // 2. Vehicles Table (Holds all 38 default + custom vehicles)
     await db.execute(`
-      CREATE TABLE IF NOT EXISTS custom_vehicles (
+      CREATE TABLE IF NOT EXISTS vehicles (
         id VARCHAR(100) PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         category_title VARCHAR(100) NOT NULL,
@@ -43,15 +54,65 @@ export const initTiDBTables = async () => {
         luggage VARCHAR(50),
         image TEXT,
         description TEXT,
+        is_custom INT DEFAULT 0,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
     `);
 
-    console.log('✅ TiDB Cloud Serverless database tables verified & ready!');
+    // 3. Blogs Table
+    await db.execute(`
+      CREATE TABLE IF NOT EXISTS blogs (
+        id VARCHAR(100) PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        category VARCHAR(100),
+        excerpt TEXT,
+        author VARCHAR(100) DEFAULT 'Bala Travels Desk',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+
+    // 4. Deleted Categories Table
+    await db.execute(`
+      CREATE TABLE IF NOT EXISTS deleted_categories (
+        title VARCHAR(100) PRIMARY KEY
+      );
+    `);
+
+    // Seed 38 default vehicles into TiDB Cloud if empty
+    const countCheck = await db.execute('SELECT COUNT(*) as cnt FROM vehicles');
+    const rowCount = countCheck?.rows?.[0]?.cnt || countCheck?.rows?.[0]?.['COUNT(*)'] || 0;
+
+    if (rowCount === 0) {
+      console.log('🌱 Seeding 38 vehicles into TiDB Cloud database...');
+      let globalIdx = 0;
+      for (const cat of fullFleetCategories) {
+        for (let i = 0; i < cat.vehicles.length; i++) {
+          const v = cat.vehicles[i];
+          const vId = v.id || `veh-${cat.id}-${i}-${globalIdx++}`;
+          await db.execute({
+            sql: `INSERT IGNORE INTO vehicles (id, name, category_title, tagline, seats, ac, luggage, image, description, is_custom)
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0)`,
+            args: [
+              vId,
+              v.name,
+              cat.title,
+              v.tagline || `${cat.title} Vehicle for Outstation & City Rides`,
+              v.capacity || '5 Seats',
+              'Dual AC',
+              '2 Large Bags',
+              v.image || '/images/crysta.png',
+              v.description || `Clean, comfortable ${v.name} ideal for long tours and city travel.`
+            ]
+          });
+        }
+      }
+    }
+
+    console.log('✅ TiDB Cloud Database tables & 38 vehicles synced successfully!');
   } catch (err) {
-    console.warn('⚠️ TiDB init warning (using offline fallback if unreachable):', err?.message || err);
+    console.warn('⚠️ TiDB init note:', err?.message || err);
   }
 };
 
-// Initialize tables asynchronously
+// Fire initial table verification
 initTiDBTables();

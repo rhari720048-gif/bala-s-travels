@@ -7,7 +7,7 @@ import {
   Plus, X, Image as ImageIcon, Check, Users, Luggage, Wind, Sparkles
 } from 'lucide-react';
 import { getEnquiries, deleteEnquiry } from '../utils/enquiryStore';
-import { getAllFleetCategories, addCustomVehicle, deleteVehicle } from '../utils/vehicleStore';
+import { getAllFleetCategories, addCustomVehicle, deleteVehicle, deleteCategory } from '../utils/vehicleStore';
 
 export const AdminPage = ({ onBackToHome }) => {
   // Read credentials from environment variables with exact requested defaults
@@ -176,6 +176,16 @@ export const AdminPage = ({ onBackToHome }) => {
   const handleDeleteVehicleItem = (vehicleId) => {
     const updated = deleteVehicle(vehicleId);
     setFleetCategories([...updated]);
+  };
+
+  // Handle deleting an entire category from fleet
+  const handleDeleteCategoryItem = (e, catTitle) => {
+    e.stopPropagation();
+    if (window.confirm(`Are you sure you want to delete category "${catTitle}"?`)) {
+      const updated = deleteCategory(catTitle);
+      setFleetCategories([...updated]);
+      setSelectedCatFilter('all');
+    }
   };
 
   // Filtered Enquiries by search query
@@ -662,17 +672,29 @@ export const AdminPage = ({ onBackToHome }) => {
                 </button>
 
                 {fleetCategories.map((cat) => (
-                  <button
+                  <div
                     key={cat.id}
                     onClick={() => setSelectedCatFilter(cat.title)}
-                    className={`px-4 py-2 rounded-xl text-xs font-extrabold whitespace-nowrap transition-all cursor-pointer ${
+                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-extrabold whitespace-nowrap transition-all cursor-pointer border ${
                       selectedCatFilter === cat.title
-                        ? 'bg-brand-red text-white shadow-xs'
-                        : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                        ? 'bg-brand-red text-white border-brand-red shadow-xs'
+                        : 'bg-white text-slate-600 hover:bg-slate-100 border-slate-200'
                     }`}
                   >
-                    {cat.title} ({cat.vehicles.length})
-                  </button>
+                    <span>{cat.title} ({cat.vehicles.length})</span>
+                    <button
+                      type="button"
+                      onClick={(e) => handleDeleteCategoryItem(e, cat.title)}
+                      className={`p-1 rounded-lg transition-colors ${
+                        selectedCatFilter === cat.title
+                          ? 'hover:bg-white/20 text-white/80 hover:text-white'
+                          : 'hover:bg-slate-200 text-slate-400 hover:text-red-600'
+                      }`}
+                      title={`Delete ${cat.title} Category`}
+                    >
+                      <Trash2 className="w-3 h-3" />
+                    </button>
+                  </div>
                 ))}
               </div>
 
