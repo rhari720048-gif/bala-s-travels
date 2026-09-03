@@ -13,9 +13,10 @@ import Footer from './components/Footer';
 import FleetPage from './pages/FleetPage';
 import VehicleDetailsPage from './pages/VehicleDetailsPage';
 import LocationsPage from './pages/LocationsPage';
+import AboutPage from './pages/AboutPage';
 
 export function App() {
-  const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'fleet' | 'locations'
+  const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'fleet' | 'locations' | 'about'
   const [selectedVehicleData, setSelectedVehicleData] = useState(null); // { vehicle, categoryTitle }
   const [activeSection, setActiveSection] = useState('home');
 
@@ -55,6 +56,9 @@ export function App() {
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     } else if (sectionId === 'locations') {
       setCurrentPage('locations');
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    } else if (sectionId === 'about') {
+      setCurrentPage('about');
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     } else {
       if (currentPage !== 'home') {
@@ -97,7 +101,15 @@ export function App() {
       
       {/* STICKY NAVBAR */}
       <Navbar 
-        activeSection={currentPage === 'fleet' || selectedVehicleData ? 'fleet' : currentPage === 'locations' ? 'locations' : activeSection} 
+        activeSection={
+          currentPage === 'fleet' || selectedVehicleData
+            ? 'fleet'
+            : currentPage === 'locations'
+            ? 'locations'
+            : currentPage === 'about'
+            ? 'about'
+            : activeSection
+        } 
         onNavigate={handleNavigate} 
       />
 
@@ -130,6 +142,19 @@ export function App() {
             }}
           />
         </div>
+      ) : currentPage === 'about' ? (
+        <div className="animate-smooth-enter">
+          <AboutPage
+            onBackToHome={() => {
+              setCurrentPage('home');
+              window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+            }}
+            onExploreFleet={() => {
+              setCurrentPage('fleet');
+              window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+            }}
+          />
+        </div>
       ) : (
         <main className="animate-smooth-enter">
           {/* HERO SECTION WITH FLOATING ENQUIRY CARD */}
@@ -141,7 +166,7 @@ export function App() {
           {/* TRUST FEATURES SECTION */}
           <TrustFeatures />
 
-          {/* ABOUT SECTION */}
+          {/* ABOUT SECTION SUMMARY ON HOME */}
           <AboutSection />
 
           {/* FEATURED FLEET (3 INTERACTIVE VEHICLES ON HOME) */}

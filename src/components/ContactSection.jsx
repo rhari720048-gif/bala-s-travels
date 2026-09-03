@@ -58,92 +58,67 @@ export const ContactSection = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* LEFT SIDE: INTERACTIVE LIGHT-THEMED CARDS WITH HOVER ANIMATIONS */}
-          <div className="lg:col-span-5 space-y-4">
+          {/* LEFT SIDE: DIRECT CLEAN CONTACT INFO LISTING (NO BOX CARDS) */}
+          <div className="lg:col-span-5 space-y-8 py-2">
             
-            {/* DIRECT PHONE CARD */}
-            <motion.div 
-              whileHover={{ y: -4, scale: 1.01 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-brand-red/60 transition-all duration-300 space-y-3 group"
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="p-3 bg-brand-lightRed text-brand-red rounded-2xl border border-brand-red/20 group-hover:scale-110 transition-transform">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-xs text-slate-500 font-extrabold uppercase block">Call Us 24/7</span>
-                    <a href={`tel:${PHONE_NUMBER.replace(/\s+/g, '')}`} className="text-lg font-black text-slate-900 group-hover:text-brand-red transition-colors">
-                      {PHONE_NUMBER}
-                    </a>
-                  </div>
-                </div>
-
-                <a 
-                  href={`tel:${PHONE_NUMBER.replace(/\s+/g, '')}`}
-                  className="w-9 h-9 rounded-full bg-slate-100 group-hover:bg-brand-red group-hover:text-white text-slate-600 flex items-center justify-center transition-colors shadow-2xs"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </a>
-              </div>
-              <p className="text-xs text-slate-500">Direct booking desk & instant call assistance across South India.</p>
-            </motion.div>
-
-            {/* WHATSAPP CARD */}
-            <motion.div 
-              whileHover={{ y: -4, scale: 1.01 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              onClick={() => openGeneralWhatsApp()}
-              className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-brand-green/60 transition-all duration-300 space-y-3 cursor-pointer group"
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="p-3 bg-emerald-50 text-brand-green rounded-2xl border border-brand-green/20 group-hover:scale-110 transition-transform">
-                    <MessageCircle className="w-5 h-5 fill-current" />
-                  </div>
-                  <div>
-                    <span className="text-xs text-slate-500 font-extrabold uppercase block">Instant WhatsApp Chat</span>
-                    <span className="text-lg font-black text-slate-900 group-hover:text-brand-green transition-colors">
-                      WhatsApp Desk
-                    </span>
-                  </div>
-                </div>
-
-                <div className="w-9 h-9 rounded-full bg-emerald-50 group-hover:bg-brand-green group-hover:text-white text-brand-green flex items-center justify-center transition-colors shadow-2xs">
-                  <ChevronRight className="w-4 h-4" />
-                </div>
-              </div>
-              <p className="text-xs text-slate-500">Get custom tariff quotes and vehicle photos directly on WhatsApp.</p>
-            </motion.div>
-
-            {/* ADDRESS & HOURS CARD */}
-            <motion.div 
-              whileHover={{ y: -2 }}
-              className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm space-y-4"
-            >
-              <div className="flex items-start gap-3">
-                <div className="p-3 bg-slate-100 text-slate-700 rounded-2xl border border-slate-200">
-                  <MapPin className="w-5 h-5" />
+            {/* DIRECT PHONE DISPLAY */}
+            <div className="space-y-2">
+              <div className="flex items-center gap-3">
+                <div className="p-3 bg-brand-lightRed text-brand-red rounded-2xl shrink-0">
+                  <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-xs text-slate-500 font-extrabold uppercase block">Headquarters & Network</span>
-                  <span className="text-sm font-extrabold text-slate-900 block">Bala's Travels Main Hub</span>
-                  <span className="text-xs text-slate-500 leading-relaxed block mt-1">
-                    Chennai & Pan-South India Operations Desk (Serving Tamil Nadu, Karnataka, Kerala, Andhra Pradesh & Telangana)
+                  <span className="text-xs text-slate-500 font-extrabold uppercase block">Call Us 24/7</span>
+                  <a href={`tel:${PHONE_NUMBER.replace(/\s+/g, '')}`} className="text-xl font-black text-slate-900 hover:text-brand-red transition-colors">
+                    {PHONE_NUMBER}
+                  </a>
+                </div>
+              </div>
+              <p className="text-xs text-slate-600 pl-14">Direct booking desk & instant call assistance across South India.</p>
+            </div>
+
+            {/* WHATSAPP DISPLAY */}
+            <div 
+              onClick={() => openGeneralWhatsApp()}
+              className="space-y-2 cursor-pointer group"
+            >
+              <div className="flex items-center gap-3">
+                <div className="p-3 bg-emerald-50 text-brand-green rounded-2xl shrink-0 group-hover:scale-105 transition-transform">
+                  <MessageCircle className="w-5 h-5 fill-current" />
+                </div>
+                <div>
+                  <span className="text-xs text-slate-500 font-extrabold uppercase block">Instant WhatsApp Chat</span>
+                  <span className="text-xl font-black text-slate-900 group-hover:text-brand-green transition-colors">
+                    WhatsApp Support Desk
                   </span>
                 </div>
               </div>
+              <p className="text-xs text-slate-600 pl-14">Get custom tariff quotes and vehicle photos directly on WhatsApp.</p>
+            </div>
 
-              <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-700">
-                <span className="flex items-center gap-1.5 font-semibold">
-                  <Clock className="w-4 h-4 text-emerald-600" /> Operating 24 Hours / 365 Days
-                </span>
-                <span className="text-[10px] bg-emerald-50 text-emerald-700 px-2.5 py-0.5 rounded-full font-extrabold border border-emerald-200">
-                  ONLINE NOW
-                </span>
+            {/* HEADQUARTERS & NETWORK DISPLAY */}
+            <div className="space-y-3 pt-4 border-t border-slate-200/80">
+              <div className="flex items-start gap-3">
+                <div className="p-3 bg-slate-100 text-slate-700 rounded-2xl shrink-0 mt-0.5">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div className="space-y-1">
+                  <span className="text-xs text-slate-500 font-extrabold uppercase block">Headquarters & Network</span>
+                  <span className="text-base font-extrabold text-slate-900 block">Bala's Travels Main Hub</span>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    Ashok Nagar, Jawahar Nagar, West Jafferkhanpet, Chennai, Tamil Nadu – 600083
+                  </p>
+                  <p className="text-[11px] text-slate-500 font-medium">
+                    Serving Tamil Nadu, Karnataka, Kerala, Andhra Pradesh & Telangana
+                  </p>
+                </div>
               </div>
-            </motion.div>
+
+              <div className="flex items-center gap-2 text-xs text-emerald-700 font-bold pl-14">
+                <Clock className="w-4 h-4 text-emerald-600" />
+                <span>Operating 24 Hours / 365 Days</span>
+              </div>
+            </div>
 
           </div>
 
