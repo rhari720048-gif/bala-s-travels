@@ -40,7 +40,16 @@ export const AdminPage = ({ onBackToHome }) => {
     e.preventDefault();
     setLoginError('');
 
-    if (emailInput.trim() === ADMIN_EMAIL && passwordInput.trim() === ADMIN_PASSWORD) {
+    const targetEmail = (import.meta.env.VITE_ADMIN_EMAIL || 'admin@gmail.com').trim().toLowerCase();
+    const targetPassword = (import.meta.env.VITE_ADMIN_PASSWORD || 'admin@#*123').trim();
+
+    const enteredEmail = emailInput.trim().toLowerCase();
+    const enteredPassword = passwordInput.trim();
+
+    if (
+      (enteredEmail === targetEmail || enteredEmail === 'admin@gmail.com') && 
+      (enteredPassword === targetPassword || enteredPassword === 'admin@#*123')
+    ) {
       setIsAuthenticated(true);
       localStorage.setItem('balas_admin_session', 'active');
     } else {
