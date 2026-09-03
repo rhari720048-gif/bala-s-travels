@@ -44,13 +44,24 @@ export const getAllFleetCategories = () => {
   const deletedIds = getDeletedVehicleIds();
   const customCategories = getCustomCategories();
 
-  // Clone default categories
+  // Clone default categories and ensure unique vehicle IDs
   const categoryMap = new Map();
 
+  let globalIndex = 0;
   defaultCategories.forEach(cat => {
     categoryMap.set(cat.title, {
       ...cat,
-      vehicles: cat.vehicles.filter(v => !deletedIds.includes(String(v.id)))
+      vehicles: cat.vehicles
+        .map((v, i) => ({
+          id: v.id || `default-veh-${cat.id || 'cat'}-${i}-${globalIndex++}`,
+          ...v,
+          specs: v.specs || {
+            seats: v.capacity || '5 Seats',
+            ac: 'Dual AC',
+            luggage: '2 Large Bags'
+          }
+        }))
+        .filter(v => !deletedIds.includes(String(v.id)))
     });
   });
 
