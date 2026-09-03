@@ -45,14 +45,14 @@ const INITIAL_SAMPLE_ENQUIRIES = [
 export const getEnquiries = () => {
   try {
     const data = localStorage.getItem(ENQUIRIES_STORAGE_KEY);
-    if (!data) {
+    if (data === null) {
       localStorage.setItem(ENQUIRIES_STORAGE_KEY, JSON.stringify(INITIAL_SAMPLE_ENQUIRIES));
       return INITIAL_SAMPLE_ENQUIRIES;
     }
     return JSON.parse(data);
   } catch (err) {
     console.error('Error reading enquiries:', err);
-    return INITIAL_SAMPLE_ENQUIRIES;
+    return [];
   }
 };
 
@@ -73,36 +73,27 @@ export const addEnquiry = (enquiryData) => {
     };
     const updated = [newEnquiry, ...existing];
     localStorage.setItem(ENQUIRIES_STORAGE_KEY, JSON.stringify(updated));
-    return newEnquiry;
-  } catch (err) {
-    console.error('Error adding enquiry:', err);
-  }
-};
-
-export const updateEnquiryStatus = (id, newStatus) => {
-  try {
-    const existing = getEnquiries();
-    const updated = existing.map(item => 
-      item.id === id ? { ...item, status: newStatus } : item
-    );
-    localStorage.setItem(ENQUIRIES_STORAGE_KEY, JSON.stringify(updated));
     return updated;
   } catch (err) {
-    console.error('Error updating status:', err);
+    console.error('Error adding enquiry:', err);
+    return [];
   }
 };
 
 export const deleteEnquiry = (id) => {
   try {
     const existing = getEnquiries();
-    const updated = existing.filter(item => item.id !== id);
+    const targetIdStr = String(id).trim();
+    const updated = existing.filter(item => String(item.id).trim() !== targetIdStr);
     localStorage.setItem(ENQUIRIES_STORAGE_KEY, JSON.stringify(updated));
     return updated;
   } catch (err) {
     console.error('Error deleting enquiry:', err);
+    return [];
   }
 };
 
 export const clearAllEnquiries = () => {
-  localStorage.removeItem(ENQUIRIES_STORAGE_KEY);
+  localStorage.setItem(ENQUIRIES_STORAGE_KEY, JSON.stringify([]));
+  return [];
 };

@@ -65,7 +65,7 @@ export const AdminPage = ({ onBackToHome }) => {
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this enquiry record?')) {
       const updated = deleteEnquiry(id);
-      if (updated) setEnquiries(updated);
+      setEnquiries([...updated]);
     }
   };
 
