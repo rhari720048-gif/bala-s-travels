@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-display: 'Outfit', sans-serif;
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+
+  --color-brand-red: #D9232D;
+  --color-brand-darkRed: #B91C1C;
+  --color-brand-lightRed: #FFF1F2;
+  --color-brand-black: #0F172A;
+  --color-brand-dark: #111827;
+  --color-brand-cardDark: #1E293B;
+  --color-brand-greyBg: #F8FAFC;
+  --color-brand-green: #25D366;
+  --color-brand-darkGreen: #128C7E;
+  
+  --shadow-card: 0 10px 30px -5px rgba(0, 0, 0, 0.08);
+  --shadow-elevated: 0 20px 40px -15px rgba(0, 0, 0, 0.12);
+  --shadow-floating: 0 25px 50px -12px rgba(0, 0, 0, 0.18);
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+  color: #111827;
+  background-color: #FFFFFF;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* 60FPS HARDWARE-ACCELERATED GPU COMPOSITOR ANIMATIONS (ZERO LAG) */
+
+/* GPU Layer Promotion */
+.gpu-accelerated {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Ultra-Smooth Card Micro-Interactions */
+.smooth-card-card {
+  will-change: transform, box-shadow;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+  transform: translateZ(0);
+}
+
+.smooth-card-card:hover {
+  transform: translateY(-5px) translateZ(0);
+  box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.12);
+}
+
+.smooth-card-card:active {
+  transform: translateY(-1px) scale(0.985) translateZ(0);
+  transition-duration: 0.1s;
+}
+
+/* Smooth Car Image Pop-Out */
+.smooth-car-img {
+  will-change: transform;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateZ(0);
+}
+
+.smooth-card-card:hover .smooth-car-img {
+  transform: scale(1.08) translateY(-4px) translateZ(0);
+}
+
+/* Smooth Entrance Keyframe */
+@keyframes smoothPageEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) translateZ(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+  }
+}
+
+.animate-smooth-enter {
+  animation: smoothPageEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}

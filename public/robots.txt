@@ -1,0 +1,25 @@
+# Robots.txt for Bala's Travels (SEO & AI Generative Engine Optimization - GEO)
+User-agent: *
+Allow: /
+
+# Allow AI Search Crawlers (ChatGPT, Gemini, Perplexity, Claude, Copilot)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Sitemap URL
+Sitemap: https://balastravels.com/sitemap.xml
