@@ -172,20 +172,69 @@ export const AdminPage = ({ onBackToHome }) => {
     }
   };
 
-  // Handle deleting a vehicle from fleet
-  const handleDeleteVehicleItem = (vehicleId) => {
-    const updated = deleteVehicle(vehicleId);
-    setFleetCategories([...updated]);
+  // Delete Confirmation Modal State
+  const [deleteConfirmModal, setDeleteConfirmModal] = useState({
+    isOpen: false,
+    title: '',
+    message: '',
+    itemType: '', // 'category' | 'vehicle' | 'enquiry'
+    itemId: null,
+    catTitle: ''
+  });
+
+  // Request Confirmation for Category Delete
+  const requestCategoryDelete = (e, catTitle) => {
+    if (e) e.stopPropagation();
+    setDeleteConfirmModal({
+      isOpen: true,
+      title: 'Delete Fleet Category?',
+      message: `Are you sure you want to delete category "${catTitle}"? All vehicles under this category will also be hidden.`,
+      itemType: 'category',
+      catTitle: catTitle
+    });
   };
 
-  // Handle deleting an entire category from fleet
-  const handleDeleteCategoryItem = (e, catTitle) => {
-    e.stopPropagation();
-    if (window.confirm(`Are you sure you want to delete category "${catTitle}"?`)) {
+  // Request Confirmation for Vehicle Delete
+  const requestVehicleDelete = (e, vehicleId, vehicleName) => {
+    if (e) e.stopPropagation();
+    setDeleteConfirmModal({
+      isOpen: true,
+      title: 'Delete Vehicle from Fleet?',
+      message: `Are you sure you want to delete "${vehicleName || 'this vehicle'}" from your fleet list?`,
+      itemType: 'vehicle',
+      itemId: vehicleId
+    });
+  };
+
+  // Request Confirmation for Enquiry Delete
+  const requestEnquiryDelete = (e, enquiryId, customerName) => {
+    if (e) e.stopPropagation();
+    setDeleteConfirmModal({
+      isOpen: true,
+      title: 'Delete Customer Enquiry?',
+      message: `Are you sure you want to delete the booking enquiry for "${customerName || enquiryId}"?`,
+      itemType: 'enquiry',
+      itemId: enquiryId
+    });
+  };
+
+  // Execute Confirmed Delete
+  const handleConfirmDelete = () => {
+    const { itemType, itemId, catTitle } = deleteConfirmModal;
+    
+    if (itemType === 'category' && catTitle) {
       const updated = deleteCategory(catTitle);
       setFleetCategories([...updated]);
       setSelectedCatFilter('all');
+    } else if (itemType === 'vehicle' && itemId) {
+      const updated = deleteVehicle(itemId);
+      setFleetCategories([...updated]);
+    } else if (itemType === 'enquiry' && itemId) {
+      const updated = deleteEnquiry(itemId);
+      setEnquiries([...updated]);
     }
+
+    setDeleteConfirmModal({ isOpen: false, title: '', message: '', itemType: '', itemId: null, catTitle: '' });
   };
 
   // Filtered Enquiries by search query
@@ -612,7 +661,7 @@ export const AdminPage = ({ onBackToHome }) => {
                               {/* DELETE ACTION */}
                               <button
                                 type="button"
-                                onClick={(e) => handleDelete(e, item.id)}
+                                onClick={(e) => requestEnquiryDelete(e, item.id, item.name)}
                                 className="p-2 rounded-xl text-red-500 hover:text-white hover:bg-brand-red transition-all cursor-pointer inline-flex items-center shadow-2xs"
                                 title="Delete Record"
                               >
@@ -674,25 +723,31 @@ export const AdminPage = ({ onBackToHome }) => {
                 {fleetCategories.map((cat) => (
                   <div
                     key={cat.id}
-                    onClick={() => setSelectedCatFilter(cat.title)}
-                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-extrabold whitespace-nowrap transition-all cursor-pointer border ${
+                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-extrabold whitespace-nowrap transition-all border ${
                       selectedCatFilter === cat.title
                         ? 'bg-brand-red text-white border-brand-red shadow-xs'
-                        : 'bg-white text-slate-600 hover:bg-slate-100 border-slate-200'
+                        : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
                     }`}
                   >
-                    <span>{cat.title} ({cat.vehicles.length})</span>
                     <button
                       type="button"
-                      onClick={(e) => handleDeleteCategoryItem(e, cat.title)}
-                      className={`p-1 rounded-lg transition-colors ${
+                      onClick={() => setSelectedCatFilter(cat.title)}
+                      className="cursor-pointer"
+                    >
+                      {cat.title} ({cat.vehicles.length})
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={(e) => requestCategoryDelete(e, cat.title)}
+                      className={`p-1 rounded-lg transition-colors cursor-pointer ${
                         selectedCatFilter === cat.title
                           ? 'hover:bg-white/20 text-white/80 hover:text-white'
                           : 'hover:bg-slate-200 text-slate-400 hover:text-red-600'
                       }`}
                       title={`Delete ${cat.title} Category`}
                     >
-                      <Trash2 className="w-3 h-3" />
+                      <Trash2 className="w-3.5 h-3.5" />
                     </button>
                   </div>
                 ))}
@@ -726,7 +781,7 @@ export const AdminPage = ({ onBackToHome }) => {
                         {/* DELETE BUTTON */}
                         <button
                           type="button"
-                          onClick={() => handleDeleteVehicleItem(v.id)}
+                          onClick={(e) => requestVehicleDelete(e, v.id, v.name)}
                           className="absolute top-3 right-3 p-2 rounded-xl bg-white/90 hover:bg-brand-red text-slate-700 hover:text-white transition-colors shadow-sm cursor-pointer"
                           title="Remove Vehicle"
                         >
@@ -960,6 +1015,53 @@ export const AdminPage = ({ onBackToHome }) => {
               </div>
 
             </form>
+
+          </div>
+        </div>
+      )}
+      {/* DELETE CONFIRMATION POPUP MODAL */}
+      {deleteConfirmModal.isOpen && (
+        <div 
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-smooth-enter"
+          onClick={() => setDeleteConfirmModal({ isOpen: false, title: '', message: '', itemType: '', itemId: null, catTitle: '' })}
+        >
+          <div 
+            className="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-slate-100 space-y-4 text-center relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            
+            {/* TRASH WARNING CIRCLE */}
+            <div className="w-14 h-14 bg-red-100 text-brand-red rounded-full flex items-center justify-center mx-auto shadow-xs">
+              <Trash2 className="w-7 h-7 stroke-[2.5]" />
+            </div>
+
+            <div className="space-y-1.5">
+              <h3 className="text-lg font-black text-slate-900 tracking-tight">
+                {deleteConfirmModal.title}
+              </h3>
+              <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                {deleteConfirmModal.message}
+              </p>
+            </div>
+
+            {/* ACTION BUTTONS */}
+            <div className="grid grid-cols-2 gap-2.5 pt-2">
+              <button
+                type="button"
+                onClick={() => setDeleteConfirmModal({ isOpen: false, title: '', message: '', itemType: '', itemId: null, catTitle: '' })}
+                className="py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-colors cursor-pointer"
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                onClick={handleConfirmDelete}
+                className="py-2.5 px-4 rounded-xl bg-brand-red hover:bg-brand-darkRed text-white text-xs font-extrabold shadow-md hover:shadow-lg transition-all cursor-pointer"
+              >
+                Yes, Delete
+              </button>
+            </div>
 
           </div>
         </div>
