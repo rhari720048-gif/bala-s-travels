@@ -120,13 +120,26 @@ export const VehicleDetailsPage = ({ vehicle, categoryTitle = 'Vehicle', onBackT
                 </h2>
               </div>
 
+              {/* VEHICLE SUMMARY BOX */}
+              <div className="bg-slate-50 rounded-2xl p-4 border border-slate-200/80 space-y-1.5">
+                <span className="text-[11px] font-black uppercase tracking-wider text-brand-red flex items-center gap-1">
+                  <Sparkles className="w-3.5 h-3.5" /> Vehicle Summary & Overview
+                </span>
+                <p className="text-xs sm:text-sm font-semibold text-slate-700 leading-relaxed">
+                  {vehicle.description || vehicle.tagline || `Well-maintained ${safeName} with experienced chauffeur for comfortable outstation tours, local city rides and airport transfers.`}
+                </p>
+              </div>
+
+              {/* SPECIFICATIONS GRID */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
                 <div className="p-3.5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200/80 hover:border-brand-red/40 transition-all duration-200 space-y-1 group">
                   <div className="flex items-center gap-1.5 text-brand-red group-hover:scale-105 transition-transform origin-left">
                     <Users className="w-4 h-4" />
                     <span className="font-bold uppercase text-[10px] text-slate-500">Seating</span>
                   </div>
-                  <span className="font-extrabold text-slate-900 text-xs sm:text-sm block">{safeCapacity}</span>
+                  <span className="font-extrabold text-slate-900 text-xs sm:text-sm block">
+                    {vehicle.specs?.seats || safeCapacity}
+                  </span>
                 </div>
 
                 <div className="p-3.5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200/80 hover:border-emerald-500/40 transition-all duration-200 space-y-1 group">
@@ -134,7 +147,9 @@ export const VehicleDetailsPage = ({ vehicle, categoryTitle = 'Vehicle', onBackT
                     <ShieldCheck className="w-4 h-4" />
                     <span className="font-bold uppercase text-[10px] text-slate-500">AC System</span>
                   </div>
-                  <span className="font-extrabold text-slate-900 text-xs sm:text-sm block">Dual Climate AC</span>
+                  <span className="font-extrabold text-slate-900 text-xs sm:text-sm block">
+                    {vehicle.specs?.ac || 'Dual Climate AC'}
+                  </span>
                 </div>
 
                 <div className="p-3.5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200/80 hover:border-indigo-500/40 transition-all duration-200 space-y-1 group">
@@ -142,19 +157,30 @@ export const VehicleDetailsPage = ({ vehicle, categoryTitle = 'Vehicle', onBackT
                     <Luggage className="w-4 h-4" />
                     <span className="font-bold uppercase text-[10px] text-slate-500">Luggage</span>
                   </div>
-                  <span className="font-extrabold text-slate-900 text-xs sm:text-sm block">Spacious Boot</span>
+                  <span className="font-extrabold text-slate-900 text-xs sm:text-sm block">
+                    {vehicle.specs?.luggage || 'Spacious Boot'}
+                  </span>
                 </div>
               </div>
 
-              {/* SUITABLE JOURNEY TYPES */}
+              {/* DYNAMIC VEHICLE FEATURES & AMENITIES */}
               <div className="space-y-2 pt-1">
-                <span className="text-xs font-bold text-slate-700 block">Recommended Trip Types:</span>
-                <div className="flex flex-wrap gap-2 text-xs">
-                  {['Outstation Journeys', 'Local City Rental', 'Airport Transfers', 'Wedding & Events'].map((tag, idx) => (
-                    <span key={idx} className="bg-slate-100 hover:bg-brand-red/10 hover:text-brand-red text-slate-800 px-3 py-1.5 rounded-xl border border-slate-200/70 font-semibold flex items-center gap-1.5 text-xs transition-all duration-200 cursor-default">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-brand-green" />
-                      {tag}
-                    </span>
+                <span className="text-xs font-black uppercase tracking-wider text-slate-900 block">
+                  Vehicle Key Features:
+                </span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                  {(vehicle.features && vehicle.features.length > 0 ? vehicle.features : [
+                    'Air Conditioned Comfort',
+                    'Push-Back Reclining Seats',
+                    '24/7 Live GPS Tracking',
+                    'Clean & Sanitized Interiors',
+                    'Experienced Uniformed Driver',
+                    'Spacious Boot Luggage Space'
+                  ]).map((feat, idx) => (
+                    <div key={idx} className="flex items-center gap-2 p-2.5 bg-slate-50 hover:bg-white rounded-xl border border-slate-200/70 text-slate-800 font-semibold transition-colors">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                      <span>{feat}</span>
+                    </div>
                   ))}
                 </div>
               </div>
