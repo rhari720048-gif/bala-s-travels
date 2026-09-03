@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { MapPin, Navigation, Car, ArrowRight, MessageCircle } from 'lucide-react';
 import { formatWhatsAppMessage } from '../utils/whatsapp';
 import { fullFleetCategories } from '../data/fleetData';
+import { addEnquiry } from '../utils/enquiryStore';
 
 export const FloatingEnquiryCard = ({ className = '' }) => {
   const [pickup, setPickup] = useState('');
@@ -30,6 +31,16 @@ export const FloatingEnquiryCard = ({ className = '' }) => {
       return;
     }
     setError('');
+    
+    // Save to central enquiry store for Admin Dashboard
+    addEnquiry({
+      name: 'Quick Route Guest',
+      phone: 'Direct WhatsApp',
+      pickup: pickup,
+      drop: drop,
+      category: selectedCategory || 'General',
+      model: selectedModel || 'Any Model'
+    });
     
     let vehicleText = 'Custom Enquiry';
     if (selectedCategory && selectedModel) {

@@ -14,11 +14,31 @@ import FleetPage from './pages/FleetPage';
 import VehicleDetailsPage from './pages/VehicleDetailsPage';
 import LocationsPage from './pages/LocationsPage';
 import AboutPage from './pages/AboutPage';
+import AdminPage from './pages/AdminPage';
 
 export function App() {
-  const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'fleet' | 'locations' | 'about'
+  const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'fleet' | 'locations' | 'about' | 'admin'
   const [selectedVehicleData, setSelectedVehicleData] = useState(null); // { vehicle, categoryTitle }
   const [activeSection, setActiveSection] = useState('home');
+
+  // Check URL pathname & hash on initial load & popstate for /admin route
+  useEffect(() => {
+    const checkRoute = () => {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      if (path === '/admin' || path === '/admin/' || hash === '#admin') {
+        setCurrentPage('admin');
+      }
+    };
+    checkRoute();
+
+    window.addEventListener('popstate', checkRoute);
+    window.addEventListener('hashchange', checkRoute);
+    return () => {
+      window.removeEventListener('popstate', checkRoute);
+      window.removeEventListener('hashchange', checkRoute);
+    };
+  }, []);
 
   // Scroll to top immediately whenever page route changes
   useEffect(() => {
@@ -60,9 +80,14 @@ export function App() {
     } else if (sectionId === 'about') {
       setCurrentPage('about');
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    } else if (sectionId === 'admin') {
+      setCurrentPage('admin');
+      window.history.pushState({}, '', '/admin');
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     } else {
       if (currentPage !== 'home') {
         setCurrentPage('home');
+        window.history.pushState({}, '', '/');
         setTimeout(() => {
           document.querySelector(`#${sectionId}`)?.scrollIntoView({ behavior: 'smooth' });
         }, 50);
@@ -96,6 +121,21 @@ export function App() {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   };
 
+  // If on admin route, render full AdminPage component
+  if (currentPage === 'admin') {
+    return (
+      <div className="min-h-screen bg-slate-950 text-white font-sans antialiased selection:bg-brand-red selection:text-white">
+        <AdminPage
+          onBackToHome={() => {
+            setCurrentPage('home');
+            window.history.pushState({}, '', '/');
+            window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+          }}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans antialiased selection:bg-brand-red selection:text-white">
       
@@ -128,6 +168,7 @@ export function App() {
           <FleetPage
             onBackToHome={() => {
               setCurrentPage('home');
+              window.history.pushState({}, '', '/');
               window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
             }}
             onSelectVehicle={handleSelectVehicle}
@@ -138,6 +179,7 @@ export function App() {
           <LocationsPage
             onBackToHome={() => {
               setCurrentPage('home');
+              window.history.pushState({}, '', '/');
               window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
             }}
           />
@@ -147,6 +189,7 @@ export function App() {
           <AboutPage
             onBackToHome={() => {
               setCurrentPage('home');
+              window.history.pushState({}, '', '/');
               window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
             }}
             onExploreFleet={() => {

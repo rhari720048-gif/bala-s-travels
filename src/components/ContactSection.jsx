@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { formatWhatsAppMessage, openGeneralWhatsApp, PHONE_NUMBER } from '../utils/whatsapp';
 import { fullFleetCategories } from '../data/fleetData';
+import { addEnquiry } from '../utils/enquiryStore';
 
 export const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -37,6 +38,17 @@ export const ContactSection = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
+    // Save to central enquiry store for Admin Dashboard
+    addEnquiry({
+      name: formData.name,
+      phone: formData.phone,
+      pickup: formData.pickup,
+      drop: formData.drop,
+      date: formData.date,
+      category: formData.category,
+      model: formData.model
+    });
+
     let vehicleText = 'Custom Travel Enquiry';
     if (formData.category && formData.model) {
       vehicleText = `${formData.model} (${formData.category})`;
