@@ -62,11 +62,14 @@ export const AdminPage = ({ onBackToHome }) => {
     localStorage.removeItem('balas_admin_session');
   };
 
-  const handleDelete = (id) => {
-    if (window.confirm('Are you sure you want to delete this enquiry record?')) {
-      const updated = deleteEnquiry(id);
-      setEnquiries([...updated]);
+  const handleDelete = (e, id) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
     }
+    const targetIdStr = String(id).trim();
+    const updated = deleteEnquiry(targetIdStr);
+    setEnquiries([...updated]);
   };
 
   const handleRefresh = () => {
@@ -379,8 +382,9 @@ export const AdminPage = ({ onBackToHome }) => {
 
                         {/* DELETE ACTION */}
                         <button
-                          onClick={() => handleDelete(item.id)}
-                          className="p-1.5 rounded-xl text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors inline-flex items-center"
+                          type="button"
+                          onClick={(e) => handleDelete(e, item.id)}
+                          className="p-2 rounded-xl text-red-500 hover:text-white hover:bg-brand-red transition-all cursor-pointer inline-flex items-center shadow-2xs"
                           title="Delete Record"
                         >
                           <Trash2 className="w-4 h-4" />
