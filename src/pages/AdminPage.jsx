@@ -35,11 +35,27 @@ export const AdminPage = ({ onBackToHome }) => {
     }
   }, []);
 
-  // Fetch enquiries when authenticated
+  // Fetch and auto-sync enquiries live without requiring manual page refresh
   useEffect(() => {
-    if (isAuthenticated) {
-      setEnquiries(getEnquiries());
-    }
+    if (!isAuthenticated) return;
+
+    const syncEnquiries = () => {
+      const data = getEnquiries();
+      setEnquiries(data);
+    };
+
+    syncEnquiries();
+
+    // Listen for storage events across browser tabs/windows
+    window.addEventListener('storage', syncEnquiries);
+
+    // Auto-poll every 1.5s for instant 0ms-latency updates
+    const interval = setInterval(syncEnquiries, 1500);
+
+    return () => {
+      window.removeEventListener('storage', syncEnquiries);
+      clearInterval(interval);
+    };
   }, [isAuthenticated]);
 
   const handleLogin = (e) => {

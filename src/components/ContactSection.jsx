@@ -157,158 +157,193 @@ export const ContactSection = () => {
           </div>
 
 
-          {/* RIGHT SIDE: PRISTINE BOOKING FORM */}
-          <div className="lg:col-span-7 p-8 sm:p-10 bg-white">
+          {/* RIGHT SIDE: PRISTINE BOOKING FORM OR SUCCESS CARD */}
+          <div className="lg:col-span-7 p-8 sm:p-10 bg-white flex flex-col justify-center">
             
-            <div className="border-b border-slate-100 pb-4 mb-6 space-y-1">
-              <span className="text-xs font-extrabold text-brand-red uppercase tracking-wider">ONLINE BOOKING ENQUIRY</span>
-              <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                Send Travel Details
-              </h3>
-              <p className="text-xs text-slate-500">Fill in your journey requirements for instant response on WhatsApp.</p>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-4 text-xs">
-              
-              {/* NAME & PHONE */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1">
-                  <label className="text-slate-700 font-bold block">Your Full Name *</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Ramesh Kumar"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:bg-white focus:outline-none placeholder-slate-400 text-xs transition-colors"
-                  />
+            {submitted ? (
+              <div className="py-10 px-4 text-center space-y-5 animate-smooth-enter">
+                
+                {/* ANIMATED GREEN TICK CIRCLE */}
+                <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-inner">
+                  <svg className="w-10 h-10 stroke-emerald-600 fill-none stroke-[3]" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5 13l4 4L19 7"
+                      className="animate-checkmark"
+                    />
+                  </svg>
                 </div>
 
-                <div className="space-y-1">
-                  <label className="text-slate-700 font-bold block">Mobile Number *</label>
-                  <input
-                    type="tel"
-                    required
-                    placeholder="e.g. 9876543210"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:bg-white focus:outline-none placeholder-slate-400 text-xs transition-colors"
-                  />
+                <div className="space-y-2 max-w-md mx-auto">
+                  <h3 className="text-2xl font-black text-slate-900 tracking-tight">Form Submitted Successfully!</h3>
+                  <p className="text-xs sm:text-sm text-slate-600 font-semibold leading-relaxed">
+                    Thank you for choosing Bala's Travels! Your journey requirements have been sent to our 24/7 dispatch desk. We will contact you shortly on WhatsApp / Phone.
+                  </p>
                 </div>
+
+                <button
+                  type="button"
+                  onClick={() => setSubmitted(false)}
+                  className="px-6 py-3.5 bg-brand-red hover:bg-brand-darkRed text-white text-xs font-extrabold rounded-xl transition-all cursor-pointer shadow-md hover:shadow-lg inline-flex items-center gap-2"
+                >
+                  <span>+ Send Another Enquiry</span>
+                </button>
+
               </div>
-
-              {/* PICKUP & DROP */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1">
-                  <label className="text-slate-700 font-bold block">Pickup Location / City *</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Chennai, Madurai, Trichy"
-                    value={formData.pickup}
-                    onChange={(e) => setFormData({ ...formData, pickup: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:bg-white focus:outline-none placeholder-slate-400 text-xs transition-colors"
-                  />
+            ) : (
+              <>
+                <div className="border-b border-slate-100 pb-4 mb-6 space-y-1">
+                  <span className="text-xs font-extrabold text-brand-red uppercase tracking-wider">ONLINE BOOKING ENQUIRY</span>
+                  <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+                    Send Travel Details
+                  </h3>
+                  <p className="text-xs text-slate-500">Fill in your journey requirements for instant response on WhatsApp.</p>
                 </div>
 
-                <div className="space-y-1">
-                  <label className="text-slate-700 font-bold block">Drop Destination *</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Rameshwaram, Kanyakumari, Ooty"
-                    value={formData.drop}
-                    onChange={(e) => setFormData({ ...formData, drop: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:bg-white focus:outline-none placeholder-slate-400 text-xs transition-colors"
-                  />
-                </div>
-              </div>
+                <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+                  
+                  {/* NAME & PHONE */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label className="text-slate-700 font-bold block">Your Full Name *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Ramesh Kumar"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="w-full px-4 py-3 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:bg-white focus:outline-none placeholder-slate-400 text-xs transition-colors"
+                      />
+                    </div>
 
-              {/* CAR TYPE CATEGORY & SPECIFIC MODEL CASCADING DROPDOWNS */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1">
-                  <label className="text-slate-700 font-bold flex items-center gap-1.5">
-                    <Car className="w-3.5 h-3.5 text-brand-red" />
-                    Car Type (Category) *
-                  </label>
-                  <div className="relative">
-                    <select
+                    <div className="space-y-1">
+                      <label className="text-slate-700 font-bold block">Mobile Number *</label>
+                      <input
+                        type="tel"
+                        required
+                        placeholder="e.g. 9876543210"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full px-4 py-3 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:bg-white focus:outline-none placeholder-slate-400 text-xs transition-colors"
+                      />
+                    </div>
+                  </div>
+
+                  {/* PICKUP & DROP */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label className="text-slate-700 font-bold block">Pickup Location / City *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Chennai, Madurai, Trichy"
+                        value={formData.pickup}
+                        onChange={(e) => setFormData({ ...formData, pickup: e.target.value })}
+                        className="w-full px-4 py-3 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:bg-white focus:outline-none placeholder-slate-400 text-xs transition-colors"
+                      />
+                    </div>
+
+                    <div className="space-y-1">
+                      <label className="text-slate-700 font-bold block">Drop Destination *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Rameshwaram, Kanyakumari, Ooty"
+                        value={formData.drop}
+                        onChange={(e) => setFormData({ ...formData, drop: e.target.value })}
+                        className="w-full px-4 py-3 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:bg-white focus:outline-none placeholder-slate-400 text-xs transition-colors"
+                      />
+                    </div>
+                  </div>
+
+                  {/* CAR TYPE CATEGORY & SPECIFIC MODEL CASCADING DROPDOWNS */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label className="text-slate-700 font-bold flex items-center gap-1.5">
+                        <Car className="w-3.5 h-3.5 text-brand-red" />
+                        Car Type (Category) *
+                      </label>
+                      <div className="relative">
+                        <select
+                          required
+                          value={formData.category}
+                          onChange={handleCategoryChange}
+                          className="w-full px-4 py-3 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:bg-white focus:outline-none text-xs transition-colors appearance-none cursor-pointer"
+                        >
+                          <option value="" disabled>Select Car Type Category</option>
+                          {fullFleetCategories.map((cat) => (
+                            <option key={cat.id} value={cat.title}>
+                              {cat.title}
+                            </option>
+                          ))}
+                        </select>
+                        <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">
+                          <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                            <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <label className="text-slate-700 font-bold block">
+                        Select Specific Car Model
+                      </label>
+                      <div className="relative">
+                        <select
+                          disabled={!formData.category}
+                          value={formData.model}
+                          onChange={(e) => setFormData({ ...formData, model: e.target.value })}
+                          className="w-full px-4 py-3 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:bg-white focus:outline-none text-xs transition-colors appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          <option value="">
+                            {formData.category ? `Any ${formData.category} Model` : 'First Select Car Type'}
+                          </option>
+                          {availableModels.map((m, idx) => (
+                            <option key={idx} value={m}>
+                              {m}
+                            </option>
+                          ))}
+                        </select>
+                        <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">
+                          <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                            <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* TRAVEL DATE */}
+                  <div className="space-y-1">
+                    <label className="text-slate-700 font-bold block">Travel Date *</label>
+                    <input
+                      type="date"
                       required
-                      value={formData.category}
-                      onChange={handleCategoryChange}
-                      className="w-full px-4 py-3 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:bg-white focus:outline-none text-xs transition-colors appearance-none cursor-pointer"
-                    >
-                      <option value="" disabled>Select Car Type Category</option>
-                      {fullFleetCategories.map((cat) => (
-                        <option key={cat.id} value={cat.title}>
-                          {cat.title}
-                        </option>
-                      ))}
-                    </select>
-                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">
-                      <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                        <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                      </svg>
-                    </div>
+                      value={formData.date}
+                      onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                      className="w-full px-4 py-3 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:bg-white focus:outline-none text-xs transition-colors"
+                    />
                   </div>
-                </div>
 
-                <div className="space-y-1">
-                  <label className="text-slate-700 font-bold block">
-                    Select Specific Car Model
-                  </label>
-                  <div className="relative">
-                    <select
-                      disabled={!formData.category}
-                      value={formData.model}
-                      onChange={(e) => setFormData({ ...formData, model: e.target.value })}
-                      className="w-full px-4 py-3 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:bg-white focus:outline-none text-xs transition-colors appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      <option value="">
-                        {formData.category ? `Any ${formData.category} Model` : 'First Select Car Type'}
-                      </option>
-                      {availableModels.map((m, idx) => (
-                        <option key={idx} value={m}>
-                          {m}
-                        </option>
-                      ))}
-                    </select>
-                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">
-                      <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                        <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                  {/* SUBMIT BUTTON */}
+                  <button
+                    type="submit"
+                    className="w-full py-4 bg-brand-red hover:bg-brand-darkRed text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    <Send className="w-4 h-4" />
+                    <span>Submit Travel Enquiry</span>
+                  </button>
 
-              {/* TRAVEL DATE */}
-              <div className="space-y-1">
-                <label className="text-slate-700 font-bold block">Travel Date *</label>
-                <input
-                  type="date"
-                  required
-                  value={formData.date}
-                  onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                  className="w-full px-4 py-3 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:bg-white focus:outline-none text-xs transition-colors"
-                />
-              </div>
+                  <p className="text-[10px] text-slate-500 text-center flex items-center justify-center gap-1">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                    Your information is 100% confidential. Direct operator response.
+                  </p>
 
-              {/* SUBMIT BUTTON */}
-              <button
-                type="submit"
-                className="w-full py-4 bg-brand-red hover:bg-brand-darkRed text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <Send className="w-4 h-4" />
-                <span>Submit Travel Enquiry</span>
-              </button>
-
-              <p className="text-[10px] text-slate-500 text-center flex items-center justify-center gap-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                Your information is 100% confidential. Direct operator response.
-              </p>
-
-            </form>
+                </form>
+              </>
+            )}
 
           </div>
 
