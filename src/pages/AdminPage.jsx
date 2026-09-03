@@ -368,14 +368,26 @@ export const AdminPage = ({ onBackToHome }) => {
                     </div>
 
                     <div className="flex items-center gap-2 shrink-0">
+                      {/* WHATSAPP ACTION */}
                       <a
                         href={`https://wa.me/91${item.phone.replace(/\D/g, '')}?text=${encodeURIComponent(`Hello ${item.name}, thank you for contacting Bala's Travels regarding your trip from ${item.pickup} to ${item.drop}. How can we assist you?`)}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="px-3 py-1.5 rounded-xl bg-emerald-50 text-brand-green font-extrabold text-xs inline-flex items-center gap-1"
+                        className="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-brand-green text-brand-green hover:text-white font-extrabold text-xs inline-flex items-center gap-1 transition-colors"
+                        title="WhatsApp Customer"
                       >
                         <MessageCircle className="w-3.5 h-3.5 fill-current" />
                         <span>WhatsApp</span>
+                      </a>
+
+                      {/* CALL ACTION */}
+                      <a
+                        href={`tel:${item.phone.replace(/\D/g, '')}`}
+                        className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-800 text-slate-700 hover:text-white font-extrabold text-xs inline-flex items-center gap-1 transition-colors"
+                        title="Call Customer"
+                      >
+                        <Phone className="w-3.5 h-3.5" />
+                        <span>Call</span>
                       </a>
                     </div>
                   </div>
