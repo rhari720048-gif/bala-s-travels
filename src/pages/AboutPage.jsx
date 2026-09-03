@@ -54,7 +54,7 @@ export const AboutPage = ({ onBackToHome, onExploreFleet }) => {
       <section className="pt-6 pb-10 text-center max-w-4xl mx-auto px-4 space-y-4">
         <div className="flex items-center justify-center">
           <span className="text-xs sm:text-sm font-black text-brand-red flex items-center gap-1.5 uppercase tracking-wider">
-            <Sparkles className="w-4 h-4 fill-current" /> About Bala's Travels
+            <ShieldCheck className="w-4 h-4" /> About Bala's Travels
           </span>
         </div>
 

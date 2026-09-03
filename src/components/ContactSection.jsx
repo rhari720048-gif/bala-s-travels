@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Phone, MessageCircle, MapPin, Clock, 
-  Send, Sparkles, ShieldCheck, CheckCircle2, Headphones, ChevronRight
+  Send, ShieldCheck, Car
 } from 'lucide-react';
 import { formatWhatsAppMessage, openGeneralWhatsApp, PHONE_NUMBER } from '../utils/whatsapp';
+import { fullFleetCategories } from '../data/fleetData';
 
 export const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -13,20 +14,45 @@ export const ContactSection = () => {
     pickup: '',
     drop: '',
     date: '',
-    message: ''
+    category: '',
+    model: ''
   });
   const [submitted, setSubmitted] = useState(false);
 
+  // Available models based on selected category
+  const availableModels = useMemo(() => {
+    if (!formData.category) return [];
+    const cat = fullFleetCategories.find(c => c.title === formData.category);
+    return cat ? cat.vehicles.map(v => v.name) : [];
+  }, [formData.category]);
+
+  const handleCategoryChange = (e) => {
+    setFormData({
+      ...formData,
+      category: e.target.value,
+      model: '' // Reset model when category changes
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    let vehicleText = 'Custom Travel Enquiry';
+    if (formData.category && formData.model) {
+      vehicleText = `${formData.model} (${formData.category})`;
+    } else if (formData.category) {
+      vehicleText = formData.category;
+    }
+
     const whatsappUrl = formatWhatsAppMessage({
       name: formData.name,
       phone: formData.phone,
       pickup: formData.pickup,
       drop: formData.drop,
       date: formData.date,
-      vehicle: 'Custom Travel Enquiry'
+      vehicle: vehicleText
     });
+    
     setSubmitted(true);
     setTimeout(() => {
       window.open(whatsappUrl, '_blank');
@@ -43,10 +69,10 @@ export const ContactSection = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
         
-        {/* HEADER */}
+        {/* HEADER (CLEAN WITHOUT UNWANTED STAR ICONS) */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="text-xs font-black uppercase tracking-widest text-brand-red flex items-center justify-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5" /> 24/7 SUPPORT & RESERVATIONS
+          <span className="text-xs font-black uppercase tracking-widest text-brand-red">
+            24/7 SUPPORT & RESERVATIONS
           </span>
           <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
             Contact Bala's Travels Today
@@ -123,7 +149,7 @@ export const ContactSection = () => {
           </div>
 
 
-          {/* RIGHT SIDE: LIGHT THEMED ENQUIRY FORM */}
+          {/* RIGHT SIDE: REDESIGNED CLEAN FORM WITH CASCADING CAR TYPE & MODEL SELECTORS */}
           <div className="lg:col-span-7">
             <motion.div 
               initial={{ opacity: 0, y: 15 }}
@@ -142,6 +168,7 @@ export const ContactSection = () => {
 
               <form onSubmit={handleSubmit} className="space-y-4 text-xs">
                 
+                {/* NAME & PHONE */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-slate-700 font-bold block">Your Full Name *</label>
@@ -168,6 +195,7 @@ export const ContactSection = () => {
                   </div>
                 </div>
 
+                {/* PICKUP & DROP */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-slate-700 font-bold block">Pickup Location / City *</label>
@@ -194,6 +222,65 @@ export const ContactSection = () => {
                   </div>
                 </div>
 
+                {/* CAR TYPE CATEGORY & SPECIFIC MODEL CASCADING DROPDOWNS */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-slate-700 font-bold flex items-center gap-1.5">
+                      <Car className="w-3.5 h-3.5 text-brand-red" />
+                      Car Type (Category) *
+                    </label>
+                    <div className="relative">
+                      <select
+                        required
+                        value={formData.category}
+                        onChange={handleCategoryChange}
+                        className="w-full px-4 py-3 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:bg-white focus:outline-none text-xs transition-colors appearance-none cursor-pointer"
+                      >
+                        <option value="" disabled>Select Car Type Category</option>
+                        {fullFleetCategories.map((cat) => (
+                          <option key={cat.id} value={cat.title}>
+                            {cat.title}
+                          </option>
+                        ))}
+                      </select>
+                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">
+                        <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                          <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-slate-700 font-bold block">
+                      Select Specific Car Model
+                    </label>
+                    <div className="relative">
+                      <select
+                        disabled={!formData.category}
+                        value={formData.model}
+                        onChange={(e) => setFormData({ ...formData, model: e.target.value })}
+                        className="w-full px-4 py-3 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:bg-white focus:outline-none text-xs transition-colors appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        <option value="">
+                          {formData.category ? `Any ${formData.category} Model` : 'First Select Car Type'}
+                        </option>
+                        {availableModels.map((m, idx) => (
+                          <option key={idx} value={m}>
+                            {m}
+                          </option>
+                        ))}
+                      </select>
+                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">
+                        <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                          <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* TRAVEL DATE */}
                 <div className="space-y-1">
                   <label className="text-slate-700 font-bold block">Travel Date *</label>
                   <input
