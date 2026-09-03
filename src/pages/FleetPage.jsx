@@ -4,7 +4,7 @@ import {
   Car, ArrowLeft, Users, Crown, Compass, 
   ShieldCheck, Sparkles, Bus, Search, ChevronRight
 } from 'lucide-react';
-import { fullFleetCategories } from '../data/fleetData';
+import { getAllFleetCategories } from '../utils/vehicleStore';
 import { InteractiveCarCard } from '../components/InteractiveCarCard';
 
 export const FleetPage = ({ onBackToHome, onSelectVehicle }) => {
@@ -12,14 +12,17 @@ export const FleetPage = ({ onBackToHome, onSelectVehicle }) => {
   const [seaterFilter, setSeaterFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
+  // Dynamically load fleet categories (includes custom admin vehicles)
+  const fullFleetCategories = useMemo(() => getAllFleetCategories(), []);
+
   // Active categories list
   const filteredCategories = useMemo(() => {
     let list = fullFleetCategories;
     if (selectedCatId !== 'all') {
-      list = list.filter(c => c.id === selectedCatId);
+      list = list.filter(c => c.id === selectedCatId || c.title === selectedCatId);
     }
     return list;
-  }, [selectedCatId]);
+  }, [selectedCatId, fullFleetCategories]);
 
   const getCategoryIcon = (id, active) => {
     const iconClass = `w-4 h-4 transition-colors ${active ? 'text-white' : 'text-brand-red'}`;

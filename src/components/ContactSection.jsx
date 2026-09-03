@@ -5,10 +5,13 @@ import {
   Send, ShieldCheck, Car, CheckCircle2
 } from 'lucide-react';
 import { formatWhatsAppMessage, openGeneralWhatsApp, PHONE_NUMBER } from '../utils/whatsapp';
-import { fullFleetCategories } from '../data/fleetData';
+import { getAllFleetCategories } from '../utils/vehicleStore';
 import { addEnquiry } from '../utils/enquiryStore';
 
 export const ContactSection = () => {
+  // Dynamically load fleet categories (includes custom admin vehicles)
+  const fullFleetCategories = useMemo(() => getAllFleetCategories(), []);
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',

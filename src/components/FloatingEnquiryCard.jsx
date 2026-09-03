@@ -1,9 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import { MapPin, Navigation, Car, ArrowRight, MessageCircle } from 'lucide-react';
-import { fullFleetCategories } from '../data/fleetData';
+import { getAllFleetCategories } from '../utils/vehicleStore';
 import { addEnquiry } from '../utils/enquiryStore';
 
 export const FloatingEnquiryCard = ({ className = '' }) => {
+  // Dynamically load fleet categories (includes custom admin vehicles)
+  const fullFleetCategories = useMemo(() => getAllFleetCategories(), []);
+
   const [pickup, setPickup] = useState('');
   const [drop, setDrop] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -17,7 +20,7 @@ export const FloatingEnquiryCard = ({ className = '' }) => {
     if (!selectedCategory) return [];
     const cat = fullFleetCategories.find(c => c.title === selectedCategory);
     return cat ? cat.vehicles.map(v => v.name) : [];
-  }, [selectedCategory]);
+  }, [selectedCategory, fullFleetCategories]);
 
   const handleCategoryChange = (e) => {
     const catTitle = e.target.value;

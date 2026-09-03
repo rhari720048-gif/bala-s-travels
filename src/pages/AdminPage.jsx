@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
   ShieldCheck, Lock, Mail, Key, LogOut, Search, 
   Trash2, Phone, MessageCircle, RefreshCw, Clock, 
   Calendar, MapPin, Car, ArrowLeft, Eye, EyeOff,
-  LayoutDashboard, FileText, Settings, Layers, ListFilter
+  LayoutDashboard, FileText, Settings, Layers, ListFilter,
+  Plus, X, Image as ImageIcon, Check, Users, Luggage, Wind, Sparkles
 } from 'lucide-react';
 import { getEnquiries, deleteEnquiry } from '../utils/enquiryStore';
+import { getAllFleetCategories, addCustomVehicle, deleteVehicle } from '../utils/vehicleStore';
 
 export const AdminPage = ({ onBackToHome }) => {
   // Read credentials from environment variables with exact requested defaults
@@ -24,6 +26,28 @@ export const AdminPage = ({ onBackToHome }) => {
   // Enquiries State
   const [enquiries, setEnquiries] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+
+  // Vehicles Fleet State
+  const [fleetCategories, setFleetCategories] = useState(() => getAllFleetCategories());
+  const [selectedCatFilter, setSelectedCatFilter] = useState('all');
+  const [showAddVehicleModal, setShowAddVehicleModal] = useState(false);
+
+  // New Vehicle Form State
+  const [newVehicle, setNewVehicle] = useState({
+    name: '',
+    categoryTitle: 'Sedan',
+    customCategory: '',
+    seats: '5 Seats',
+    ac: 'Dual AC',
+    luggage: '2 Large Bags',
+    image: '',
+    description: '',
+    tagline: 'Comfortable & Reliable Outstation Travel'
+  });
+
+  const refreshFleetData = () => {
+    setFleetCategories(getAllFleetCategories());
+  };
 
   // Check login session strictly on mount
   useEffect(() => {
@@ -96,6 +120,62 @@ export const AdminPage = ({ onBackToHome }) => {
 
   const handleRefresh = () => {
     setEnquiries(getEnquiries());
+    setFleetCategories(getAllFleetCategories());
+  };
+
+  // Handle adding new vehicle to fleet
+  const handleAddVehicleSubmit = (e) => {
+    e.preventDefault();
+    if (!newVehicle.name.trim()) return;
+
+    const finalCategory = newVehicle.categoryTitle === 'NEW_CUSTOM'
+      ? (newVehicle.customCategory.trim() || 'Custom Fleet')
+      : newVehicle.categoryTitle;
+
+    const updatedCategories = addCustomVehicle({
+      name: newVehicle.name.trim(),
+      categoryTitle: finalCategory,
+      tagline: newVehicle.tagline.trim() || 'Comfortable & Premium Outstation Ride',
+      seats: newVehicle.seats.trim(),
+      ac: newVehicle.ac.trim(),
+      luggage: newVehicle.luggage.trim(),
+      image: newVehicle.image.trim() || 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=800',
+      description: newVehicle.description.trim() || `Clean and spacious ${newVehicle.name} for comfortable South India tours and airport transfers.`
+    });
+
+    setFleetCategories(updatedCategories);
+    setShowAddVehicleModal(false);
+
+    // Reset form
+    setNewVehicle({
+      name: '',
+      categoryTitle: 'Sedan',
+      customCategory: '',
+      seats: '5 Seats',
+      ac: 'Dual AC',
+      luggage: '2 Large Bags',
+      image: '',
+      description: '',
+      tagline: 'Comfortable & Reliable Outstation Travel'
+    });
+  };
+
+  // Handle image file upload for new vehicle
+  const handleVehicleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setNewVehicle(prev => ({ ...prev, image: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Handle deleting a vehicle from fleet
+  const handleDeleteVehicleItem = (vehicleId) => {
+    const updated = deleteVehicle(vehicleId);
+    setFleetCategories([...updated]);
   };
 
   // Filtered Enquiries by search query
@@ -543,29 +623,125 @@ export const AdminPage = ({ onBackToHome }) => {
             </div>
           )}
 
-          {/* TAB 3: VEHICLES MANAGEMENT */}
+          {/* TAB 3: VEHICLES FLEET MANAGEMENT */}
           {activeTab === 'vehicles' && (
-            <div className="bg-white rounded-3xl border border-slate-200 p-6 space-y-6 shadow-sm">
-              <div className="border-b border-slate-100 pb-4 flex items-center justify-between">
+            <div className="space-y-6">
+              
+              {/* HEADER BAR */}
+              <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <h3 className="text-base font-black text-slate-900">Vehicle Fleet Overview</h3>
-                  <p className="text-xs text-slate-500 font-medium">Manage categories, tariffs & active fleet models.</p>
+                  <h3 className="text-lg font-black text-slate-900 flex items-center gap-2">
+                    <Car className="w-5 h-5 text-brand-red" />
+                    <span>Vehicle Fleet Management</span>
+                  </h3>
+                  <p className="text-xs text-slate-500 font-medium mt-0.5">
+                    Add new vehicles, create custom categories, view specs & delete vehicles.
+                  </p>
                 </div>
-                <span className="text-xs bg-slate-100 text-slate-700 font-bold px-3 py-1 rounded-full">
-                  38 Vehicles Active
-                </span>
+
+                <button
+                  onClick={() => setShowAddVehicleModal(true)}
+                  className="px-4 py-2.5 bg-brand-red hover:bg-brand-darkRed text-white text-xs font-extrabold rounded-xl shadow-sm hover:shadow transition-all inline-flex items-center justify-center gap-1.5 cursor-pointer shrink-0"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>+ Add New Vehicle</span>
+                </button>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                {['Sedan', 'SUVs / Mini SUVs', 'Luxury Sedans & SUVs', 'Travellers and Coaches'].map((cat) => (
-                  <div key={cat} className="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between">
-                    <div className="font-extrabold text-slate-900">{cat}</div>
-                    <span className="text-[10px] font-bold bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full">
-                      Active Category
-                    </span>
-                  </div>
+              {/* CATEGORY FILTER TABS */}
+              <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+                <button
+                  onClick={() => setSelectedCatFilter('all')}
+                  className={`px-4 py-2 rounded-xl text-xs font-extrabold whitespace-nowrap transition-all cursor-pointer ${
+                    selectedCatFilter === 'all'
+                      ? 'bg-slate-900 text-white shadow-xs'
+                      : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                  }`}
+                >
+                  All Vehicles ({fleetCategories.reduce((acc, c) => acc + c.vehicles.length, 0)})
+                </button>
+
+                {fleetCategories.map((cat) => (
+                  <button
+                    key={cat.id}
+                    onClick={() => setSelectedCatFilter(cat.title)}
+                    className={`px-4 py-2 rounded-xl text-xs font-extrabold whitespace-nowrap transition-all cursor-pointer ${
+                      selectedCatFilter === cat.title
+                        ? 'bg-brand-red text-white shadow-xs'
+                        : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                    }`}
+                  >
+                    {cat.title} ({cat.vehicles.length})
+                  </button>
                 ))}
               </div>
+
+              {/* VEHICLES GRID */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {fleetCategories
+                  .filter(cat => selectedCatFilter === 'all' || cat.title === selectedCatFilter)
+                  .flatMap(cat => cat.vehicles.map(v => ({ ...v, categoryName: cat.title })))
+                  .map((v) => (
+                    <div key={v.id} className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow group">
+                      
+                      {/* IMAGE THUMBNAIL */}
+                      <div className="relative h-44 bg-slate-100 overflow-hidden flex items-center justify-center">
+                        <img
+                          src={v.image}
+                          alt={v.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=800';
+                          }}
+                        />
+                        <div className="absolute top-3 left-3">
+                          <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-slate-900/80 backdrop-blur-md text-white shadow-xs">
+                            {v.categoryName}
+                          </span>
+                        </div>
+
+                        {/* DELETE BUTTON */}
+                        <button
+                          type="button"
+                          onClick={() => handleDeleteVehicleItem(v.id)}
+                          className="absolute top-3 right-3 p-2 rounded-xl bg-white/90 hover:bg-brand-red text-slate-700 hover:text-white transition-colors shadow-sm cursor-pointer"
+                          title="Remove Vehicle"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+
+                      {/* CARD DETAILS */}
+                      <div className="p-4 space-y-3 flex-1 flex flex-col justify-between">
+                        <div>
+                          <h4 className="text-sm font-black text-slate-900 tracking-tight">{v.name}</h4>
+                          <p className="text-[11px] text-slate-500 font-medium line-clamp-1 mt-0.5">
+                            {v.tagline || v.description}
+                          </p>
+                        </div>
+
+                        {/* SPECS PILLS */}
+                        <div className="flex flex-wrap items-center gap-1.5 text-[10px] font-extrabold">
+                          <span className="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-lg flex items-center gap-1">
+                            <Users className="w-3 h-3 text-brand-red" />
+                            <span>{v.specs?.seats || '5 Seats'}</span>
+                          </span>
+                          <span className="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-lg flex items-center gap-1">
+                            <Wind className="w-3 h-3 text-sky-500" />
+                            <span>{v.specs?.ac || 'Dual AC'}</span>
+                          </span>
+                          <span className="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-lg flex items-center gap-1">
+                            <Luggage className="w-3 h-3 text-amber-500" />
+                            <span>{v.specs?.luggage || '2 Bags'}</span>
+                          </span>
+                        </div>
+                      </div>
+
+                    </div>
+                  ))}
+              </div>
+
             </div>
           )}
 
@@ -596,6 +772,176 @@ export const AdminPage = ({ onBackToHome }) => {
         </section>
 
       </div>
+
+      {/* ADD NEW VEHICLE MODAL */}
+      {showAddVehicleModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-smooth-enter overflow-y-auto">
+          <div className="bg-white rounded-3xl p-6 max-w-lg w-full shadow-2xl border border-slate-100 relative my-8 space-y-4">
+            
+            {/* MODAL HEADER */}
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-xl bg-brand-red/10 text-brand-red flex items-center justify-center">
+                  <Plus className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-slate-900">Add New Vehicle to Fleet</h3>
+                  <p className="text-[11px] text-slate-500 font-medium">Fill in vehicle specs, select or create category & upload photo.</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowAddVehicleModal(false)}
+                className="p-1.5 rounded-xl hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition-colors cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <form onSubmit={handleAddVehicleSubmit} className="space-y-3.5 text-xs">
+              
+              {/* VEHICLE NAME */}
+              <div className="space-y-1">
+                <label className="text-slate-700 font-extrabold block">Vehicle Model Name *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Toyota Innova Hycross, Force Urbania 17 Seater"
+                  value={newVehicle.name}
+                  onChange={(e) => setNewVehicle({ ...newVehicle, name: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:bg-white focus:outline-none text-xs transition-colors"
+                />
+              </div>
+
+              {/* CATEGORY SELECTOR */}
+              <div className="space-y-1">
+                <label className="text-slate-700 font-extrabold block">Category *</label>
+                <select
+                  value={newVehicle.categoryTitle}
+                  onChange={(e) => setNewVehicle({ ...newVehicle, categoryTitle: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:bg-white focus:outline-none text-xs transition-colors cursor-pointer"
+                >
+                  {fleetCategories.map((c) => (
+                    <option key={c.id} value={c.title}>
+                      {c.title}
+                    </option>
+                  ))}
+                  <option value="NEW_CUSTOM">+ Create New Custom Category...</option>
+                </select>
+              </div>
+
+              {/* NEW CUSTOM CATEGORY INPUT */}
+              {newVehicle.categoryTitle === 'NEW_CUSTOM' && (
+                <div className="space-y-1 animate-smooth-enter">
+                  <label className="text-brand-red font-extrabold block">New Category Title *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Luxury Vans, Electric Fleets, EV Cabs"
+                    value={newVehicle.customCategory}
+                    onChange={(e) => setNewVehicle({ ...newVehicle, customCategory: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-slate-50 text-slate-900 rounded-xl border border-brand-red focus:bg-white focus:outline-none text-xs transition-colors"
+                  />
+                </div>
+              )}
+
+              {/* SEATS, AC, LUGGAGE */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="space-y-1">
+                  <label className="text-slate-700 font-bold block">Seating Capacity</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. 5 Seats, 7 Seats"
+                    value={newVehicle.seats}
+                    onChange={(e) => setNewVehicle({ ...newVehicle, seats: e.target.value })}
+                    className="w-full px-3 py-2 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red text-xs"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-slate-700 font-bold block">AC Specs</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Dual AC"
+                    value={newVehicle.ac}
+                    onChange={(e) => setNewVehicle({ ...newVehicle, ac: e.target.value })}
+                    className="w-full px-3 py-2 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red text-xs"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-slate-700 font-bold block">Luggage Space</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. 3 Large Bags"
+                    value={newVehicle.luggage}
+                    onChange={(e) => setNewVehicle({ ...newVehicle, luggage: e.target.value })}
+                    className="w-full px-3 py-2 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red text-xs"
+                  />
+                </div>
+              </div>
+
+              {/* IMAGE SELECTION */}
+              <div className="space-y-1.5">
+                <label className="text-slate-700 font-extrabold block">Vehicle Image (File or Image URL)</label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleVehicleImageUpload}
+                    className="w-full text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200 cursor-pointer"
+                  />
+                  <input
+                    type="url"
+                    placeholder="Or paste Image URL (https://...)"
+                    value={newVehicle.image}
+                    onChange={(e) => setNewVehicle({ ...newVehicle, image: e.target.value })}
+                    className="w-full px-3 py-2 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 text-xs"
+                  />
+                </div>
+
+                {/* IMAGE PREVIEW */}
+                {newVehicle.image && (
+                  <div className="relative h-28 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 mt-2">
+                    <img src={newVehicle.image} alt="Preview" className="w-full h-full object-cover" />
+                  </div>
+                )}
+              </div>
+
+              {/* SHORT TAGLINE / DESCRIPTION */}
+              <div className="space-y-1">
+                <label className="text-slate-700 font-bold block">Vehicle Summary / Features</label>
+                <textarea
+                  rows={2}
+                  placeholder="e.g. Clean & spacious luxury vehicle with pushback seats and 24/7 GPS tracking."
+                  value={newVehicle.description}
+                  onChange={(e) => setNewVehicle({ ...newVehicle, description: e.target.value })}
+                  className="w-full px-3 py-2 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red text-xs"
+                />
+              </div>
+
+              {/* SUBMIT BUTTON */}
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+                <button
+                  type="button"
+                  onClick={() => setShowAddVehicleModal(false)}
+                  className="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 font-bold transition-colors cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-5 py-2.5 rounded-xl bg-brand-red hover:bg-brand-darkRed text-white font-extrabold shadow-sm transition-all inline-flex items-center gap-1.5 cursor-pointer"
+                >
+                  <Check className="w-4 h-4" />
+                  <span>+ Save & Add Vehicle to Fleet</span>
+                </button>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      )}
 
     </div>
   );
