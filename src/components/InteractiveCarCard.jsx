@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users, ChevronRight } from 'lucide-react';
+import { Users, ChevronRight, Bus } from 'lucide-react';
 
 export const InteractiveCarCard = ({ vehicle, categoryTitle, onClick }) => {
   return (
@@ -10,18 +10,26 @@ export const InteractiveCarCard = ({ vehicle, categoryTitle, onClick }) => {
       {/* SNUG IMAGE CONTAINER WITH NATIVE TRANSPARENT CAR DISPLAY */}
       <div className="relative h-32 sm:h-40 bg-transparent p-2 flex items-center justify-center border-b border-slate-100/60 overflow-hidden">
         
-        {/* CAR PHOTO POPPING OUT ON HOVER */}
-        <img
-          src={vehicle.image}
-          alt={vehicle.name}
-          className="smooth-car-img max-h-28 sm:max-h-34 w-full object-contain transform-gpu"
-        />
-
         {/* PASSENGER CAPACITY BADGE */}
         <span className="absolute top-2 left-2 bg-white px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-extrabold text-slate-800 border border-slate-200 flex items-center gap-1 shadow-2xs group-hover:border-brand-red/50 transition-colors z-20">
           <Users className="w-3 h-3 text-brand-red" />
           {vehicle.capacity}
         </span>
+
+        {vehicle.image ? (
+          <img
+            src={vehicle.image}
+            alt={vehicle.name}
+            className="smooth-car-img max-h-28 sm:max-h-34 w-full object-contain transform-gpu"
+          />
+        ) : (
+          <div className="flex flex-col items-center justify-center gap-2 text-center p-3">
+            <div className="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-200/60 flex items-center justify-center text-purple-600 shadow-2xs group-hover:scale-110 transition-transform">
+              <Bus className="w-6 h-6" />
+            </div>
+            <span className="text-[11px] font-extrabold text-slate-700">Group Coach / Bus</span>
+          </div>
+        )}
       </div>
 
       {/* VEHICLE TITLE AND SELECTION CHEVRON */}
