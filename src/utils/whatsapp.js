@@ -1,20 +1,16 @@
 export const PHONE_NUMBER = "99400 99347";
 export const WHATSAPP_NUMBER = "919940099347";
 
-export const formatWhatsAppMessage = ({ pickup, drop, vehicle }) => {
-  const pickupText = pickup?.trim() || "Not specified";
-  const dropText = drop?.trim() || "Not specified";
-  const vehicleText = vehicle || "Not Sure";
-
-  const message = `Hi Bala's Travels,
-
-I would like to enquire about a Pickup & Drop service.
-
-Pickup Location: ${pickupText}
-Drop Location: ${dropText}
-Vehicle Preference: ${vehicleText}
-
-Please contact me with more details.`;
+export const formatWhatsAppMessage = ({ name, phone, pickup, drop, hours, vehicle }) => {
+  let message = `Hi Bala's Travels,\n\nI would like to enquire about a trip.\n\n`;
+  if (name) message += `*Name:* ${name}\n`;
+  if (phone) message += `*Mobile:* ${phone}\n`;
+  if (pickup) message += `*Pickup:* ${pickup}\n`;
+  if (drop) message += `*Drop:* ${drop}\n`;
+  if (hours) message += `*Duration:* ${hours} Hours\n`;
+  if (vehicle) message += `*Vehicle:* ${vehicle}\n`;
+  
+  message += `\nPlease contact me with more details.`;
 
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 };
