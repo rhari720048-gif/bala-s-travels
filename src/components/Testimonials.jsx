@@ -1,14 +1,24 @@
-import React from 'react';
-import { Quote, User, Star } from 'lucide-react';
+import React, { useState } from 'react';
+import { Quote, User, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { testimonialsData } from '../data/testimonialsData';
 
 export const Testimonials = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev === testimonialsData.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev === 0 ? testimonialsData.length - 1 : prev - 1));
+  };
+
   return (
-    <section id="customers" className="py-20 lg:py-28 bg-white overflow-hidden">
+    <section id="customers" className="py-20 lg:py-28 bg-slate-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* HEADER */}
-        <div className="text-center max-w-2xl mx-auto space-y-3 mb-16">
+        <div className="text-center max-w-2xl mx-auto space-y-3 mb-12 sm:mb-16">
           <span className="text-xs font-bold uppercase tracking-widest text-brand-red">
             WHAT OUR CUSTOMERS SAY
           </span>
@@ -17,50 +27,69 @@ export const Testimonials = () => {
           </h2>
         </div>
 
-        {/* 3 TESTIMONIAL CARDS */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonialsData.map((item) => (
-            <div
-              key={item.id}
-              className="bg-white rounded-2xl p-7 border border-slate-200 shadow-card hover:shadow-elevated transition-all duration-300 flex flex-col justify-between space-y-6 relative"
+        {/* SLIDER WRAPPER */}
+        <div className="relative max-w-4xl mx-auto">
+          {/* LEFT ARROW */}
+          <button 
+            onClick={prevSlide}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -ml-2 sm:-ml-12 z-10 p-2 sm:p-3 bg-white rounded-full shadow-lg border border-slate-200 text-slate-600 hover:text-brand-red hover:scale-110 transition-all focus:outline-none cursor-pointer"
+            aria-label="Previous Review"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+
+          {/* SLIDER CONTENT */}
+          <div className="overflow-hidden px-2 py-4">
+            <div 
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
-              {/* QUOTE ICON */}
-              <div className="text-slate-300">
-                <Quote className="w-8 h-8 fill-slate-100 rotate-180" />
-              </div>
+              {testimonialsData.map((item) => (
+                <div key={item.id} className="w-full shrink-0 px-2 sm:px-4">
+                  <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between space-y-6 min-h-[250px] sm:min-h-[280px]">
+                    <div className="text-slate-200 flex justify-between items-start">
+                      <Quote className="w-10 h-10 fill-slate-100 rotate-180" />
+                      <div className="flex items-center gap-1 text-amber-400">
+                        {[...Array(item.rating)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 fill-current" />
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <p className="text-base sm:text-lg lg:text-xl text-slate-700 leading-relaxed font-medium">
+                      "{item.quote}"
+                    </p>
 
-              {/* QUOTE TEXT */}
-              <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-normal flex-1">
-                "{item.quote}"
-              </p>
-
-              {/* RATING STARS */}
-              <div className="flex items-center gap-1 text-amber-400">
-                {[...Array(item.rating)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-current" />
-                ))}
-              </div>
-
-              {/* AUTHOR INFO */}
-              <div className="flex items-center gap-3 pt-3 border-t border-slate-100">
-                <div className="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-500">
-                  <User className="w-5 h-5" />
+                    <div className="flex items-center gap-4 pt-6 border-t border-slate-100 mt-auto">
+                      <div className="w-12 h-12 rounded-full bg-brand-lightRed border border-brand-red/20 flex items-center justify-center text-brand-red shrink-0">
+                        <User className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <h4 className="text-base font-bold text-slate-900">{item.author}</h4>
+                        <p className="text-sm text-slate-500">{item.location}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-sm font-bold text-slate-900">{item.author}</h4>
-                  <p className="text-xs text-slate-500">{item.location}</p>
-                </div>
-              </div>
-
+              ))}
             </div>
-          ))}
+          </div>
+
+          {/* RIGHT ARROW */}
+          <button 
+            onClick={nextSlide}
+            className="absolute right-0 top-1/2 -translate-y-1/2 -mr-2 sm:-mr-12 z-10 p-2 sm:p-3 bg-white rounded-full shadow-lg border border-slate-200 text-slate-600 hover:text-brand-red hover:scale-110 transition-all focus:outline-none cursor-pointer"
+            aria-label="Next Review"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
         </div>
 
-        {/* PAGINATION DOTS DECORATION */}
-        <div className="flex items-center justify-center gap-2 mt-12">
-          <span className="w-2.5 h-2.5 rounded-full bg-slate-300" />
-          <span className="w-6 h-2.5 rounded-full bg-brand-red" />
-          <span className="w-2.5 h-2.5 rounded-full bg-slate-300" />
+        {/* PROGRESS INDICATOR */}
+        <div className="text-center mt-8">
+          <span className="text-xs font-bold text-slate-500 bg-white border border-slate-200 px-4 py-2 rounded-full shadow-sm inline-block">
+            Review {currentIndex + 1} of {testimonialsData.length}
+          </span>
         </div>
 
       </div>

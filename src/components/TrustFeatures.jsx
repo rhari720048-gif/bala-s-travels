@@ -1,27 +1,27 @@
 import React from 'react';
-import { Car, MapPin, ShieldCheck, MessageSquare } from 'lucide-react';
+import { Plane, Briefcase, Heart, Map } from 'lucide-react';
 
 export const TrustFeatures = () => {
   const features = [
     {
-      icon: Car,
-      title: 'Comfortable Vehicles',
-      description: 'Well-maintained vehicles for a smooth journey.'
+      icon: Plane,
+      title: 'Airport Pickup & Drop',
+      description: 'Punctual and reliable airport transfer services.'
     },
     {
-      icon: MapPin,
-      title: 'South India Coverage',
-      description: 'Pickup & drop services across South India.'
+      icon: Briefcase,
+      title: 'Corporate Events',
+      description: 'Professional transportation for corporate needs.'
     },
     {
-      icon: ShieldCheck,
-      title: 'Reliable Pickup & Drop',
-      description: 'Punctual, safe and dependable service.'
+      icon: Heart,
+      title: 'Wedding Events',
+      description: 'Premium vehicles to make your special day memorable.'
     },
     {
-      icon: MessageSquare,
-      title: 'Quick WhatsApp Support',
-      description: 'Instant response and personal support.'
+      icon: Map,
+      title: 'South India Tours',
+      description: 'Customized holiday packages across South India.'
     }
   ];
 
