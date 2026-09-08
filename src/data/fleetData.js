@@ -48,20 +48,6 @@ export const fullFleetCategories = [
     ]
   },
   {
-    id: 'luxury',
-    title: 'Luxury',
-    badge: 'VIP Experience',
-    description: 'VVIP executive, corporate & wedding transportation with high-end luxury vehicles',
-    vehicles: [
-      { name: 'BMW 5-Series', capacity: '4 Passengers', type: 'luxury', image: '/images/fleet/luxury/bmw-5-series.png' },
-      { name: 'Mercedes Benz S-Class 2024', capacity: '4 Passengers', type: 'luxury', image: '/images/fleet/luxury/mercedes-s-class-2024.png' },
-      { name: 'Mercedes Benz E-Class (2023)', capacity: '4 Passengers', type: 'luxury', image: '/images/fleet/luxury/mercedes-e-class-2023.png' },
-      { name: 'Mercedes Benz E-Class W214', capacity: '4 Passengers', type: 'luxury', image: '/images/fleet/luxury/mercedes-e-class-w214.png' },
-      { name: 'Mercedes Benz S-Class', capacity: '4 Passengers', type: 'luxury', image: '/images/fleet/luxury/mercedes-s-class-2024.png' },
-      { name: 'Audi A6 Executive', capacity: '4 Passengers', type: 'luxury', image: '/images/fleet/luxury/bmw-5-series.png' },
-    ]
-  },
-  {
     id: 'suv',
     title: 'SUVs / Mini SUVs',
     badge: 'Family Favorite',
@@ -76,7 +62,6 @@ export const fullFleetCategories = [
       { name: 'Maruti Suzuki XL6', capacity: '6 Passengers', type: 'suv', image: '/images/fleet/suv/maruti-ertiga.png' },
       { name: 'Maruti Suzuki Grand Vitara', capacity: '5 Passengers', type: 'suv', image: '/images/fleet/suv/maruti-grand-vitara.png' },
       { name: 'Mahindra XUV700 AX7', capacity: '7 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-fortuner.png' },
-      { name: 'Kia Carnival', capacity: '7-9 Passengers', type: 'suv', image: '/images/fleet/suv/kia-carnival.png' },
       { name: 'Kia Carens', capacity: '7 Passengers', type: 'suv', image: '/images/fleet/suv/kia-carens.png' },
       { name: 'Hyundai Alcazar', capacity: '7 Passengers', type: 'suv', image: '/images/fleet/suv/hyundai-alcazar.png' },
       { name: 'Tata Safari Dark Edition', capacity: '7 Passengers', type: 'suv', image: '/images/fleet/suv/kia-seltos-black.png' },
@@ -88,12 +73,28 @@ export const fullFleetCategories = [
     badge: 'Group Tours',
     description: 'Large group travel options with luxury push-back seats and dual AC comfort',
     vehicles: [
-      { name: 'Force Urbania', capacity: '12-17 Passengers', type: 'traveller', image: '/images/fleet/traveller/force-urbania.png' },
+      { name: 'Force Urbania', capacity: '12-22 Passengers', type: 'traveller', image: '/images/fleet/traveller/force-urbania.png' },
       { name: 'Tempo Traveller', capacity: '12-26 Passengers', type: 'traveller', image: '/images/fleet/traveller/tempo-traveller.png' },
       { name: 'Maharaja Executive Traveller', capacity: '9-12 Passengers', type: 'traveller', image: '/images/fleet/traveller/force-urbania.png' },
-      { name: '21 Seater Luxury Mini Bus', capacity: '21 Passengers', type: 'traveller', image: '/images/fleet/traveller/tempo-traveller.png' },
+      { name: 'Luxury Mini Bus', capacity: '20-28 Passengers', type: 'traveller', image: '/images/fleet/traveller/tempo-traveller.png' },
       { name: 'Luxury Coach / Bus (Push Back Seats)', capacity: '35-50 Passengers', type: 'traveller', image: '/images/fleet/traveller/luxury-coach.png' },
       { name: 'Volvo / Benz Coach (Push Back Seats)', capacity: '45-53 Passengers', type: 'traveller', image: '/images/fleet/traveller/volvo-benz-coach.png' },
+    ]
+  },
+  {
+    id: 'luxury',
+    title: 'Luxury',
+    badge: 'VIP Experience',
+    description: 'VVIP executive, corporate & wedding transportation with high-end luxury vehicles',
+    vehicles: [
+      { name: 'BMW 5-Series', capacity: '4 Passengers', type: 'luxury', image: '/images/fleet/luxury/bmw-5-series.png' },
+      { name: 'Mercedes Benz S-Class 2024', capacity: '4 Passengers', type: 'luxury', image: '/images/fleet/luxury/mercedes-s-class-2024.png' },
+      { name: 'Mercedes Benz E-Class (2023)', capacity: '4 Passengers', type: 'luxury', image: '/images/fleet/luxury/mercedes-e-class-2023.png' },
+      { name: 'Mercedes Benz E-Class W214', capacity: '4 Passengers', type: 'luxury', image: '/images/fleet/luxury/mercedes-e-class-w214.png' },
+      { name: 'Mercedes Benz S-Class', capacity: '4 Passengers', type: 'luxury', image: '/images/fleet/luxury/mercedes-s-class-2024.png' },
+      { name: 'Audi A6 Executive', capacity: '4 Passengers', type: 'luxury', image: '/images/fleet/luxury/bmw-5-series.png' },
+      { name: 'Kia Carnival', capacity: '7-9 Passengers', type: 'luxury', image: '/images/fleet/suv/kia-carnival.png' },
+      { name: 'Toyota Vellfire', capacity: '7 Passengers', type: 'luxury', image: '/images/fleet/luxury/toyota-vellfire.png' },
     ]
   }
 ];
