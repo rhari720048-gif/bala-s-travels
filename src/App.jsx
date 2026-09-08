@@ -21,6 +21,7 @@ export function App() {
   const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'fleet' | 'locations' | 'about' | 'blogs' | 'admin'
   const [selectedVehicleData, setSelectedVehicleData] = useState(null); // { vehicle, categoryTitle }
   const [activeSection, setActiveSection] = useState('home');
+  const [initialFleetCategory, setInitialFleetCategory] = useState('all');
 
   // Check URL pathname & hash on initial load & popstate for /admin route
   useEffect(() => {
@@ -73,6 +74,7 @@ export function App() {
   const handleNavigate = (sectionId) => {
     setSelectedVehicleData(null);
     if (sectionId === 'fleet') {
+      setInitialFleetCategory('all');
       setCurrentPage('fleet');
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     } else if (sectionId === 'locations') {
@@ -119,8 +121,9 @@ export function App() {
     }
   };
 
-  const handleBackToFleet = () => {
+  const handleBackToFleet = (categoryId = 'all') => {
     setSelectedVehicleData(null);
+    setInitialFleetCategory(categoryId);
     if (currentPage !== 'fleet') setCurrentPage('fleet');
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   };
@@ -178,6 +181,7 @@ export function App() {
               window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
             }}
             onSelectVehicle={handleSelectVehicle}
+            initialCategory={initialFleetCategory}
           />
         </div>
       ) : currentPage === 'locations' ? (
@@ -199,6 +203,7 @@ export function App() {
               window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
             }}
             onExploreFleet={() => {
+              setInitialFleetCategory('all');
               setCurrentPage('fleet');
               window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
             }}
@@ -218,6 +223,7 @@ export function App() {
         <main className="animate-smooth-enter">
           {/* HERO SECTION WITH FLOATING ENQUIRY CARD */}
           <HeroSection onExploreFleet={() => {
+            setInitialFleetCategory('all');
             setCurrentPage('fleet');
             window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
           }} />
@@ -231,6 +237,7 @@ export function App() {
           {/* FEATURED FLEET (3 INTERACTIVE VEHICLES ON HOME) */}
           <FeaturedFleet 
             onViewAllFleet={() => {
+              setInitialFleetCategory('all');
               setCurrentPage('fleet');
               window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
             }}

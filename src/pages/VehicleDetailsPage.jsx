@@ -67,7 +67,12 @@ export const VehicleDetailsPage = ({ vehicle, categoryTitle = 'Vehicle', onBackT
             </button>
 
             <span className="text-xs text-slate-500">/</span>
-            <span className="text-xs text-slate-300 font-semibold">{safeCatTitle}</span>
+            <button 
+              onClick={() => onBackToFleet(currentCategory?.id || 'all')}
+              className="text-xs text-slate-300 font-semibold hover:text-brand-red cursor-pointer transition-colors"
+            >
+              {safeCatTitle}
+            </button>
             <span className="text-xs text-slate-500">/</span>
             <span className="text-xs font-bold text-brand-red">{safeName}</span>
           </div>
