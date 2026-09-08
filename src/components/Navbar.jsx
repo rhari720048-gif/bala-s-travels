@@ -30,6 +30,7 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
     { id: 'home', label: 'Home', href: '#home' },
     { id: 'about', label: 'About', href: '#about' },
     { id: 'fleet', label: 'Fleet', href: '#fleet' },
+    { id: 'acting-drivers', label: 'Acting Drivers', href: '#acting-drivers' },
     { id: 'locations', label: 'Locations', href: '#locations' },
     { id: 'blogs', label: 'Blogs', href: '#blogs' },
     { id: 'customers', label: 'Customers', href: '#customers' },
@@ -43,7 +44,7 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
       onNavigate(id);
     }
     // Only scroll into view for home sections, NOT for standalone pages
-    if (id !== 'fleet' && id !== 'locations' && id !== 'about' && id !== 'blogs') {
+    if (id !== 'fleet' && id !== 'acting-drivers' && id !== 'locations' && id !== 'about' && id !== 'blogs') {
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
@@ -54,12 +55,21 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 flex flex-col ${
       isScrolled 
-        ? 'bg-white/95 backdrop-blur-md shadow-md py-2.5 sm:py-3' 
-        : 'bg-white/90 backdrop-blur-sm py-3 sm:py-4 border-b border-slate-100'
+        ? 'bg-white/95 backdrop-blur-md shadow-md' 
+        : 'bg-white/90 backdrop-blur-sm border-b border-slate-100'
     }`}>
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      
+      {/* SCROLLING ANNOUNCEMENT BAR */}
+      <div className="bg-brand-red text-white py-1.5 overflow-hidden flex items-center shrink-0">
+        <div className="whitespace-nowrap animate-marquee text-[11px] sm:text-xs font-bold tracking-wide w-full inline-block">
+          <span className="mx-4 sm:mx-10">🔥 Special Offer: Airport Pickup & Drop at Low Cost! 30 kms for ₹700 | 30 kms for ₹1000 | 24/7 Acting Drivers Available in Chennai</span>
+          <span className="mx-4 sm:mx-10">🔥 Special Offer: Airport Pickup & Drop at Low Cost! 30 kms for ₹700 | 30 kms for ₹1000 | 24/7 Acting Drivers Available in Chennai</span>
+        </div>
+      </div>
+
+      <div className={`transition-all duration-300 w-full ${isScrolled ? 'py-2.5 sm:py-3' : 'py-3 sm:py-4'} max-w-7xl mx-auto px-3 sm:px-6 lg:px-8`}>
         <div className="flex items-center justify-between gap-2">
           
           {/* LOGO */}

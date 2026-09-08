@@ -16,6 +16,7 @@ import LocationsPage from './pages/LocationsPage';
 import AboutPage from './pages/AboutPage';
 import BlogsPage from './pages/BlogsPage';
 import AdminPage from './pages/AdminPage';
+import ActingDriversPage from './pages/ActingDriversPage';
 
 export function App() {
   const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'fleet' | 'locations' | 'about' | 'blogs' | 'admin'
@@ -82,6 +83,9 @@ export function App() {
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     } else if (sectionId === 'about') {
       setCurrentPage('about');
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    } else if (sectionId === 'acting-drivers') {
+      setCurrentPage('acting-drivers');
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     } else if (sectionId === 'blogs') {
       setCurrentPage('blogs');
@@ -212,6 +216,16 @@ export function App() {
       ) : currentPage === 'blogs' ? (
         <div className="animate-smooth-enter">
           <BlogsPage
+            onBackToHome={() => {
+              setCurrentPage('home');
+              window.history.pushState({}, '', '/');
+              window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+            }}
+          />
+        </div>
+      ) : currentPage === 'acting-drivers' ? (
+        <div className="animate-smooth-enter">
+          <ActingDriversPage
             onBackToHome={() => {
               setCurrentPage('home');
               window.history.pushState({}, '', '/');

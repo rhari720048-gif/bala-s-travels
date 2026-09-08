@@ -25,3 +25,8 @@ export const openRouteWhatsApp = (from, to) => {
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank");
 };
 
+export const openActingDriverWhatsApp = (driverType = "Acting Driver") => {
+  const message = `Hi Bala's Travels,\n\nI am looking to book an ${driverType} in Chennai.\nPlease share the availability and charges.`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank");
+};
+
