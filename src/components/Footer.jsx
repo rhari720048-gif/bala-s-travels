@@ -14,11 +14,13 @@ export const Footer = ({ onNavigate }) => {
   ];
 
   const services = [
-    'Pickup & Drop Service',
+    'Airport Pickup & Drop',
+    'Airport Transfers',
     'One Way Trips',
     'Round Trips',
     'Outstation Travel',
-    'Airport Transfers'
+    'Wedding Events',
+    'Corporate Events'
   ];
 
   const handleLinkClick = (id, href) => {
