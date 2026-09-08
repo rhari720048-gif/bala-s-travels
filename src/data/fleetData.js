@@ -31,9 +31,9 @@ export const featuredVehicles = [
 export const fullFleetCategories = [
   {
     id: 'sedan',
-    title: 'Sedan',
+    title: 'Sedans & Hatchback/Compact',
     badge: 'Popular Choice',
-    description: 'Smooth, comfortable & economical sedans ideal for business & long distance travel',
+    description: 'Smooth, comfortable & economical sedans and compacts ideal for business, city, & long distance travel',
     vehicles: [
       { name: 'Maruti Suzuki Dzire', capacity: '4 Passengers', type: 'sedan', image: '/images/fleet/sedan/maruti-dzire.png' },
       { name: 'Toyota Etios', capacity: '4 Passengers', type: 'sedan', image: '/images/fleet/sedan/toyota-etios.png' },
@@ -42,18 +42,8 @@ export const fullFleetCategories = [
       { name: 'Honda Amaze', capacity: '4 Passengers', type: 'sedan', image: '/images/fleet/sedan/honda-amaze.png' },
       { name: 'Maruti Suzuki Ciaz', capacity: '4 Passengers', type: 'sedan', image: '/images/fleet/sedan/maruti-ciaz.png' },
       { name: 'Hyundai Verna', capacity: '4 Passengers', type: 'sedan', image: '/images/fleet/sedan/hyundai-verna.png' },
-      { name: 'Toyota Corolla Altis', capacity: '4 Passengers', type: 'sedan', image: '/images/fleet/sedan/corolla-altis.png' }
-    ]
-  },
-  {
-    id: 'hatchback',
-    title: 'Hatchbacks / Compact',
-    badge: 'City Travel',
-    description: 'Agile & practical vehicles for quick city rides and small family travel',
-    vehicles: [
+      { name: 'Toyota Corolla Altis', capacity: '4 Passengers', type: 'sedan', image: '/images/fleet/sedan/corolla-altis.png' },
       { name: 'Toyota Glanza', capacity: '5 Passengers', type: 'hatchback', image: '/images/fleet/hatchback/toyota-glanza.png' },
-      { name: 'Kia Seltos', capacity: '5 Passengers', type: 'suv', image: '/images/fleet/suv/kia-seltos-black.png' },
-      { name: 'Hyundai Verna', capacity: '4 Passengers', type: 'sedan', image: '/images/fleet/sedan/hyundai-verna.png' },
       { name: 'Hyundai Venue', capacity: '5 Passengers', type: 'hatchback', image: '/images/fleet/hatchback/hyundai-venue.png' }
     ]
   },

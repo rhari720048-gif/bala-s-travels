@@ -12,7 +12,7 @@ const INITIAL_SAMPLE_ENQUIRIES = [
     phone: '9876543210',
     pickup: 'Chennai Airport (MAA)',
     drop: 'Pondicherry Rock Beach',
-    category: 'Sedan',
+    category: 'Sedans & Hatchback/Compact',
     model: 'Hyundai Verna',
     date: '2026-09-10',
     status: 'New'

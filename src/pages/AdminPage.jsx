@@ -35,7 +35,7 @@ export const AdminPage = ({ onBackToHome }) => {
   // New Vehicle Form State
   const [newVehicle, setNewVehicle] = useState({
     name: '',
-    categoryTitle: 'Sedan',
+    categoryTitle: 'Sedans & Hatchback/Compact',
     customCategory: '',
     seats: '5 Seats',
     ac: 'Dual AC',
@@ -149,7 +149,7 @@ export const AdminPage = ({ onBackToHome }) => {
     // Reset form
     setNewVehicle({
       name: '',
-      categoryTitle: 'Sedan',
+      categoryTitle: 'Sedans & Hatchback/Compact',
       customCategory: '',
       seats: '5 Seats',
       ac: 'Dual AC',
