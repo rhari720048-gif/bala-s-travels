@@ -104,7 +104,10 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
           {/* RIGHT ACTION: WHATSAPP ENQUIRY BUTTON */}
           <div className="hidden md:flex items-center">
             <button
-              onClick={() => openGeneralWhatsApp()}
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick('enquiry', '#home');
+              }}
               className="inline-flex items-center gap-2 bg-brand-green hover:bg-brand-darkGreen text-white px-5 py-2.5 rounded-xl text-xs font-bold shadow-xs hover:shadow-md transition-all duration-200 cursor-pointer transform hover:-translate-y-0.5"
             >
               <MessageCircle className="w-4 h-4 fill-current" />
@@ -115,9 +118,12 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
           {/* MOBILE HAMBURGER TOGGLE */}
           <div className="flex md:hidden items-center gap-2 shrink-0">
             <button
-              onClick={() => openGeneralWhatsApp()}
-              className="inline-flex items-center justify-center p-2 rounded-xl bg-brand-green text-white shadow-2xs"
-              aria-label="WhatsApp"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick('enquiry', '#home');
+              }}
+              className="inline-flex items-center justify-center p-2 rounded-xl bg-brand-green text-white shadow-2xs cursor-pointer"
+              aria-label="WhatsApp Enquiry"
             >
               <MessageCircle className="w-4 h-4 fill-current" />
             </button>
@@ -176,9 +182,9 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
-                openGeneralWhatsApp();
+                handleNavClick('enquiry', '#home');
               }}
-              className="w-full flex items-center justify-center gap-2 bg-brand-green hover:bg-brand-darkGreen text-white py-3 rounded-lg text-xs font-bold shadow-md"
+              className="w-full flex items-center justify-center gap-2 bg-brand-green hover:bg-brand-darkGreen text-white py-3 rounded-lg text-xs font-bold shadow-md cursor-pointer"
             >
               <MessageCircle className="w-4 h-4 fill-current" />
               <span>WhatsApp Enquiry</span>

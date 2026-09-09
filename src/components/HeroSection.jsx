@@ -20,10 +20,10 @@ export const HeroSection = ({ onExploreFleet }) => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="flex flex-col items-center justify-center text-center">
           
-          {/* LEFT CONTENT (6 cols - Pushed Far Left with Premium Typography) */}
-          <div className="lg:col-span-6 space-y-6 text-white text-left max-w-lg">
+          {/* CENTERED HERO CONTENT */}
+          <div className="space-y-6 text-white max-w-3xl flex flex-col items-center">
             
             {/* BRAND BADGE */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[11px] font-extrabold tracking-[0.2em] uppercase text-white shadow-sm">
@@ -32,7 +32,7 @@ export const HeroSection = ({ onExploreFleet }) => {
             </div>
 
             {/* STYLISH MAIN HEADING */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08]">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.08]">
               <span className="block font-black text-white drop-shadow-md">
                 Your Journey.
               </span>
@@ -42,16 +42,16 @@ export const HeroSection = ({ onExploreFleet }) => {
             </h1>
 
             {/* STYLISH SUBHEADING */}
-            <p className="text-base sm:text-lg font-bold text-slate-100 tracking-wide flex items-center gap-2">
+            <p className="text-base sm:text-lg font-bold text-slate-100 tracking-wide flex items-center justify-center gap-2">
               <ShieldCheck className="w-5 h-5 text-brand-red flex-shrink-0" />
               <span>Reliable Pickup & Drop Services Across South India</span>
             </p>
 
             {/* SPECIAL OFFERS HIGHLIGHT - Minimalist Version */}
-            <div className="flex flex-col sm:flex-row gap-5 sm:gap-8 pt-2 pb-3">
+            <div className="flex flex-col sm:flex-row items-center gap-5 sm:gap-8 pt-2 pb-3 justify-center">
               <div className="flex items-center gap-3">
                 <div className="w-2 h-12 bg-brand-red rounded-full shadow-[0_0_12px_rgba(217,35,45,0.9)]" />
-                <div>
+                <div className="text-left">
                   <p className="text-xs text-brand-red font-black uppercase tracking-widest leading-none mb-2">Airport (Small Cars)</p>
                   <p className="text-white font-black text-2xl sm:text-3xl leading-none drop-shadow-md">₹700 <span className="text-sm text-slate-300 font-bold">/ 20km</span></p>
                 </div>
@@ -59,7 +59,7 @@ export const HeroSection = ({ onExploreFleet }) => {
               <div className="hidden sm:block w-px h-12 bg-white/20" />
               <div className="flex items-center gap-3">
                 <div className="w-2 h-12 bg-brand-red rounded-full shadow-[0_0_12px_rgba(217,35,45,0.9)]" />
-                <div>
+                <div className="text-left">
                   <p className="text-xs text-brand-red font-black uppercase tracking-widest leading-none mb-2">Airport (Big Cars)</p>
                   <p className="text-white font-black text-2xl sm:text-3xl leading-none drop-shadow-md">₹1000 <span className="text-sm text-slate-300 font-bold">/ 20km</span></p>
                 </div>
@@ -67,20 +67,12 @@ export const HeroSection = ({ onExploreFleet }) => {
             </div>
 
             {/* DESCRIPTION */}
-            <p className="text-xs sm:text-sm text-slate-300 max-w-md leading-relaxed font-normal">
+            <p className="text-xs sm:text-sm text-slate-300 max-w-lg leading-relaxed font-normal">
               Share your pickup and drop location with us, and our team will help you plan a comfortable journey with the right vehicle.
             </p>
 
             {/* ACTION BUTTONS */}
-            <div className="pt-2 flex flex-wrap items-center gap-3.5">
-              <button
-                onClick={() => openGeneralWhatsApp()}
-                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-brand-red to-red-600 hover:from-brand-darkRed hover:to-red-700 text-white px-6 py-3.5 rounded-xl font-extrabold text-xs sm:text-sm shadow-xl hover:shadow-2xl transition-all duration-200 transform hover:-translate-y-0.5 tracking-wide"
-              >
-                <MessageCircle className="w-4 h-4 fill-current" />
-                <span>Enquire on WhatsApp</span>
-              </button>
-
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-3.5">
               <a
                 href="#fleet"
                 onClick={(e) => {
@@ -88,20 +80,14 @@ export const HeroSection = ({ onExploreFleet }) => {
                   if (onExploreFleet) onExploreFleet();
                   document.querySelector('#fleet')?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="inline-flex items-center gap-2 bg-white/95 hover:bg-white text-slate-900 px-6 py-3.5 rounded-xl font-extrabold text-xs sm:text-sm shadow-md transition-all duration-200 transform hover:-translate-y-0.5 tracking-wide border border-white"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-brand-red to-red-600 hover:from-brand-darkRed hover:to-red-700 text-white px-8 py-3.5 rounded-xl font-extrabold text-xs sm:text-sm shadow-xl hover:shadow-2xl transition-all duration-200 transform hover:-translate-y-0.5 tracking-wide"
               >
-                <Compass className="w-4 h-4 text-brand-red" />
+                <Compass className="w-4 h-4 text-white" />
                 <span>Explore Our Fleet</span>
               </a>
             </div>
 
           </div>
-
-          {/* RIGHT SIDE FLOATING ENQUIRY CARD (6 cols - Far Right) */}
-          <div className="lg:col-span-6 w-full flex justify-end">
-            <FloatingEnquiryCard />
-          </div>
-
         </div>
       </div>
 

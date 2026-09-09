@@ -17,6 +17,7 @@ import AboutPage from './pages/AboutPage';
 import BlogsPage from './pages/BlogsPage';
 import AdminPage from './pages/AdminPage';
 import ActingDriversPage from './pages/ActingDriversPage';
+import EnquiryPage from './pages/EnquiryPage';
 import AIChatbot from './components/AIChatbot';
 
 export function App() {
@@ -87,6 +88,9 @@ export function App() {
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     } else if (sectionId === 'acting-drivers') {
       setCurrentPage('acting-drivers');
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    } else if (sectionId === 'enquiry') {
+      setCurrentPage('enquiry');
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     } else if (sectionId === 'blogs') {
       setCurrentPage('blogs');
@@ -227,6 +231,16 @@ export function App() {
       ) : currentPage === 'acting-drivers' ? (
         <div className="animate-smooth-enter">
           <ActingDriversPage
+            onBackToHome={() => {
+              setCurrentPage('home');
+              window.history.pushState({}, '', '/');
+              window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+            }}
+          />
+        </div>
+      ) : currentPage === 'enquiry' ? (
+        <div className="animate-smooth-enter">
+          <EnquiryPage
             onBackToHome={() => {
               setCurrentPage('home');
               window.history.pushState({}, '', '/');
