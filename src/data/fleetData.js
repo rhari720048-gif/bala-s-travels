@@ -81,7 +81,7 @@ export const fullFleetCategories = [
     description: 'Spacious 6 to 8 seaters designed for comfortable family outstation journeys',
     vehicles: [
       { name: 'Toyota Innova Crysta', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-innova.png' },
-      { name: 'Toyota Innova Hycross Hybrid', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-innova-hycross.png' },
+      { name: 'Toyota Innova Hycross', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-innova-hycross.png' },
       { name: 'Toyota Fortuner', capacity: '7 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-fortuner.png' },
       { name: 'Mahindra Marazzo', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/mahindra-marazzo.png' },
       { name: 'Maruti Suzuki Ertiga', capacity: '6 Passengers', type: 'suv', image: '/images/fleet/suv/maruti-ertiga.png' },
