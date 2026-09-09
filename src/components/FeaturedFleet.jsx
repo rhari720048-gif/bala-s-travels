@@ -4,11 +4,7 @@ import { featuredVehicles } from '../data/fleetData';
 import { InteractiveCarCard } from './InteractiveCarCard';
 
 export const FeaturedFleet = ({ onViewAllFleet, onSelectVehicle }) => {
-  const getVehicleImage = (id) => {
-    if (id === 'sedan') return '/images/verna.png';
-    if (id === 'suv') return '/images/seltos.png';
-    return '/images/crysta.png';
-  };
+  // Use image directly from data
 
   return (
     <section id="fleet" className="py-20 lg:py-24 bg-slate-100/60 border-y border-slate-200/80">
@@ -33,7 +29,7 @@ export const FeaturedFleet = ({ onViewAllFleet, onSelectVehicle }) => {
             const formattedVehicle = {
               name: vehicle.name,
               capacity: vehicle.capacity,
-              image: getVehicleImage(vehicle.id),
+              image: vehicle.image,
               description: vehicle.description
             };
 

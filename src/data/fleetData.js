@@ -4,7 +4,7 @@ export const featuredVehicles = [
     name: 'Sedan',
     category: 'Sedan',
     description: 'Comfortable for everyday and long-distance travel.',
-    image: '/images/fleet/sedan/hyundai-verna.png',
+    image: '/images/fleet/sedan/maruti-dzire.png',
     capacity: '4 Passengers',
     features: ['Air Conditioned', 'Spacious Boot', 'Smooth Ride']
   },
@@ -13,18 +13,45 @@ export const featuredVehicles = [
     name: 'SUV',
     category: 'SUV',
     description: 'More space and comfort for family journeys.',
-    image: '/images/fleet/suv/maruti-ertiga.png',
-    capacity: '5 Passengers',
+    image: '/images/fleet/suv/toyota-innova-crysta.png',
+    capacity: '7-8 Passengers',
     features: ['High Ground Clearance', 'Ample Legroom', 'Comfort Seating']
   },
   {
-    id: 'large-vehicle',
-    name: 'Premium / Large Vehicle',
-    category: 'Premium Family Vehicle',
-    description: 'Suitable for larger groups and extended trips.',
-    image: '/images/fleet/suv/toyota-innova-crysta.png',
-    capacity: '7-8 Passengers',
-    features: ['Captain Seats', 'Dual AC', 'Long Distance Comfort']
+    id: 'luxury',
+    name: 'Luxury Car',
+    category: 'Luxury',
+    description: 'Premium experience for corporate and special events.',
+    image: '/images/fleet/luxury/mercedes-s-class-2024.png',
+    capacity: '4 Passengers',
+    features: ['Premium Interiors', 'Chauffeur Driven', 'Ultimate Comfort']
+  },
+  {
+    id: 'traveller',
+    name: 'Tempo Traveller',
+    category: 'Traveller',
+    description: 'Perfect for mid-sized groups and family outings.',
+    image: '/images/fleet/traveller/tempo-traveller.png',
+    capacity: '12-26 Passengers',
+    features: ['Push-back Seats', 'Dual AC', 'Entertainment System']
+  },
+  {
+    id: 'minibus',
+    name: 'Mini Bus',
+    category: 'Bus',
+    description: 'Ideal for large family functions and corporate trips.',
+    image: '/images/fleet/traveller/force-urbania.png',
+    capacity: '20-28 Passengers',
+    features: ['Spacious Aisle', 'Comfortable Seating', 'Luggage Space']
+  },
+  {
+    id: 'luxury-coach',
+    name: 'Volvo 9600 / Luxury Bus',
+    category: 'Bus',
+    description: 'High-end luxury travel for large groups.',
+    image: '/images/fleet/traveller/volvo-benz-coach.png',
+    capacity: '45-53 Passengers',
+    features: ['Air Suspension', 'Reclining Seats', 'Premium Travel']
   }
 ];
 
