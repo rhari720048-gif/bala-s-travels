@@ -76,8 +76,8 @@ export const AboutSection = () => {
           <div className="lg:col-span-6 relative">
             <div className="relative mx-auto rounded-3xl overflow-hidden shadow-elevated group border border-slate-200">
               <img
-                src="/images/about-temple.jpg"
-                alt="Bala's Travels Vehicle at South Indian Temple Destination"
+                src="/images/about-urbania.jpg"
+                alt="Bala's Travels Premium Force Urbania Fleet"
                 className="w-full h-[380px] sm:h-[450px] object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-60" />
