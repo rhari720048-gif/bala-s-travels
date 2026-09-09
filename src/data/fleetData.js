@@ -83,13 +83,9 @@ export const fullFleetCategories = [
       { name: 'Toyota Innova', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-innova-crysta.png' },
       { name: 'Toyota Innova Hycross Hybrid', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-innova-hycross.png' },
       { name: 'Toyota Fortuner', capacity: '7 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-fortuner.png' },
-      { name: 'Mahindra Scorpio', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/mahindra-marazzo.png' },
       { name: 'Mahindra Marazzo', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/mahindra-marazzo.png' },
       { name: 'Maruti Suzuki Ertiga', capacity: '6 Passengers', type: 'suv', image: '/images/fleet/suv/maruti-ertiga.png' },
-      { name: 'Maruti Suzuki Grand Vitara', capacity: '5 Passengers', type: 'suv', image: '/images/fleet/suv/maruti-grand-vitara.png' },
       { name: 'Kia Carens', capacity: '7 Passengers', type: 'suv', image: '/images/fleet/suv/kia-carens.png' },
-      { name: 'Hyundai Alcazar', capacity: '7 Passengers', type: 'suv', image: '/images/fleet/suv/hyundai-alcazar.png' },
-      { name: 'Tata Safari Dark Edition', capacity: '7 Passengers', type: 'suv', image: '/images/fleet/suv/tata-nexon-ev.png' },
     ]
   },
   {
