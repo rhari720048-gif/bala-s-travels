@@ -52,7 +52,7 @@ export const VehicleDetailsPage = ({ vehicle, categoryTitle = 'Vehicle', onBackT
     <div key={safeName} className="min-h-screen bg-slate-50 text-slate-900 animate-smooth-enter">
       
       {/* BREADCRUMB & BACK HEADER WITH GRADIENT ACCENT */}
-      <section className="bg-slate-950 text-white pt-24 pb-8 border-b border-slate-800 relative overflow-hidden">
+      <section className="bg-slate-950 text-white pt-32 lg:pt-40 pb-8 border-b border-slate-800 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-brand-red/10 rounded-full filter blur-3xl pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4 relative z-10">
