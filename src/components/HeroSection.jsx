@@ -10,9 +10,9 @@ export const HeroSection = ({ onExploreFleet }) => {
       {/* BACKGROUND IMAGE & CINEMATIC OVERLAY */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2000&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2000&auto=format&fit=crop"
           alt="Bala's Travels SUV Journey"
-          className="w-full h-full object-cover object-center filter brightness-[0.8] contrast-[1.1]"
+          className="w-full h-full object-cover object-center filter brightness-[0.75] contrast-[1.15]"
         />
         {/* Sleek edge gradients to enhance white Range Rover in center while ensuring 100% readable text on left */}
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/30 to-slate-950/20" />
@@ -47,20 +47,21 @@ export const HeroSection = ({ onExploreFleet }) => {
               <span>Reliable Pickup & Drop Services Across South India</span>
             </p>
 
-            {/* SPECIAL OFFERS HIGHLIGHT CARD */}
-            <div className="bg-white/10 backdrop-blur-md border border-brand-red/40 rounded-xl p-4 shadow-lg">
-              <div className="flex items-center gap-2 mb-2.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-brand-red animate-pulse shadow-[0_0_8px_rgba(217,35,45,0.8)]" />
-                <h3 className="text-xs font-black text-white uppercase tracking-widest drop-shadow-sm">Special Pickup Rates</h3>
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="bg-slate-950/60 rounded-lg p-3 border border-white/10 transform transition-transform hover:-translate-y-1">
-                  <p className="text-[11px] text-slate-300 font-bold uppercase tracking-wider mb-1">Small Cars</p>
-                  <p className="text-brand-red font-black text-xl drop-shadow-sm">₹700 <span className="text-[11px] text-slate-400 font-semibold tracking-normal">/ 20 km</span></p>
+            {/* SPECIAL OFFERS HIGHLIGHT - Minimalist Version */}
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 pt-1 pb-2">
+              <div className="flex items-center gap-2.5">
+                <div className="w-1.5 h-10 bg-brand-red rounded-full shadow-[0_0_8px_rgba(217,35,45,0.8)]" />
+                <div>
+                  <p className="text-[10px] text-slate-300 font-bold uppercase tracking-widest leading-none mb-1.5">Airport (Small Cars)</p>
+                  <p className="text-white font-black text-xl leading-none drop-shadow-sm">₹700 <span className="text-xs text-slate-400 font-medium">/ 20km</span></p>
                 </div>
-                <div className="bg-slate-950/60 rounded-lg p-3 border border-white/10 transform transition-transform hover:-translate-y-1">
-                  <p className="text-[11px] text-slate-300 font-bold uppercase tracking-wider mb-1">Big Cars</p>
-                  <p className="text-brand-red font-black text-xl drop-shadow-sm">₹1000 <span className="text-[11px] text-slate-400 font-semibold tracking-normal">/ 20 km</span></p>
+              </div>
+              <div className="hidden sm:block w-px h-10 bg-white/10" />
+              <div className="flex items-center gap-2.5">
+                <div className="w-1.5 h-10 bg-brand-red rounded-full shadow-[0_0_8px_rgba(217,35,45,0.8)]" />
+                <div>
+                  <p className="text-[10px] text-slate-300 font-bold uppercase tracking-widest leading-none mb-1.5">Airport (Big Cars)</p>
+                  <p className="text-white font-black text-xl leading-none drop-shadow-sm">₹1000 <span className="text-xs text-slate-400 font-medium">/ 20km</span></p>
                 </div>
               </div>
             </div>
