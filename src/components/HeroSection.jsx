@@ -8,18 +8,15 @@ export const HeroSection = ({ onExploreFleet }) => {
     <section id="home" className="relative min-h-[90vh] lg:min-h-[85vh] pt-28 pb-16 lg:py-24 flex items-center overflow-hidden bg-slate-950">
       
       {/* BACKGROUND IMAGE & CINEMATIC OVERLAY */}
-      <div className="absolute inset-0 z-0 bg-slate-950 overflow-hidden">
-        {/* Dynamic Image Placement */}
-        <div className="absolute inset-0 flex items-center justify-end right-[-15%] sm:right-[5%] opacity-40 sm:opacity-50 pointer-events-none">
-          <img
-            src="/images/fleet/suv/toyota-innova-hycross.png"
-            alt="Bala's Travels SUV Journey - Innova Hycross"
-            className="w-[150%] max-w-none sm:w-[900px] h-auto object-contain filter drop-shadow-[0_0_60px_rgba(255,255,255,0.15)] transform translate-y-10"
-          />
-        </div>
+      <div className="absolute inset-0 z-0 bg-slate-950">
+        <img
+          src="/images/fleet/traveller/background-buses.jpg"
+          alt="Bala's Travels Fleet"
+          className="w-full h-full object-cover object-center filter brightness-[0.70] contrast-[1.10]"
+        />
         {/* Sleek edge gradients to enhance the background while ensuring 100% readable text */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/100 via-slate-950/80 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-slate-950/90" />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/70 to-slate-950/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-slate-950/60" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
