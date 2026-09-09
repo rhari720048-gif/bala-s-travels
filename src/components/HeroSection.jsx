@@ -10,9 +10,9 @@ export const HeroSection = ({ onExploreFleet }) => {
       {/* BACKGROUND IMAGE & CINEMATIC OVERLAY */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/hero-bg.jpg"
-          alt="Bala's Travels Highway Journey"
-          className="w-full h-full object-cover object-center filter brightness-[0.92] contrast-[1.08]"
+          src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2000&auto=format&fit=crop"
+          alt="Bala's Travels SUV Journey"
+          className="w-full h-full object-cover object-center filter brightness-[0.8] contrast-[1.1]"
         />
         {/* Sleek edge gradients to enhance white Range Rover in center while ensuring 100% readable text on left */}
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/30 to-slate-950/20" />
