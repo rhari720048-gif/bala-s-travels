@@ -25,10 +25,15 @@ export const HeroSection = ({ onExploreFleet }) => {
           {/* CENTERED HERO CONTENT */}
           <div className="space-y-6 text-white max-w-3xl flex flex-col items-center">
             
-            {/* BRAND BADGE */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[11px] font-extrabold tracking-[0.2em] uppercase text-white shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-brand-red animate-pulse" />
-              BALA'S TRAVELS
+            {/* CENTERED LOGO */}
+            <div className="flex justify-center mb-2 animate-smooth-enter">
+              <div className="bg-white/95 backdrop-blur-md p-3 sm:p-4 rounded-3xl shadow-elevated border border-white/20 transform hover:scale-105 transition-transform duration-300">
+                <img 
+                  src="/logo.png" 
+                  alt="Bala's Travels Official Logo" 
+                  className="h-20 sm:h-28 md:h-36 object-contain"
+                />
+              </div>
             </div>
 
             {/* STYLISH MAIN HEADING */}
