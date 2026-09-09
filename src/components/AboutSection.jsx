@@ -38,26 +38,36 @@ export const AboutSection = () => {
               </h2>
             </div>
 
-            <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-              Bala's Travels provides reliable pickup and drop transportation services for customers travelling across Chennai and South India. From city rides to long-distance journeys, we help you travel comfortably with the right vehicle for your journey.
-            </p>
+            <div className="space-y-4 text-sm sm:text-base text-slate-600 leading-relaxed">
+              <p>
+                Welcome to <strong className="text-slate-900 font-bold">Bala Travels</strong>, your trusted partner for safe, comfortable, and reliable transportation services. We specialize in turning every journey into a seamless experience, whether you are traveling locally or heading out of town.
+              </p>
+              <p>
+                Over the years, we have proudly served countless clients with a diverse range of specialized transportation and event solutions. Our core services include:
+              </p>
+              
+              <ul className="space-y-2 mt-2">
+                <li className="flex gap-2">
+                  <span className="text-brand-red font-bold mt-0.5">•</span>
+                  <span><strong className="text-slate-900 font-bold">Airport Transfers & Local Packages:</strong> Prompt and dependable airport pickup and drop services, alongside customized local sightseeing packages tailored to your schedule.</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-brand-red font-bold mt-0.5">•</span>
+                  <span><strong className="text-slate-900 font-bold">Outstation Travels:</strong> Comfortable outstation trips designed to make long-distance travel relaxing and stress-free.</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-brand-red font-bold mt-0.5">•</span>
+                  <span><strong className="text-slate-900 font-bold">Wedding Events:</strong> Dedicated, premium transportation arrangements for weddings, ensuring your family and guests arrive in comfort and style.</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-brand-red font-bold mt-0.5">•</span>
+                  <span><strong className="text-slate-900 font-bold">Corporate Events:</strong> Professional and punctual fleet solutions managed efficiently for corporate clients, business meets, and executive transport.</span>
+                </li>
+              </ul>
 
-            {/* 3 HIGHLIGHT CARDS */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
-              {highlights.map((item, idx) => {
-                const IconComponent = item.icon;
-                return (
-                  <div key={idx} className="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-start gap-2">
-                    <div className="w-9 h-9 rounded-lg bg-brand-lightRed flex items-center justify-center text-brand-red">
-                      <IconComponent className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-bold text-slate-900">{item.title}</h4>
-                      <p className="text-xs text-slate-500">{item.desc}</p>
-                    </div>
-                  </div>
-                );
-              })}
+              <p className="pt-2">
+                With a well-maintained fleet ranging from comfortable Sedans and spacious SUVs to Tempo Travellers, Mini Buses, and Luxury vehicles, we are fully equipped to handle groups of any size. Customer satisfaction, safety, and punctuality are at the heart of everything we do. Choose Bala Travels for your next journey and experience travel at its best!
+              </p>
             </div>
 
           </div>

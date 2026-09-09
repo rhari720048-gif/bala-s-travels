@@ -98,19 +98,34 @@ export const AboutPage = ({ onBackToHome, onExploreFleet }) => {
 
             <div className="space-y-4 text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
               <p>
-                Founded with a vision to make regional travel transparent and stress-free, <strong>Bala's Travels</strong> has grown into one of Chennai's most trusted outstation taxi and doorstep pickup services.
+                Welcome to <strong>Bala Travels</strong>, your trusted partner for safe, comfortable, and reliable transportation services. We specialize in turning every journey into a seamless experience, whether you are traveling locally or heading out of town.
               </p>
 
               <p>
-                Whether you need a early morning airport pickup in Chennai, a family pilgrimage to Rameshwaram and Kanyakumari, a business travel connection between Bangalore and Chennai, or a weekend getaway to Ooty and Kodaikanal, our team ensures every kilometer of your journey is smooth and pleasant.
+                Over the years, we have proudly served countless clients with a diverse range of specialized transportation and event solutions. Our core services include:
               </p>
 
-              <p>
-                Beyond standard travel, we specialize in organizing seamless transportation for <strong>Wedding Events</strong> and <strong>Corporate Events</strong>. From coordinating bulk guest pickups in premium coaches to arranging luxury VIP cars for the bride and groom, our dedicated event management team ensures zero delays and maximum comfort on your big day. For corporate offsites and conferences, we provide professional chauffeurs and well-maintained vehicles to leave a lasting impression on your delegates.
-              </p>
+              <ul className="space-y-3 mt-2">
+                <li className="flex gap-2">
+                  <span className="text-brand-red font-bold mt-0.5">•</span>
+                  <span><strong>Airport Transfers & Local Packages:</strong> Prompt and dependable airport pickup and drop services, alongside customized local sightseeing packages tailored to your schedule.</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-brand-red font-bold mt-0.5">•</span>
+                  <span><strong>Outstation Travels:</strong> Comfortable outstation trips designed to make long-distance travel relaxing and stress-free.</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-brand-red font-bold mt-0.5">•</span>
+                  <span><strong>Wedding Events:</strong> Dedicated, premium transportation arrangements for weddings, ensuring your family and guests arrive in comfort and style.</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-brand-red font-bold mt-0.5">•</span>
+                  <span><strong>Corporate Events:</strong> Professional and punctual fleet solutions managed efficiently for corporate clients, business meets, and executive transport.</span>
+                </li>
+              </ul>
 
-              <p>
-                Our well-maintained fleet spans from budget-friendly hatchbacks and executive sedans (Hyundai Verna, Honda City) to spacious family SUVs (Toyota Innova Crysta, Toyota Hycross) and luxury group coaches (Tempo Travellers, Push-back Luxury Coaches).
+              <p className="pt-2">
+                With a well-maintained fleet ranging from comfortable Sedans and spacious SUVs to Tempo Travellers, Mini Buses, and Luxury vehicles, we are fully equipped to handle groups of any size. Customer satisfaction, safety, and punctuality are at the heart of everything we do. Choose Bala Travels for your next journey and experience travel at its best!
               </p>
             </div>
 
