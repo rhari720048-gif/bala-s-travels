@@ -47,6 +47,24 @@ export const HeroSection = ({ onExploreFleet }) => {
               <span>Reliable Pickup & Drop Services Across South India</span>
             </p>
 
+            {/* SPECIAL OFFERS HIGHLIGHT CARD */}
+            <div className="bg-white/10 backdrop-blur-md border border-brand-red/40 rounded-xl p-4 shadow-lg">
+              <div className="flex items-center gap-2 mb-2.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-brand-red animate-pulse shadow-[0_0_8px_rgba(217,35,45,0.8)]" />
+                <h3 className="text-xs font-black text-white uppercase tracking-widest drop-shadow-sm">Special Pickup Rates</h3>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="bg-slate-950/60 rounded-lg p-3 border border-white/10 transform transition-transform hover:-translate-y-1">
+                  <p className="text-[11px] text-slate-300 font-bold uppercase tracking-wider mb-1">Small Cars</p>
+                  <p className="text-brand-red font-black text-xl drop-shadow-sm">₹700 <span className="text-[11px] text-slate-400 font-semibold tracking-normal">/ 20 km</span></p>
+                </div>
+                <div className="bg-slate-950/60 rounded-lg p-3 border border-white/10 transform transition-transform hover:-translate-y-1">
+                  <p className="text-[11px] text-slate-300 font-bold uppercase tracking-wider mb-1">Big Cars</p>
+                  <p className="text-brand-red font-black text-xl drop-shadow-sm">₹1000 <span className="text-[11px] text-slate-400 font-semibold tracking-normal">/ 20 km</span></p>
+                </div>
+              </div>
+            </div>
+
             {/* DESCRIPTION */}
             <p className="text-xs sm:text-sm text-slate-300 max-w-md leading-relaxed font-normal">
               Share your pickup and drop location with us, and our team will help you plan a comfortable journey with the right vehicle.
