@@ -17,6 +17,7 @@ import AboutPage from './pages/AboutPage';
 import BlogsPage from './pages/BlogsPage';
 import AdminPage from './pages/AdminPage';
 import ActingDriversPage from './pages/ActingDriversPage';
+import AIChatbot from './components/AIChatbot';
 
 export function App() {
   const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'fleet' | 'locations' | 'about' | 'blogs' | 'admin'
@@ -277,6 +278,9 @@ export function App() {
 
       {/* FOOTER */}
       <Footer onNavigate={handleNavigate} />
+
+      {/* FLOATING AI CHATBOT */}
+      <AIChatbot />
 
     </div>
   );
