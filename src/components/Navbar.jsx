@@ -62,8 +62,8 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
     }`}>
       
       {/* SCROLLING ANNOUNCEMENT BAR */}
-      <div className="bg-brand-red text-white py-1.5 overflow-hidden flex items-center shrink-0">
-        <div className="whitespace-nowrap animate-marquee text-[11px] sm:text-xs font-bold tracking-wide w-full inline-block">
+      <div className="bg-brand-red text-white py-2 sm:py-2.5 overflow-hidden flex items-center shrink-0">
+        <div className="whitespace-nowrap animate-marquee text-xs sm:text-sm font-black tracking-wide w-full inline-block uppercase">
           <span className="mx-4 sm:mx-10">🔥 SPECIAL OFFER: Airport Pickup & Drop at Low Cost! Small Cars: ₹700 (20 km) | Big Cars: ₹1000 (20 km) | 24/7 Acting Drivers Available in Chennai</span>
           <span className="mx-4 sm:mx-10">🔥 SPECIAL OFFER: Airport Pickup & Drop at Low Cost! Small Cars: ₹700 (20 km) | Big Cars: ₹1000 (20 km) | 24/7 Acting Drivers Available in Chennai</span>
         </div>
@@ -160,12 +160,17 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
           </div>
 
           <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
-            <a 
-              href={`tel:${PHONE_NUMBER.replace(/\s+/g, '')}`} 
-              className="flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-slate-700 bg-slate-100 rounded-lg"
-            >
+            <a href="tel:+919940099347" className="flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200">
               <Phone className="w-3.5 h-3.5 text-brand-red" />
-              <span>Call: {PHONE_NUMBER}</span>
+              <span>Call: 99400 99347</span>
+            </a>
+            <a href="tel:+919444705044" className="flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200">
+              <Phone className="w-3.5 h-3.5 text-brand-red" />
+              <span>Call: 94447 05044</span>
+            </a>
+            <a href="tel:+917401441442" className="flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200">
+              <Phone className="w-3.5 h-3.5 text-brand-red" />
+              <span>Call: 74014 41442</span>
             </a>
 
             <button

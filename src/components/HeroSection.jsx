@@ -48,20 +48,20 @@ export const HeroSection = ({ onExploreFleet }) => {
             </p>
 
             {/* SPECIAL OFFERS HIGHLIGHT - Minimalist Version */}
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 pt-1 pb-2">
-              <div className="flex items-center gap-2.5">
-                <div className="w-1.5 h-10 bg-brand-red rounded-full shadow-[0_0_8px_rgba(217,35,45,0.8)]" />
+            <div className="flex flex-col sm:flex-row gap-5 sm:gap-8 pt-2 pb-3">
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-12 bg-brand-red rounded-full shadow-[0_0_12px_rgba(217,35,45,0.9)]" />
                 <div>
-                  <p className="text-[10px] text-slate-300 font-bold uppercase tracking-widest leading-none mb-1.5">Airport (Small Cars)</p>
-                  <p className="text-white font-black text-xl leading-none drop-shadow-sm">₹700 <span className="text-xs text-slate-400 font-medium">/ 20km</span></p>
+                  <p className="text-xs text-brand-red font-black uppercase tracking-widest leading-none mb-2">Airport (Small Cars)</p>
+                  <p className="text-white font-black text-2xl sm:text-3xl leading-none drop-shadow-md">₹700 <span className="text-sm text-slate-300 font-bold">/ 20km</span></p>
                 </div>
               </div>
-              <div className="hidden sm:block w-px h-10 bg-white/10" />
-              <div className="flex items-center gap-2.5">
-                <div className="w-1.5 h-10 bg-brand-red rounded-full shadow-[0_0_8px_rgba(217,35,45,0.8)]" />
+              <div className="hidden sm:block w-px h-12 bg-white/20" />
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-12 bg-brand-red rounded-full shadow-[0_0_12px_rgba(217,35,45,0.9)]" />
                 <div>
-                  <p className="text-[10px] text-slate-300 font-bold uppercase tracking-widest leading-none mb-1.5">Airport (Big Cars)</p>
-                  <p className="text-white font-black text-xl leading-none drop-shadow-sm">₹1000 <span className="text-xs text-slate-400 font-medium">/ 20km</span></p>
+                  <p className="text-xs text-brand-red font-black uppercase tracking-widest leading-none mb-2">Airport (Big Cars)</p>
+                  <p className="text-white font-black text-2xl sm:text-3xl leading-none drop-shadow-md">₹1000 <span className="text-sm text-slate-300 font-bold">/ 20km</span></p>
                 </div>
               </div>
             </div>

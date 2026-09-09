@@ -122,16 +122,24 @@ export const Footer = ({ onNavigate }) => {
             <div className="space-y-3 text-xs text-slate-300">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-brand-red flex-shrink-0 mt-0.5" />
-                <span className="leading-relaxed">
-                  Ashok Nagar, Jawahar Nagar, West Jafferkhanpet, Chennai, Tamil Nadu – 600083
+                <span className="leading-relaxed font-medium">
+                  No 2/4 Pillaiyar Kovil Street, West JAFFERKHANPET Ashok Nagar Chennai 600083
                 </span>
               </div>
 
-              <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-brand-red flex-shrink-0" />
-                <a href={`tel:${PHONE_NUMBER.replace(/\s+/g, '')}`} className="hover:text-white font-semibold transition-colors">
-                  {PHONE_NUMBER}
-                </a>
+              <div className="flex items-start gap-2.5">
+                <Phone className="w-4 h-4 text-brand-red flex-shrink-0 mt-0.5" />
+                <div className="flex flex-col gap-1.5">
+                  <a href="tel:+919940099347" className="hover:text-white font-bold transition-colors text-sm">
+                    +91 99400 99347
+                  </a>
+                  <a href="tel:+919444705044" className="hover:text-white font-bold transition-colors text-sm">
+                    +91 94447 05044
+                  </a>
+                  <a href="tel:+917401441442" className="hover:text-white font-bold transition-colors text-sm">
+                    +91 74014 41442
+                  </a>
+                </div>
               </div>
             </div>
 
