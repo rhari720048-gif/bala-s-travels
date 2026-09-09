@@ -64,8 +64,8 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
       {/* SCROLLING ANNOUNCEMENT BAR */}
       <div className="bg-brand-red text-white py-2 sm:py-2.5 overflow-hidden flex items-center shrink-0">
         <div className="whitespace-nowrap animate-marquee text-xs sm:text-sm font-black tracking-wide w-full inline-block uppercase">
-          <span className="mx-4 sm:mx-10">🔥 SPECIAL OFFER: Airport Pickup & Drop at Low Cost! Sedan: ₹700 (20 km) | SUVs: ₹1000 (20 km) | 24/7 Acting Drivers Available in Chennai</span>
-          <span className="mx-4 sm:mx-10">🔥 SPECIAL OFFER: Airport Pickup & Drop at Low Cost! Sedan: ₹700 (20 km) | SUVs: ₹1000 (20 km) | 24/7 Acting Drivers Available in Chennai</span>
+          <span className="mx-4 sm:mx-10">🔥 SPECIAL OFFER: Airport Pickup & Drop at Low Cost! Sedan: ₹700 (20 km) | SUVs: ₹900 (20 km) | 24/7 Acting Drivers Available in Chennai</span>
+          <span className="mx-4 sm:mx-10">🔥 SPECIAL OFFER: Airport Pickup & Drop at Low Cost! Sedan: ₹700 (20 km) | SUVs: ₹900 (20 km) | 24/7 Acting Drivers Available in Chennai</span>
         </div>
       </div>
 
