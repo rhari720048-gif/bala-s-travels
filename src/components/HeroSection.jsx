@@ -52,7 +52,7 @@ export const HeroSection = ({ onExploreFleet }) => {
               <div className="flex items-center gap-3">
                 <div className="w-2 h-12 bg-brand-red rounded-full shadow-[0_0_12px_rgba(217,35,45,0.9)]" />
                 <div className="text-left">
-                  <p className="text-xs text-brand-red font-black uppercase tracking-widest leading-none mb-2">Airport (Sedan)</p>
+                  <p className="text-xs text-brand-red font-black uppercase tracking-widest leading-none mb-2">Airport Transfers Sedan</p>
                   <p className="text-white font-black text-2xl sm:text-3xl leading-none drop-shadow-md">₹700 <span className="text-sm text-slate-300 font-bold">/ 20km</span></p>
                 </div>
               </div>
@@ -60,7 +60,7 @@ export const HeroSection = ({ onExploreFleet }) => {
               <div className="flex items-center gap-3">
                 <div className="w-2 h-12 bg-brand-red rounded-full shadow-[0_0_12px_rgba(217,35,45,0.9)]" />
                 <div className="text-left">
-                  <p className="text-xs text-brand-red font-black uppercase tracking-widest leading-none mb-2">Airport (SUVs)</p>
+                  <p className="text-xs text-brand-red font-black uppercase tracking-widest leading-none mb-2">Airport Transfers SUVs</p>
                   <p className="text-white font-black text-2xl sm:text-3xl leading-none drop-shadow-md">₹1000 <span className="text-sm text-slate-300 font-bold">/ 20km</span></p>
                 </div>
               </div>
