@@ -10,13 +10,13 @@ export const HeroSection = ({ onExploreFleet }) => {
       {/* BACKGROUND IMAGE & CINEMATIC OVERLAY */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2000&auto=format&fit=crop"
-          alt="Bala's Travels SUV Journey"
-          className="w-full h-full object-cover object-center filter brightness-[0.75] contrast-[1.15]"
+          src="https://upload.wikimedia.org/wikipedia/commons/7/7b/2016_Toyota_Innova_Crysta_2.4_V.jpg"
+          alt="Bala's Travels SUV Journey - Innova Crysta"
+          className="w-full h-full object-cover object-center filter brightness-[0.60] contrast-[1.20]"
         />
-        {/* Sleek edge gradients to enhance white Range Rover in center while ensuring 100% readable text on left */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/30 to-slate-950/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-slate-950/40" />
+        {/* Sleek edge gradients to enhance the background while ensuring 100% readable text */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/60 to-slate-950/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/50" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -52,7 +52,7 @@ export const HeroSection = ({ onExploreFleet }) => {
               <div className="flex items-center gap-3">
                 <div className="w-2 h-12 bg-brand-red rounded-full shadow-[0_0_12px_rgba(217,35,45,0.9)]" />
                 <div className="text-left">
-                  <p className="text-xs text-brand-red font-black uppercase tracking-widest leading-none mb-2">Airport (Small Cars)</p>
+                  <p className="text-xs text-brand-red font-black uppercase tracking-widest leading-none mb-2">Airport (Sedan)</p>
                   <p className="text-white font-black text-2xl sm:text-3xl leading-none drop-shadow-md">₹700 <span className="text-sm text-slate-300 font-bold">/ 20km</span></p>
                 </div>
               </div>
@@ -60,7 +60,7 @@ export const HeroSection = ({ onExploreFleet }) => {
               <div className="flex items-center gap-3">
                 <div className="w-2 h-12 bg-brand-red rounded-full shadow-[0_0_12px_rgba(217,35,45,0.9)]" />
                 <div className="text-left">
-                  <p className="text-xs text-brand-red font-black uppercase tracking-widest leading-none mb-2">Airport (Big Cars)</p>
+                  <p className="text-xs text-brand-red font-black uppercase tracking-widest leading-none mb-2">Airport (SUVs)</p>
                   <p className="text-white font-black text-2xl sm:text-3xl leading-none drop-shadow-md">₹1000 <span className="text-sm text-slate-300 font-bold">/ 20km</span></p>
                 </div>
               </div>

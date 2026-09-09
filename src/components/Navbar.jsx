@@ -64,8 +64,8 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
       {/* SCROLLING ANNOUNCEMENT BAR */}
       <div className="bg-brand-red text-white py-2 sm:py-2.5 overflow-hidden flex items-center shrink-0">
         <div className="whitespace-nowrap animate-marquee text-xs sm:text-sm font-black tracking-wide w-full inline-block uppercase">
-          <span className="mx-4 sm:mx-10">🔥 SPECIAL OFFER: Airport Pickup & Drop at Low Cost! Small Cars: ₹700 (20 km) | Big Cars: ₹1000 (20 km) | 24/7 Acting Drivers Available in Chennai</span>
-          <span className="mx-4 sm:mx-10">🔥 SPECIAL OFFER: Airport Pickup & Drop at Low Cost! Small Cars: ₹700 (20 km) | Big Cars: ₹1000 (20 km) | 24/7 Acting Drivers Available in Chennai</span>
+          <span className="mx-4 sm:mx-10">🔥 SPECIAL OFFER: Airport Pickup & Drop at Low Cost! Sedan: ₹700 (20 km) | SUVs: ₹1000 (20 km) | 24/7 Acting Drivers Available in Chennai</span>
+          <span className="mx-4 sm:mx-10">🔥 SPECIAL OFFER: Airport Pickup & Drop at Low Cost! Sedan: ₹700 (20 km) | SUVs: ₹1000 (20 km) | 24/7 Acting Drivers Available in Chennai</span>
         </div>
       </div>
 
@@ -101,8 +101,12 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
             })}
           </nav>
 
-          {/* RIGHT ACTION: WHATSAPP ENQUIRY BUTTON */}
-          <div className="hidden md:flex items-center">
+          {/* RIGHT ACTION: EMAIL & WHATSAPP ENQUIRY BUTTON */}
+          <div className="hidden md:flex items-center gap-4">
+            <a href="mailto:balastravels@gmail.com" className="text-xs font-bold text-slate-600 hover:text-brand-red flex items-center gap-1.5 transition-colors">
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+              balastravels@gmail.com
+            </a>
             <button
               onClick={(e) => {
                 e.preventDefault();
@@ -177,6 +181,10 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
             <a href="tel:+917401441442" className="flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200">
               <Phone className="w-3.5 h-3.5 text-brand-red" />
               <span>Call: 74014 41442</span>
+            </a>
+            <a href="mailto:balastravels@gmail.com" className="flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200">
+              <svg className="w-3.5 h-3.5 text-brand-red" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+              <span>balastravels@gmail.com</span>
             </a>
 
             <button
