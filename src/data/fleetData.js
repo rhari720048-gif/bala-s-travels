@@ -64,7 +64,7 @@ export const fullFleetCategories = [
     vehicles: [
       { name: 'Maruti Suzuki Dzire', capacity: '4 Passengers', type: 'sedan', image: '/images/fleet/sedan/maruti-dzire.png' },
       { name: 'Toyota Etios', capacity: '4 Passengers', type: 'sedan', image: '/images/fleet/suv/toyota-innova-crysta.png' },
-      { name: 'Hyundai Aura', capacity: '4 Passengers', type: 'sedan', image: '/images/fleet/sedan/hyundai-verna.png' },
+      { name: 'Hyundai Aura', capacity: '4 Passengers', type: 'sedan', image: '/images/fleet/sedan/hyundai-aura.png' },
       { name: 'Honda City', capacity: '4 Passengers', type: 'sedan', image: '/images/fleet/sedan/honda-city.png' },
       { name: 'Honda Amaze', capacity: '4 Passengers', type: 'sedan', image: '/images/fleet/sedan/honda-amaze.png' },
       { name: 'Maruti Suzuki Ciaz', capacity: '4 Passengers', type: 'sedan', image: '/images/fleet/sedan/maruti-ciaz.png' },
