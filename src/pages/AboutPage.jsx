@@ -106,7 +106,11 @@ export const AboutPage = ({ onBackToHome, onExploreFleet }) => {
               </p>
 
               <p>
-                Our well-maintained fleet spans from budget-friendly hatchbacks and executive sedans (Hyundai Verna, Honda City) to spacious family SUVs (Toyota Innova Crysta, Kia Seltos) and luxury group coaches (Tempo Travellers, Push-back Luxury Coaches).
+                Beyond standard travel, we specialize in organizing seamless transportation for <strong>Wedding Events</strong> and <strong>Corporate Events</strong>. From coordinating bulk guest pickups in premium coaches to arranging luxury VIP cars for the bride and groom, our dedicated event management team ensures zero delays and maximum comfort on your big day. For corporate offsites and conferences, we provide professional chauffeurs and well-maintained vehicles to leave a lasting impression on your delegates.
+              </p>
+
+              <p>
+                Our well-maintained fleet spans from budget-friendly hatchbacks and executive sedans (Hyundai Verna, Honda City) to spacious family SUVs (Toyota Innova Crysta, Toyota Hycross) and luxury group coaches (Tempo Travellers, Push-back Luxury Coaches).
               </p>
             </div>
 
@@ -152,11 +156,11 @@ export const AboutPage = ({ onBackToHome, onExploreFleet }) => {
 
           {/* RIGHT SIDE: IMAGE FEATURE */}
           <div className="lg:col-span-6 relative">
-            <div className="rounded-3xl overflow-hidden shadow-xl border border-slate-200 bg-white p-2">
+            <div className="rounded-3xl overflow-hidden shadow-xl border border-slate-200 bg-gradient-to-br from-slate-100 to-slate-200 p-8 sm:p-12 flex items-center justify-center">
               <img
-                src="/images/about-temple.jpg"
-                alt="Bala's Travels Journey across Temple & Cultural Destinations in South India"
-                className="w-full h-[400px] sm:h-[480px] object-cover rounded-2xl"
+                src="/images/fleet/suv/toyota-innova-hycross.png"
+                alt="Toyota Innova Hycross - Bala's Travels Premium Fleet"
+                className="w-full h-auto object-contain filter drop-shadow-2xl hover:scale-105 transition-transform duration-500"
               />
             </div>
           </div>
