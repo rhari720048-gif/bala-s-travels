@@ -40,7 +40,7 @@ export const featuredVehicles = [
     name: 'Mini Bus',
     category: 'Bus',
     description: 'Ideal for large family functions and corporate trips.',
-    image: '/images/fleet/traveller/force-urbania-real.jpg',
+    image: '/images/fleet/traveller/mini-bus-real.png',
     capacity: '20-28 Passengers',
     features: ['Spacious Aisle', 'Comfortable Seating', 'Luggage Space']
   },
@@ -99,7 +99,7 @@ export const fullFleetCategories = [
     vehicles: [
       { name: 'Force Urbania', capacity: '12-22 Passengers', type: 'traveller', image: '/images/fleet/traveller/force-urbania-real.jpg' },
       { name: 'Tempo Traveller', capacity: '12-26 Passengers', type: 'traveller', image: '/images/fleet/traveller/tempo-traveller-real.png' },
-      { name: 'Luxury Mini Bus', capacity: '20-28 Passengers', type: 'traveller', image: '/images/fleet/traveller/tempo-traveller-real.png' },
+      { name: 'Luxury Mini Bus', capacity: '20-28 Passengers', type: 'traveller', image: '/images/fleet/traveller/mini-bus-real.png' },
     ]
   },
   {
