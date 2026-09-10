@@ -99,7 +99,6 @@ export const fullFleetCategories = [
     vehicles: [
       { name: 'Force Urbania', capacity: '12-22 Passengers', type: 'traveller', image: '/images/fleet/traveller/force-urbania.png' },
       { name: 'Tempo Traveller', capacity: '12-26 Passengers', type: 'traveller', image: '/images/fleet/traveller/tempo-traveller.png' },
-      { name: 'Maharaja Executive Traveller', capacity: '9-12 Passengers', type: 'traveller', image: '/images/fleet/traveller/force-urbania.png' },
       { name: 'Luxury Mini Bus', capacity: '20-28 Passengers', type: 'traveller', image: '/images/fleet/traveller/tempo-traveller.png' },
     ]
   },
