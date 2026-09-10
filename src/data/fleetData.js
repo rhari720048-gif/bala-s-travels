@@ -115,7 +115,7 @@ export const fullFleetCategories = [
       { name: 'Mercedes Benz E-Class', capacity: '4 Passengers', type: 'luxury', image: '/images/fleet/luxury/mercedes-e-class-2023.png' },
       { name: 'Audi A6 Executive', capacity: '4 Passengers', type: 'luxury', image: '/images/fleet/luxury/bmw-5-series.png' },
       { name: 'Kia Carnival', capacity: '7-9 Passengers', type: 'luxury', image: '/images/fleet/suv/kia-carnival.png' },
-      { name: 'Toyota Vellfire', capacity: '7 Passengers', type: 'luxury', image: '/images/fleet/luxury/mercedes-s-class-2024.png' },
+      { name: 'Toyota Vellfire', capacity: '7 Passengers', type: 'luxury', image: '/images/fleet/luxury/toyota-vellfire-real.png' },
       { name: 'Jaguar XF', capacity: '4 Passengers', type: 'luxury', image: '/images/fleet/luxury/jaguar.png' },
     ]
   }
