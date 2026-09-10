@@ -31,7 +31,7 @@ export const featuredVehicles = [
     name: 'Tempo Traveller',
     category: 'Traveller',
     description: 'Perfect for mid-sized groups and family outings.',
-    image: '/images/fleet/traveller/tempo-traveller.png',
+    image: '/images/fleet/traveller/tempo-traveller-real.png',
     capacity: '12-26 Passengers',
     features: ['Push-back Seats', 'Dual AC', 'Entertainment System']
   },
@@ -98,8 +98,8 @@ export const fullFleetCategories = [
     description: 'Large group travel options with luxury push-back seats and dual AC comfort',
     vehicles: [
       { name: 'Force Urbania', capacity: '12-22 Passengers', type: 'traveller', image: '/images/fleet/traveller/force-urbania-real.jpg' },
-      { name: 'Tempo Traveller', capacity: '12-26 Passengers', type: 'traveller', image: '/images/fleet/traveller/tempo-traveller.png' },
-      { name: 'Luxury Mini Bus', capacity: '20-28 Passengers', type: 'traveller', image: '/images/fleet/traveller/tempo-traveller.png' },
+      { name: 'Tempo Traveller', capacity: '12-26 Passengers', type: 'traveller', image: '/images/fleet/traveller/tempo-traveller-real.png' },
+      { name: 'Luxury Mini Bus', capacity: '20-28 Passengers', type: 'traveller', image: '/images/fleet/traveller/tempo-traveller-real.png' },
     ]
   },
   {
