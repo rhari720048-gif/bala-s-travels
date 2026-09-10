@@ -65,7 +65,7 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-20 lg:py-24 bg-slate-50 text-slate-900 relative overflow-hidden border-t border-slate-200">
+    <section id="contact" className="py-20 lg:py-24 bg-slate-50 text-slate-900 relative overflow-hidden border-t border-slate-200 scroll-mt-28">
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 relative z-10">
         

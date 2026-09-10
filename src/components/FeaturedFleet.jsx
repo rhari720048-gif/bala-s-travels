@@ -7,7 +7,7 @@ export const FeaturedFleet = ({ onViewAllFleet, onSelectVehicle }) => {
   // Use image directly from data
 
   return (
-    <section id="fleet" className="py-20 lg:py-24 bg-slate-100/60 border-y border-slate-200/80">
+    <section id="fleet" className="py-20 lg:py-24 bg-slate-100/60 border-y border-slate-200/80 scroll-mt-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         {/* HEADER */}
@@ -15,7 +15,7 @@ export const FeaturedFleet = ({ onViewAllFleet, onSelectVehicle }) => {
           <span className="text-xs font-extrabold uppercase tracking-widest text-brand-red">
             OUR FLEET
           </span>
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+          <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">
             Choose the Right Ride for Your Journey
           </h2>
           <p className="text-sm text-slate-600">

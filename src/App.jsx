@@ -153,7 +153,7 @@ export function App() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans antialiased selection:bg-brand-red selection:text-white">
+    <div className="min-h-screen bg-white text-slate-900 font-sans antialiased selection:bg-brand-red selection:text-white overflow-x-hidden">
       
       {/* STICKY NAVBAR */}
       <Navbar 

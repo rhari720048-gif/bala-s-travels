@@ -5,7 +5,7 @@ import { openGeneralWhatsApp } from '../utils/whatsapp';
 
 export const HeroSection = ({ onExploreFleet }) => {
   return (
-    <section id="home" className="relative min-h-[90vh] lg:min-h-[85vh] pt-28 pb-16 lg:py-24 flex items-center overflow-hidden bg-slate-950">
+    <section id="home" className="relative min-h-[90vh] lg:min-h-[85vh] pt-32 pb-24 lg:pt-36 lg:pb-32 flex items-center overflow-hidden bg-slate-950 scroll-mt-28">
       
       {/* BACKGROUND IMAGE & CINEMATIC OVERLAY */}
       <div className="absolute inset-0 z-0 bg-slate-950">

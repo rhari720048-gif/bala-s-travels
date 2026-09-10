@@ -4,7 +4,7 @@ import TamilNaduMap from './TamilNaduMap';
 
 export const ServiceCoverage = ({ onViewLocations }) => {
   return (
-    <section id="locations" className="py-20 lg:py-24 bg-slate-50/80 text-slate-900 relative overflow-hidden border-b border-slate-200/80">
+    <section id="locations" className="py-20 lg:py-24 bg-slate-50/80 text-slate-900 relative overflow-hidden border-b border-slate-200/80 scroll-mt-28">
       
       {/* CENTERED HEADER SECTION */}
       <div className="text-center max-w-4xl mx-auto px-4 space-y-3 relative z-10 mb-12">

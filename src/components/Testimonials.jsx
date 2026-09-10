@@ -14,7 +14,7 @@ export const Testimonials = () => {
   };
 
   return (
-    <section id="customers" className="py-20 lg:py-28 bg-slate-50 overflow-hidden">
+    <section id="customers" className="py-20 lg:py-28 bg-slate-50 overflow-hidden scroll-mt-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* HEADER */}
