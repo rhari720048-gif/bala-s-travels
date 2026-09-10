@@ -80,6 +80,7 @@ export const fullFleetCategories = [
     badge: 'Family Favorite',
     description: 'Spacious 6 to 8 seaters designed for comfortable family outstation journeys',
     vehicles: [
+      { name: 'Toyota Innova', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-innova.png' },
       { name: 'Toyota Innova Crysta', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-innova-white-new.png' },
       { name: 'Toyota Innova Hycross', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-innova-hycross.png' },
       { name: 'Toyota Fortuner', capacity: '7 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-fortuner.png' },
