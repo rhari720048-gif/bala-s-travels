@@ -76,7 +76,7 @@ export const AboutSection = () => {
           <div className="lg:col-span-6 relative">
             <div className="relative mx-auto rounded-3xl overflow-hidden shadow-elevated group border border-slate-200">
               <img
-                src="/images/about-urbania.jpg"
+                src="/images/fleet/traveller/force-urbania-real.jpg"
                 alt="Bala's Travels Premium Force Urbania Fleet"
                 className="w-full h-[380px] sm:h-[450px] object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
               />
