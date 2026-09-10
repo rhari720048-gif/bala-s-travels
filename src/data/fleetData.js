@@ -100,6 +100,8 @@ export const fullFleetCategories = [
       { name: 'Force Urbania', capacity: '12-22 Passengers', type: 'traveller', image: '/images/fleet/traveller/force-urbania-real.jpg' },
       { name: 'Tempo Traveller', capacity: '12-26 Passengers', type: 'traveller', image: '/images/fleet/traveller/tempo-traveller-real.png' },
       { name: 'Luxury Mini Bus', capacity: '20-28 Passengers', type: 'traveller', image: '/images/fleet/traveller/mini-bus-real.png' },
+      { name: 'Volvo 9600 Luxury Coach', capacity: '45-53 Passengers', type: 'traveller', image: '/images/fleet/traveller/volvo-benz-coach.png' },
+      { name: 'Luxury Push-Back Bus', capacity: '35-50 Passengers', type: 'traveller', image: '/images/fleet/traveller/luxury-coach.png' },
     ]
   },
   {
@@ -114,8 +116,6 @@ export const fullFleetCategories = [
       { name: 'Audi A6 Executive', capacity: '4 Passengers', type: 'luxury', image: '/images/fleet/luxury/bmw-5-series.png' },
       { name: 'Kia Carnival', capacity: '7-9 Passengers', type: 'luxury', image: '/images/fleet/suv/kia-carnival.png' },
       { name: 'Toyota Vellfire', capacity: '7 Passengers', type: 'luxury', image: '/images/fleet/luxury/mercedes-s-class-2024.png' },
-      { name: 'Volvo 9600 Luxury Coach', capacity: '45-53 Passengers', type: 'luxury', image: '/images/fleet/traveller/volvo-benz-coach.png' },
-      { name: 'Luxury Push-Back Bus', capacity: '35-50 Passengers', type: 'luxury', image: '/images/fleet/traveller/luxury-coach.png' },
     ]
   }
 ];
