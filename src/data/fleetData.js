@@ -49,7 +49,7 @@ export const featuredVehicles = [
     name: 'Volvo 9600 / Luxury Bus',
     category: 'Bus',
     description: 'High-end luxury travel for large groups.',
-    image: '/images/fleet/traveller/volvo-benz-coach.png',
+    image: '/images/fleet/traveller/volvo-9600-real.png',
     capacity: '45-53 Passengers',
     features: ['Air Suspension', 'Reclining Seats', 'Premium Travel']
   }
@@ -100,7 +100,7 @@ export const fullFleetCategories = [
       { name: 'Force Urbania', capacity: '12-22 Passengers', type: 'traveller', image: '/images/fleet/traveller/force-urbania-real.jpg' },
       { name: 'Tempo Traveller', capacity: '12-26 Passengers', type: 'traveller', image: '/images/fleet/traveller/tempo-traveller-real.png' },
       { name: 'Luxury Mini Bus', capacity: '20-28 Passengers', type: 'traveller', image: '/images/fleet/traveller/mini-bus-real.png' },
-      { name: 'Volvo 9600 Luxury Coach', capacity: '45-53 Passengers', type: 'traveller', image: '/images/fleet/traveller/volvo-benz-coach.png' },
+      { name: 'Volvo 9600 Luxury Coach', capacity: '45-53 Passengers', type: 'traveller', image: '/images/fleet/traveller/volvo-9600-real.png' },
       { name: 'Luxury Push-Back Bus', capacity: '35-50 Passengers', type: 'traveller', image: '/images/fleet/traveller/luxury-coach.png' },
     ]
   },
