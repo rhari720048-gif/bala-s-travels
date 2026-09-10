@@ -231,7 +231,7 @@ export const VehicleDetailsPage = ({ vehicle, categoryTitle = 'Vehicle', onBackT
                   transition={{ duration: 0.3 }}
                   src={safeImage}
                   alt={safeName}
-                  className="max-h-60 sm:max-h-76 md:max-h-88 w-full object-contain filter drop-shadow-md z-10 transform-gpu"
+                  className={`max-h-60 sm:max-h-76 md:max-h-88 w-full object-contain filter drop-shadow-md z-10 transform-gpu mix-blend-multiply ${safeName.includes('XL6') || safeName.includes('Carens') ? 'scale-[1.35] sm:scale-[1.4]' : ''}`}
                 />
                 
                 <span className="absolute top-3 left-3 bg-white px-3 py-1 rounded-full text-[11px] font-extrabold text-slate-800 border border-slate-200 flex items-center gap-1.5 shadow-2xs z-20">
@@ -297,7 +297,7 @@ export const VehicleDetailsPage = ({ vehicle, categoryTitle = 'Vehicle', onBackT
                     }}
                     className="smooth-card-card bg-white rounded-2xl overflow-hidden border border-slate-200/90 hover:border-brand-red shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col justify-between cursor-pointer group p-3 space-y-2.5"
                   >
-                    <div className="h-24 sm:h-28 bg-transparent rounded-xl p-1 flex items-center justify-center overflow-hidden">
+                    <div className={`h-24 sm:h-28 bg-transparent rounded-xl p-1 flex items-center justify-center overflow-hidden mix-blend-multiply ${simV.name.includes('XL6') || simV.name.includes('Carens') ? 'scale-[1.35] sm:scale-[1.4]' : ''}`}>
                       <img
                         src={simV.image || '/images/crysta.png'}
                         alt={simV.name || 'Car'}

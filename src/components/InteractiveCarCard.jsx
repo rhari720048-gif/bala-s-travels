@@ -11,11 +11,13 @@ export const InteractiveCarCard = ({ vehicle, categoryTitle, onClick }) => {
       <div className="relative h-32 sm:h-40 bg-transparent p-2 flex items-center justify-center border-b border-slate-100/60 overflow-hidden">
         
         {/* CAR PHOTO POPPING OUT ON HOVER */}
-        <img
-          src={vehicle.image}
-          alt={vehicle.name}
-          className="smooth-car-img max-h-28 sm:max-h-34 w-full object-contain transform-gpu"
-        />
+        <div className={`w-full h-full flex items-center justify-center mix-blend-multiply ${vehicle.name.includes('XL6') || vehicle.name.includes('Carens') ? 'scale-[1.35] sm:scale-[1.4]' : ''}`}>
+          <img
+            src={vehicle.image}
+            alt={vehicle.name}
+            className="smooth-car-img max-h-28 sm:max-h-34 w-full object-contain transform-gpu"
+          />
+        </div>
 
         {/* PASSENGER CAPACITY BADGE */}
         <span className="absolute top-2 left-2 bg-white px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-extrabold text-slate-800 border border-slate-200 flex items-center gap-1 shadow-2xs group-hover:border-brand-red/50 transition-colors z-20">
