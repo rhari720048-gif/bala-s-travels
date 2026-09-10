@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { 
   ArrowLeft, MessageCircle, Phone, CheckCircle2, ShieldCheck, 
   Users, Luggage, Sparkles, Check, ChevronRight
@@ -48,9 +48,38 @@ export const VehicleDetailsPage = ({ vehicle, categoryTitle = 'Vehicle', onBackT
     window.open(customMessage, '_blank');
   };
 
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const rotateX = useTransform(y, [-150, 150], [15, -15]);
+  const rotateY = useTransform(x, [-150, 150], [-15, 15]);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    x.set(e.clientX - centerX);
+    y.set(e.clientY - centerY);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
   return (
     <div key={safeName} className="min-h-screen bg-slate-50 text-slate-900 animate-smooth-enter">
+    <div key={safeName} className="min-h-screen bg-slate-50 text-slate-900 animate-smooth-enter">
       
+      {/* FLOATING BACK BUTTON */}
+      <button
+        onClick={onBackToFleet}
+        className="fixed top-24 left-4 z-50 bg-white/90 backdrop-blur-md border border-slate-200 shadow-md hover:shadow-lg rounded-full p-2.5 text-slate-700 hover:text-brand-red transition-all group lg:hidden"
+        title="Back to Fleet"
+      >
+        <ArrowLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" />
+      </button>
+
       {/* BREADCRUMB & BACK HEADER WITH GRADIENT ACCENT */}
       <section className="bg-slate-950 text-white pt-32 lg:pt-40 pb-8 border-b border-slate-800 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-brand-red/10 rounded-full filter blur-3xl pointer-events-none" />
@@ -147,24 +176,18 @@ export const VehicleDetailsPage = ({ vehicle, categoryTitle = 'Vehicle', onBackT
                   </span>
                 </div>
 
-                <div className="p-3.5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200/80 hover:border-emerald-500/40 transition-all duration-200 space-y-1 group">
+                <div className="p-3.5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200/80 hover:border-emerald-500/40 transition-all duration-200 flex items-center group">
                   <div className="flex items-center gap-1.5 text-emerald-600 group-hover:scale-105 transition-transform origin-left">
-                    <ShieldCheck className="w-4 h-4" />
-                    <span className="font-bold uppercase text-[10px] text-slate-500">AC System</span>
+                    <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="font-black uppercase text-[11px] sm:text-xs text-slate-700">AC System</span>
                   </div>
-                  <span className="font-extrabold text-slate-900 text-xs sm:text-sm block">
-                    {vehicle.specs?.ac || 'Dual Climate AC'}
-                  </span>
                 </div>
 
-                <div className="p-3.5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200/80 hover:border-indigo-500/40 transition-all duration-200 space-y-1 group">
+                <div className="p-3.5 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200/80 hover:border-indigo-500/40 transition-all duration-200 flex items-center group">
                   <div className="flex items-center gap-1.5 text-indigo-600 group-hover:scale-105 transition-transform origin-left">
-                    <Luggage className="w-4 h-4" />
-                    <span className="font-bold uppercase text-[10px] text-slate-500">Luggage</span>
+                    <Luggage className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="font-black uppercase text-[11px] sm:text-xs text-slate-700">Luggage</span>
                   </div>
-                  <span className="font-extrabold text-slate-900 text-xs sm:text-sm block">
-                    {vehicle.specs?.luggage || 'Spacious Boot'}
-                  </span>
                 </div>
               </div>
 
@@ -222,23 +245,33 @@ export const VehicleDetailsPage = ({ vehicle, categoryTitle = 'Vehicle', onBackT
             <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-200 shadow-md sticky top-24 space-y-4">
               
               {/* LARGE STUDIO PHOTO CONTAINER */}
-              <div className="relative h-64 sm:h-80 md:h-96 bg-transparent rounded-2xl p-4 flex items-center justify-center overflow-hidden group">
+              <motion.div 
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+                style={{ perspective: 1200 }}
+                className="relative h-64 sm:h-80 md:h-96 bg-transparent rounded-2xl p-4 flex items-center justify-center overflow-hidden group cursor-grab active:cursor-grabbing"
+              >
                 
                 <motion.img
                   key={safeName}
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3 }}
+                  style={{ rotateX, rotateY }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   src={safeImage}
                   alt={safeName}
-                  className={`max-h-60 sm:max-h-76 md:max-h-88 w-full object-contain filter drop-shadow-md z-10 transform-gpu mix-blend-multiply ${safeName.includes('XL6') || safeName.includes('Carens') ? 'scale-[1.35] sm:scale-[1.4]' : ''}`}
+                  className={`max-h-60 sm:max-h-76 md:max-h-88 w-full object-contain filter drop-shadow-xl z-10 transform-gpu mix-blend-multiply ${safeName.includes('XL6') || safeName.includes('Carens') ? 'scale-[1.35] sm:scale-[1.4]' : ''}`}
                 />
                 
-                <span className="absolute top-3 left-3 bg-white px-3 py-1 rounded-full text-[11px] font-extrabold text-slate-800 border border-slate-200 flex items-center gap-1.5 shadow-2xs z-20">
+                <span className="absolute top-3 left-3 bg-white px-3 py-1 rounded-full text-[11px] font-extrabold text-slate-800 border border-slate-200 flex items-center gap-1.5 shadow-2xs z-20 pointer-events-none">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
                   Verified Vehicle
                 </span>
-              </div>
+
+                <span className="absolute bottom-3 right-3 bg-slate-900/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-[10px] font-bold tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  Interact to View 3D
+                </span>
+              </motion.div>
 
               {/* ACTION BUTTONS */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
