@@ -101,7 +101,7 @@ export const fullFleetCategories = [
       { name: 'Tempo Traveller', capacity: '12-26 Passengers', type: 'traveller', image: '/images/fleet/traveller/tempo-traveller-real.png' },
       { name: 'Luxury Mini Bus', capacity: '20-28 Passengers', type: 'traveller', image: '/images/fleet/traveller/mini-bus-real.png' },
       { name: 'Volvo 9600 Luxury Coach', capacity: '45-53 Passengers', type: 'traveller', image: '/images/fleet/traveller/volvo-9600-real.png' },
-      { name: 'Luxury Push-Back Bus', capacity: '35-50 Passengers', type: 'traveller', image: '/images/fleet/traveller/luxury-coach.png' },
+      { name: 'Luxury Push-Back Bus', capacity: '35-50 Passengers', type: 'traveller', image: '/images/fleet/traveller/luxury-push-back-bus-real.png' },
     ]
   },
   {
