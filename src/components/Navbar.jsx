@@ -29,8 +29,8 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
   const navLinks = [
     { id: 'home', label: 'Home', href: '#home' },
     { id: 'about', label: 'About', href: '#about' },
-    { id: 'fleet', label: 'Fleet', href: '#fleet' },
     { id: 'services', label: 'Services', href: '#services' },
+    { id: 'fleet', label: 'Fleet', href: '#fleet' },
     { id: 'acting-drivers', label: 'Acting Drivers', href: '#acting-drivers' },
     { id: 'locations', label: 'Locations', href: '#locations' },
     { id: 'blogs', label: 'Blogs', href: '#blogs' },

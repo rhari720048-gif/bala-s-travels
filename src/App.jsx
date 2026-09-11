@@ -55,7 +55,7 @@ export function App() {
     if (currentPage !== 'home' || selectedVehicleData) return;
 
     const handleScroll = () => {
-      const sections = ['home', 'about', 'fleet', 'services', 'locations', 'customers', 'contact'];
+      const sections = ['home', 'about', 'services', 'fleet', 'locations', 'customers', 'contact'];
       const scrollPosition = window.scrollY + 200;
 
       for (const sectionId of sections) {
@@ -264,6 +264,9 @@ export function App() {
           {/* ABOUT SECTION SUMMARY ON HOME */}
           <AboutSection />
 
+          {/* OUR SERVICES SECTION */}
+          <OurServices />
+
           {/* FEATURED FLEET (3 INTERACTIVE VEHICLES ON HOME) */}
           <FeaturedFleet 
             onViewAllFleet={() => {
@@ -273,9 +276,6 @@ export function App() {
             }}
             onSelectVehicle={handleSelectVehicle}
           />
-
-          {/* OUR SERVICES SECTION */}
-          <OurServices />
 
           {/* SERVICE COVERAGE SECTION */}
           <ServiceCoverage onViewLocations={() => handleNavigate('locations')} />
