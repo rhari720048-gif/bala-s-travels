@@ -13,7 +13,7 @@ export const featuredVehicles = [
     name: 'SUV',
     category: 'SUV',
     description: 'More space and comfort for family journeys.',
-    image: '/images/fleet/suv/toyota-innova-red-front.jpg',
+    image: '/images/fleet/suv/toyota-innova-crysta.png',
     capacity: '7-8 Passengers',
     features: ['High Ground Clearance', 'Ample Legroom', 'Comfort Seating']
   },
@@ -81,7 +81,7 @@ export const fullFleetCategories = [
     description: 'Spacious 6 to 8 seaters designed for comfortable family outstation journeys',
     vehicles: [
       { name: 'Toyota Innova', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-innova.png' },
-      { name: 'Toyota Innova Crysta', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-innova-red-front.jpg' },
+      { name: 'Toyota Innova Crysta', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-innova-crysta.png' },
       { name: 'Toyota Innova Hycross', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-innova-hycross.png' },
       { name: 'Toyota Fortuner', capacity: '7 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-fortuner.png' },
       { name: 'Mahindra Marazzo', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/mahindra-marazzo.png' },
