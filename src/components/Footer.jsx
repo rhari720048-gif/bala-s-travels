@@ -20,7 +20,8 @@ export const Footer = ({ onNavigate }) => {
     'Round Trips',
     'Outstation Travel',
     'Wedding Events',
-    'Corporate Mobility & Event Solution'
+    'Corporate Mobility & Event Solution',
+    'VIP Mobility'
   ];
 
   const handleLinkClick = (id, href) => {
