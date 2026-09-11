@@ -13,7 +13,7 @@ export const featuredVehicles = [
     name: 'SUV',
     category: 'SUV',
     description: 'More space and comfort for family journeys.',
-    image: '/images/fleet/suv/toyota-innova-white-new.png',
+    image: '/images/fleet/suv/toyota-innova-red-front.jpg',
     capacity: '7-8 Passengers',
     features: ['High Ground Clearance', 'Ample Legroom', 'Comfort Seating']
   },
