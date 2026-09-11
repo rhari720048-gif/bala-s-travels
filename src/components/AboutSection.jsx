@@ -78,9 +78,8 @@ export const AboutSection = () => {
               <img
                 src="/images/about-fleet.png"
                 alt="Bala's Travels Complete Fleet Lineup"
-                className="w-full h-[380px] sm:h-[450px] object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                className="w-full h-auto object-contain transition-transform duration-700 ease-out group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-60" />
             </div>
             {/* Subtle decorative background blur */}
             <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-brand-red/10 rounded-full blur-3xl -z-10" />
