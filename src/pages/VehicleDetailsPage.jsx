@@ -69,15 +69,6 @@ export const VehicleDetailsPage = ({ vehicle, categoryTitle = 'Vehicle', onBackT
 
   return (
     <div key={safeName} className="min-h-screen bg-slate-50 text-slate-900 animate-smooth-enter">
-      
-      {/* FLOATING BACK BUTTON */}
-      <button
-        onClick={onBackToFleet}
-        className="fixed top-24 left-4 z-50 bg-white/90 backdrop-blur-md border border-slate-200 shadow-md hover:shadow-lg rounded-full p-2.5 text-slate-700 hover:text-brand-red transition-all group lg:hidden"
-        title="Back to Fleet"
-      >
-        <ArrowLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" />
-      </button>
 
       {/* BREADCRUMB & BACK HEADER WITH GRADIENT ACCENT */}
       <section className="bg-slate-950 text-white pt-32 lg:pt-40 pb-8 border-b border-slate-800 relative overflow-hidden">
