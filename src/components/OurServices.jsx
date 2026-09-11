@@ -4,12 +4,12 @@ const services = [
   {
     id: 1,
     title: 'Airport Pickup & Drop',
-    image: '/images/airport.jpg',
+    image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80&w=800',
   },
   {
     id: 2,
     title: 'Railway pickup & drop',
-    image: '/images/railway.jpg',
+    image: 'https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&q=80&w=800',
   },
   {
     id: 3,
