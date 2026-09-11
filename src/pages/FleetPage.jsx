@@ -52,7 +52,7 @@ export const FleetPage = ({ onBackToHome, onSelectVehicle }) => {
     <div className="min-h-screen bg-slate-100/90 text-slate-900">
       
       {/* HEADER HERO BANNER WITH ANIMATED PARTICLES & GLOW */}
-      <section className="relative pt-20 sm:pt-24 pb-10 sm:pb-12 bg-slate-950 text-white border-b border-slate-800 overflow-hidden">
+      <section className="relative pt-32 lg:pt-40 pb-10 sm:pb-12 bg-slate-950 text-white border-b border-slate-800 overflow-hidden">
         
         {/* ANIMATED AMBIENT GLOW BACKDROP */}
         <div className="absolute inset-0 z-0">

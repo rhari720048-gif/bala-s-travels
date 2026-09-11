@@ -7,7 +7,7 @@ export const ActingDriversPage = ({ onBackToHome }) => {
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900 pb-20 animate-smooth-enter">
       {/* HEADER SECTION */}
-      <section className="bg-slate-950 text-white pt-24 pb-12 sm:pt-28 sm:pb-16 relative overflow-hidden">
+      <section className="bg-slate-950 text-white pt-32 lg:pt-40 pb-12 sm:pb-16 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-brand-red/10 rounded-full filter blur-3xl pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4 relative z-10">

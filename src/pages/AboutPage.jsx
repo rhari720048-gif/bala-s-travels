@@ -37,7 +37,7 @@ export const AboutPage = ({ onBackToHome, onExploreFleet }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50/80 text-slate-900 pt-20 pb-16 relative">
+    <div className="min-h-screen bg-slate-50/80 text-slate-900 pt-32 lg:pt-40 pb-16 relative">
       
       {/* TOP BACK TO HOME NAVIGATION */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
