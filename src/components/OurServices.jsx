@@ -29,12 +29,12 @@ const services = [
   {
     id: 6,
     title: 'Wedding Events',
-    image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800',
+    image: '/images/services/wedding-events.jpg',
   },
   {
     id: 7,
     title: 'Corporate Events',
-    image: 'https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&q=80&w=800',
+    image: '/images/services/corporate-events.jpg',
   }
 ];
 
