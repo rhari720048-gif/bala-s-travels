@@ -71,7 +71,7 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
       </div>
 
       <div className={`transition-all duration-300 w-full ${isScrolled ? 'py-2.5 sm:py-3' : 'py-3 sm:py-4'} px-4 sm:px-8 lg:px-12`}>
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center justify-between gap-4 lg:gap-8">
           
           {/* LOGO */}
           <div onClick={() => handleNavClick('home', '#home')} className="shrink-0 cursor-pointer">
@@ -79,7 +79,7 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
           </div>
 
           {/* DESKTOP NAV LINKS WITH INSTANT SNAPPY INDICATOR GLIDER */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center space-x-3 xl:space-x-6">
             {navLinks.map((link) => {
               const isActive = selectedTab === link.id;
               return (
@@ -90,7 +90,7 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
                     e.preventDefault();
                     handleNavClick(link.id, link.href);
                   }}
-                  className={`text-base lg:text-[17px] font-bold transition-colors duration-150 relative py-1 px-1 ${
+                  className={`text-[13px] xl:text-[15px] font-bold transition-colors duration-150 relative py-1 px-1 ${
                     isActive
                       ? 'text-brand-red font-black'
                       : 'text-slate-700 hover:text-brand-red'
@@ -103,9 +103,9 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
           </nav>
 
           {/* RIGHT ACTION: EMAIL & WHATSAPP ENQUIRY BUTTON */}
-          <div className="hidden md:flex items-center gap-4">
-            <a href="mailto:balastravels2023@gmail.com" className="text-xs font-bold text-slate-600 hover:text-brand-red flex items-center gap-1.5 transition-colors">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+          <div className="hidden lg:flex items-center gap-3 xl:gap-4">
+            <a href="mailto:balastravels2023@gmail.com" className="hidden xl:flex text-[11px] xl:text-xs font-bold text-slate-600 hover:text-brand-red items-center gap-1.5 transition-colors">
+              <svg className="w-3.5 h-3.5 xl:w-4 xl:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
               balastravels2023@gmail.com
             </a>
             <button
@@ -113,15 +113,15 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
                 e.preventDefault();
                 handleNavClick('enquiry', '#home');
               }}
-              className="inline-flex items-center gap-2 bg-brand-green hover:bg-brand-darkGreen text-white px-5 py-2.5 rounded-xl text-xs font-bold shadow-xs hover:shadow-md transition-all duration-200 cursor-pointer transform hover:-translate-y-0.5"
+              className="inline-flex items-center gap-1.5 xl:gap-2 bg-brand-green hover:bg-brand-darkGreen text-white px-4 xl:px-5 py-2 xl:py-2.5 rounded-xl text-[11px] xl:text-xs font-bold shadow-xs hover:shadow-md transition-all duration-200 cursor-pointer transform hover:-translate-y-0.5"
             >
-              <MessageCircle className="w-4 h-4 fill-current" />
-              <span>WhatsApp Enquiry</span>
+              <MessageCircle className="w-3.5 h-3.5 xl:w-4 xl:h-4 fill-current" />
+              <span>WhatsApp</span>
             </button>
           </div>
 
           {/* MOBILE HAMBURGER TOGGLE */}
-          <div className="flex md:hidden items-center gap-2 shrink-0">
+          <div className="flex lg:hidden items-center gap-2 shrink-0">
             <button
               onClick={(e) => {
                 e.preventDefault();
