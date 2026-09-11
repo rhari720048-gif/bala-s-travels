@@ -4,6 +4,7 @@ import HeroSection from './components/HeroSection';
 import TrustFeatures from './components/TrustFeatures';
 import AboutSection from './components/AboutSection';
 import FeaturedFleet from './components/FeaturedFleet';
+import OurServices from './components/OurServices';
 import ServiceCoverage from './components/ServiceCoverage';
 import HowItWorks from './components/HowItWorks';
 import Testimonials from './components/Testimonials';
@@ -54,7 +55,7 @@ export function App() {
     if (currentPage !== 'home' || selectedVehicleData) return;
 
     const handleScroll = () => {
-      const sections = ['home', 'about', 'fleet', 'locations', 'customers', 'contact'];
+      const sections = ['home', 'about', 'fleet', 'services', 'locations', 'customers', 'contact'];
       const scrollPosition = window.scrollY + 200;
 
       for (const sectionId of sections) {
@@ -272,6 +273,9 @@ export function App() {
             }}
             onSelectVehicle={handleSelectVehicle}
           />
+
+          {/* OUR SERVICES SECTION */}
+          <OurServices />
 
           {/* SERVICE COVERAGE SECTION */}
           <ServiceCoverage onViewLocations={() => handleNavigate('locations')} />
