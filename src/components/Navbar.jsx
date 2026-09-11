@@ -71,7 +71,7 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
       </div>
 
       <div className={`transition-all duration-300 w-full ${isScrolled ? 'py-2.5 sm:py-3' : 'py-3 sm:py-4'} px-4 sm:px-8 lg:px-12`}>
-        <div className="flex items-center justify-between gap-4 lg:gap-8">
+        <div className="flex items-center justify-between gap-2 lg:gap-8">
           
           {/* LOGO */}
           <div onClick={() => handleNavClick('home', '#home')} className="shrink-0 cursor-pointer">
