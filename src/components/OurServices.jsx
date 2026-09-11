@@ -33,7 +33,7 @@ const services = [
   },
   {
     id: 7,
-    title: 'Corporate Events',
+    title: 'Corporate Mobility & Event Solution',
     image: '/images/services/corporate-events.jpg',
   }
 ];

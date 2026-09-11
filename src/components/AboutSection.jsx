@@ -61,7 +61,7 @@ export const AboutSection = () => {
                 </li>
                 <li className="flex gap-2">
                   <span className="text-brand-red font-bold mt-0.5">•</span>
-                  <span><strong className="text-slate-900 font-bold">Corporate Events:</strong> Professional and punctual fleet solutions managed efficiently for corporate clients, business meets, and executive transport.</span>
+                  <span><strong className="text-slate-900 font-bold">Corporate Mobility & Event Solution:</strong> Professional and punctual fleet solutions managed efficiently for corporate clients, business meets, and executive transport.</span>
                 </li>
               </ul>
 

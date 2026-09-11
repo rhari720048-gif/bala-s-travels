@@ -10,7 +10,7 @@ export const TrustFeatures = () => {
     },
     {
       icon: Briefcase,
-      title: 'Corporate Events',
+      title: 'Corporate Mobility & Event Solution',
       description: 'Professional transportation for corporate needs.'
     },
     {

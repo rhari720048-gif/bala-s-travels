@@ -20,7 +20,7 @@ export const Footer = ({ onNavigate }) => {
     'Round Trips',
     'Outstation Travel',
     'Wedding Events',
-    'Corporate Events'
+    'Corporate Mobility & Event Solution'
   ];
 
   const handleLinkClick = (id, href) => {
