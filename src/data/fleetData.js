@@ -81,7 +81,7 @@ export const fullFleetCategories = [
     description: 'Spacious 6 to 8 seaters designed for comfortable family outstation journeys',
     vehicles: [
       { name: 'Toyota Innova', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-innova.png' },
-      { name: 'Toyota Innova Crysta', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-innova-white-new.png' },
+      { name: 'Toyota Innova Crysta', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-innova-red-front.jpg' },
       { name: 'Toyota Innova Hycross', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-innova-hycross.png' },
       { name: 'Toyota Fortuner', capacity: '7 Passengers', type: 'suv', image: '/images/fleet/suv/toyota-fortuner.png' },
       { name: 'Mahindra Marazzo', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/mahindra-marazzo.png' },
@@ -112,7 +112,7 @@ export const fullFleetCategories = [
     vehicles: [
       { name: 'BMW', capacity: '4 Passengers', type: 'luxury', image: '/images/fleet/luxury/bmw-5-series.png' },
       { name: 'Mercedes-Benz', capacity: '4 Passengers', type: 'luxury', image: '/images/fleet/luxury/mercedes-s-class-2024.png' },
-      { name: 'Audi', capacity: '4 Passengers', type: 'luxury', image: '/images/fleet/luxury/bmw-5-series.png' },
+      { name: 'Audi', capacity: '4 Passengers', type: 'luxury', image: '/images/fleet/luxury/audi-a6-front.jpg' },
       { name: 'Kia Carnival', capacity: '7-9 Passengers', type: 'luxury', image: '/images/fleet/suv/kia-carnival.png' },
       { name: 'Toyota Vellfire', capacity: '7 Passengers', type: 'luxury', image: '/images/fleet/luxury/toyota-vellfire-real.png' },
       { name: 'Jaguar', capacity: '4 Passengers', type: 'luxury', image: '/images/fleet/luxury/jaguar.png' },
