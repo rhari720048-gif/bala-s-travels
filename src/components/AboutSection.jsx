@@ -63,6 +63,10 @@ export const AboutSection = () => {
                   <span className="text-brand-red font-bold mt-0.5">•</span>
                   <span><strong className="text-slate-900 font-bold">Corporate Mobility & Event Solution:</strong> Professional and punctual fleet solutions managed efficiently for corporate clients, business meets, and executive transport.</span>
                 </li>
+                <li className="flex gap-2">
+                  <span className="text-brand-red font-bold mt-0.5">•</span>
+                  <span><strong className="text-slate-900 font-bold">VIP Mobility:</strong> Exclusive, premium, and confidential transportation services designed for VIPs, celebrities, and high-profile guests.</span>
+                </li>
               </ul>
 
               <p className="pt-2">

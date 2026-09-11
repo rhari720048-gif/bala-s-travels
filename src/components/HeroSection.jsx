@@ -32,47 +32,30 @@ export const HeroSection = ({ onExploreFleet }) => {
             </div>
 
             {/* STYLISH MAIN HEADING */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.3] flex flex-wrap justify-center gap-x-3 gap-y-1">
-              <span className="font-black text-white drop-shadow-md">
-                Your Journey,
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.3] flex flex-col items-center justify-center gap-y-2">
+              <span className="font-black text-white drop-shadow-md text-2xl sm:text-3xl lg:text-4xl">
+                Over 10 Years of Leadership in Crafting
               </span>
-              <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-brand-red to-rose-500 drop-shadow-sm">
-                Our Responsibility.
+              <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-brand-red to-rose-500 drop-shadow-sm text-center">
+                The Finest Chauffeur-Driven Experiences.
               </span>
             </h1>
 
-            {/* STYLISH SUBHEADING */}
-            <p className="text-base sm:text-lg font-bold text-slate-100 tracking-wide flex items-center justify-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-brand-red flex-shrink-0" />
-              <span>Reliable Pickup & Drop Services Across South India</span>
-            </p>
-
-            {/* SPECIAL OFFERS HIGHLIGHT - Minimalist Version */}
-            <div className="flex flex-col sm:flex-row items-center sm:items-stretch gap-4 sm:gap-8 pt-2 pb-3 justify-center w-full max-w-full px-2">
-              <div className="flex items-center gap-3 w-full sm:w-auto bg-white/5 sm:bg-transparent p-3 sm:p-0 rounded-2xl border border-white/10 sm:border-transparent">
-                <div className="w-1.5 sm:w-2 h-10 sm:h-12 bg-brand-red rounded-full shadow-[0_0_12px_rgba(217,35,45,0.9)] shrink-0" />
-                <div className="text-left flex-1 min-w-0">
-                  <p className="text-[10px] sm:text-xs text-brand-red font-black uppercase tracking-wider sm:tracking-widest leading-snug mb-1 truncate sm:overflow-visible sm:whitespace-normal">Railway Pickup & Drop Sedan</p>
-                  <p className="text-white font-black text-xl sm:text-3xl leading-none drop-shadow-md">₹750 <span className="text-xs sm:text-sm text-slate-300 font-bold">/ 20km</span></p>
-                </div>
-              </div>
-              <div className="hidden sm:block w-px h-12 bg-white/20 self-center" />
-              <div className="flex items-center gap-3 w-full sm:w-auto bg-white/5 sm:bg-transparent p-3 sm:p-0 rounded-2xl border border-white/10 sm:border-transparent">
-                <div className="w-1.5 sm:w-2 h-10 sm:h-12 bg-brand-red rounded-full shadow-[0_0_12px_rgba(217,35,45,0.9)] shrink-0" />
-                <div className="text-left flex-1 min-w-0">
-                  <p className="text-[10px] sm:text-xs text-brand-red font-black uppercase tracking-wider sm:tracking-widest leading-snug mb-1 truncate sm:overflow-visible sm:whitespace-normal">Railway Pickup & Drop SUVs</p>
-                  <p className="text-white font-black text-xl sm:text-3xl leading-none drop-shadow-md">₹1000 <span className="text-xs sm:text-sm text-slate-300 font-bold">/ 20km</span></p>
-                </div>
-              </div>
-            </div>
-
             {/* DESCRIPTION */}
-            <p className="text-xs sm:text-sm text-slate-300 max-w-lg leading-relaxed font-normal">
-              Share your pickup and drop location with us, and our team will help you plan a comfortable journey with the right vehicle.
+            <p className="text-sm sm:text-lg text-slate-200 max-w-2xl leading-relaxed font-semibold tracking-wide pt-4 text-center">
+              Luxury, Punctuality & Professionalism — The Balas Standard Since Over a Decade.
             </p>
 
             {/* ACTION BUTTONS */}
-            <div className="pt-2 flex flex-wrap items-center justify-center gap-3.5">
+            <div className="pt-8 flex flex-wrap items-center justify-center gap-4">
+              <button
+                onClick={() => openGeneralWhatsApp("Hi Bala's Travels, I would like to book a chauffeur.")}
+                className="inline-flex items-center gap-2 bg-brand-green hover:bg-brand-darkGreen text-white px-8 py-3.5 rounded-xl font-extrabold text-xs sm:text-sm shadow-xl hover:shadow-2xl transition-all duration-200 transform hover:-translate-y-0.5 tracking-wide cursor-pointer"
+              >
+                <MessageCircle className="w-5 h-5 fill-current" />
+                <span>Book Your Chauffeur</span>
+              </button>
+              
               <a
                 href="#fleet"
                 onClick={(e) => {
@@ -80,10 +63,10 @@ export const HeroSection = ({ onExploreFleet }) => {
                   if (onExploreFleet) onExploreFleet();
                   document.querySelector('#fleet')?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-brand-red to-red-600 hover:from-brand-darkRed hover:to-red-700 text-white px-8 py-3.5 rounded-xl font-extrabold text-xs sm:text-sm shadow-xl hover:shadow-2xl transition-all duration-200 transform hover:-translate-y-0.5 tracking-wide"
+                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white px-8 py-3.5 rounded-xl font-extrabold text-xs sm:text-sm shadow-xl hover:shadow-2xl transition-all duration-200 transform hover:-translate-y-0.5 tracking-wide cursor-pointer"
               >
-                <Compass className="w-4 h-4 text-white" />
-                <span>Explore Our Fleet</span>
+                <Compass className="w-5 h-5 text-white" />
+                <span>Explore Fleet</span>
               </a>
             </div>
 
