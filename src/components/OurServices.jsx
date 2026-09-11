@@ -4,7 +4,7 @@ const services = [
   {
     id: 1,
     title: 'Airport Pickup & Drop',
-    image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80&w=800',
+    image: '/images/airport.jpg',
   },
   {
     id: 2,
