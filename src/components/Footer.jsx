@@ -15,7 +15,7 @@ export const Footer = ({ onNavigate }) => {
 
   const services = [
     'Airport Pickup & Drop',
-    'Airport Transfers',
+    'Railway pickup & drop',
     'One Way Trips',
     'Round Trips',
     'Outstation Travel',
