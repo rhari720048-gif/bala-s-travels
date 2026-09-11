@@ -89,6 +89,7 @@ export const fullFleetCategories = [
       { name: 'Maruti Suzuki XL6', capacity: '6 Passengers', type: 'suv', image: '/images/fleet/suv/maruti-xl6-new.png' },
       { name: 'Kia Carens', capacity: '7 Passengers', type: 'suv', image: '/images/fleet/suv/kia-carens.png' },
       { name: 'Chevrolet Tavera', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/chevrolet-tavera-new.png' },
+      { name: 'Mahindra Xylo', capacity: '7-8 Passengers', type: 'suv', image: '/images/fleet/suv/mahindra-xylo.png' },
     ]
   },
   {
