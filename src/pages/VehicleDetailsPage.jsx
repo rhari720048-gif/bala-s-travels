@@ -69,7 +69,6 @@ export const VehicleDetailsPage = ({ vehicle, categoryTitle = 'Vehicle', onBackT
 
   return (
     <div key={safeName} className="min-h-screen bg-slate-50 text-slate-900 animate-smooth-enter">
-    <div key={safeName} className="min-h-screen bg-slate-50 text-slate-900 animate-smooth-enter">
       
       {/* FLOATING BACK BUTTON */}
       <button
