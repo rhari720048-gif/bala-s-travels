@@ -9,7 +9,7 @@ const services = [
   {
     id: 2,
     title: 'Railway pickup & drop',
-    image: 'https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&q=80&w=800',
+    image: '/images/railway.jpg',
   },
   {
     id: 3,
