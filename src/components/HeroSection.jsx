@@ -48,20 +48,20 @@ export const HeroSection = ({ onExploreFleet }) => {
             </p>
 
             {/* SPECIAL OFFERS HIGHLIGHT - Minimalist Version */}
-            <div className="flex flex-col sm:flex-row items-center gap-5 sm:gap-8 pt-2 pb-3 justify-center">
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-12 bg-brand-red rounded-full shadow-[0_0_12px_rgba(217,35,45,0.9)]" />
-                <div className="text-left">
-                  <p className="text-xs text-brand-red font-black uppercase tracking-widest leading-none mb-2">Airport Transfers Sedan</p>
-                  <p className="text-white font-black text-2xl sm:text-3xl leading-none drop-shadow-md">₹750 <span className="text-sm text-slate-300 font-bold">/ 20km</span></p>
+            <div className="flex flex-col sm:flex-row items-center sm:items-stretch gap-4 sm:gap-8 pt-2 pb-3 justify-center w-full max-w-full px-2">
+              <div className="flex items-center gap-3 w-full sm:w-auto bg-white/5 sm:bg-transparent p-3 sm:p-0 rounded-2xl border border-white/10 sm:border-transparent">
+                <div className="w-1.5 sm:w-2 h-10 sm:h-12 bg-brand-red rounded-full shadow-[0_0_12px_rgba(217,35,45,0.9)] shrink-0" />
+                <div className="text-left flex-1 min-w-0">
+                  <p className="text-[10px] sm:text-xs text-brand-red font-black uppercase tracking-wider sm:tracking-widest leading-snug mb-1 truncate sm:overflow-visible sm:whitespace-normal">Railway Pickup & Drop Sedan</p>
+                  <p className="text-white font-black text-xl sm:text-3xl leading-none drop-shadow-md">₹750 <span className="text-xs sm:text-sm text-slate-300 font-bold">/ 20km</span></p>
                 </div>
               </div>
-              <div className="hidden sm:block w-px h-12 bg-white/20" />
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-12 bg-brand-red rounded-full shadow-[0_0_12px_rgba(217,35,45,0.9)]" />
-                <div className="text-left">
-                  <p className="text-xs text-brand-red font-black uppercase tracking-widest leading-none mb-2">Airport Transfers SUVs</p>
-                  <p className="text-white font-black text-2xl sm:text-3xl leading-none drop-shadow-md">₹1000 <span className="text-sm text-slate-300 font-bold">/ 20km</span></p>
+              <div className="hidden sm:block w-px h-12 bg-white/20 self-center" />
+              <div className="flex items-center gap-3 w-full sm:w-auto bg-white/5 sm:bg-transparent p-3 sm:p-0 rounded-2xl border border-white/10 sm:border-transparent">
+                <div className="w-1.5 sm:w-2 h-10 sm:h-12 bg-brand-red rounded-full shadow-[0_0_12px_rgba(217,35,45,0.9)] shrink-0" />
+                <div className="text-left flex-1 min-w-0">
+                  <p className="text-[10px] sm:text-xs text-brand-red font-black uppercase tracking-wider sm:tracking-widest leading-snug mb-1 truncate sm:overflow-visible sm:whitespace-normal">Railway Pickup & Drop SUVs</p>
+                  <p className="text-white font-black text-xl sm:text-3xl leading-none drop-shadow-md">₹1000 <span className="text-xs sm:text-sm text-slate-300 font-bold">/ 20km</span></p>
                 </div>
               </div>
             </div>
