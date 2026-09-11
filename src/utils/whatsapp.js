@@ -1,5 +1,5 @@
-export const PHONE_NUMBER = "80721 66761";
-export const WHATSAPP_NUMBER = "918072166761";
+export const PHONE_NUMBER = "99400 99347";
+export const WHATSAPP_NUMBER = "919940099347";
 
 export const formatWhatsAppMessage = ({ name, phone, pickup, drop, hours, vehicle }) => {
   let message = `Hi Bala's Travels,\n\nI would like to enquire about a trip.\n\n`;
