@@ -4,12 +4,12 @@ const services = [
   {
     id: 1,
     title: 'Airport Pickup & Drop',
-    image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80&w=800',
+    image: '/images/services/airport-pickup.png',
   },
   {
     id: 2,
     title: 'Railway pickup & drop',
-    image: 'https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&q=80&w=800',
+    image: '/images/services/railway-pickup.png',
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ const services = [
   {
     id: 5,
     title: 'Outstation Travel',
-    image: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800',
+    image: '/images/services/outstation-travel.png',
   },
   {
     id: 6,
