@@ -131,6 +131,9 @@ export const Footer = ({ onNavigate }) => {
               <div className="flex items-start gap-2.5">
                 <Phone className="w-4 h-4 text-brand-red flex-shrink-0 mt-0.5" />
                 <div className="flex flex-col gap-1.5">
+                  <a href={`tel:+91${PHONE_NUMBER.replace(/\s+/g, '')}`} className="hover:text-white font-bold transition-colors text-sm">
+                    +91 {PHONE_NUMBER}
+                  </a>
                   <a href="tel:+919940099347" className="hover:text-white font-bold transition-colors text-sm">
                     +91 99400 99347
                   </a>
