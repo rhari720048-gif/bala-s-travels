@@ -14,7 +14,7 @@ const services = [
   {
     id: 3,
     title: 'One Way Trips',
-    image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=800',
+    image: '/images/services/outstation-travel.png',
   },
   {
     id: 4,
@@ -24,7 +24,7 @@ const services = [
   {
     id: 5,
     title: 'Outstation Travel',
-    image: '/images/services/outstation-travel.png',
+    image: '/images/services/temples-collage.jpg',
   },
   {
     id: 6,
