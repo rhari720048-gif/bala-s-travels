@@ -5,7 +5,7 @@ import { openGeneralWhatsApp } from '../utils/whatsapp';
 
 export const HeroSection = ({ onExploreFleet }) => {
   return (
-    <section id="home" className="relative min-h-[90vh] lg:min-h-[85vh] pt-32 pb-24 lg:pt-36 lg:pb-32 flex items-center overflow-hidden bg-slate-950 scroll-mt-28">
+    <section id="home" className="relative min-h-[90vh] lg:min-h-[85vh] pt-40 pb-24 lg:pt-48 lg:pb-32 flex items-center overflow-hidden bg-slate-950 scroll-mt-28">
       
       {/* BACKGROUND IMAGE & CINEMATIC OVERLAY */}
       <div className="absolute inset-0 z-0 bg-slate-950">
@@ -23,20 +23,20 @@ export const HeroSection = ({ onExploreFleet }) => {
         <div className="flex flex-col items-center justify-center text-center">
           
           {/* CENTERED HERO CONTENT */}
-          <div className="space-y-6 text-white max-w-3xl flex flex-col items-center">
+          <div className="space-y-6 text-white max-w-4xl flex flex-col items-center">
             
             {/* BRAND BADGE WITH SMALL LOGO */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[11px] font-extrabold tracking-[0.2em] uppercase text-white shadow-sm animate-smooth-enter">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[11px] font-extrabold tracking-[0.2em] uppercase text-white shadow-sm animate-smooth-enter mt-8 lg:mt-4">
               <img src="/logo.png" alt="Icon" className="h-4 w-auto object-contain drop-shadow-sm" />
               BALA'S TRAVELS
             </div>
 
             {/* STYLISH MAIN HEADING */}
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.08]">
-              <span className="block font-black text-white drop-shadow-md">
-                Your Journey.
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.3] flex flex-wrap justify-center gap-x-3 gap-y-1">
+              <span className="font-black text-white drop-shadow-md">
+                Your Journey,
               </span>
-              <span className="block font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-brand-red to-rose-500 drop-shadow-sm">
+              <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-brand-red to-rose-500 drop-shadow-sm">
                 Our Responsibility.
               </span>
             </h1>

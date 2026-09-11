@@ -90,9 +90,9 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
                     e.preventDefault();
                     handleNavClick(link.id, link.href);
                   }}
-                  className={`text-sm font-semibold transition-colors duration-150 relative py-1 ${
+                  className={`text-base lg:text-[17px] font-bold transition-colors duration-150 relative py-1 px-1 ${
                     isActive
-                      ? 'text-brand-red font-bold'
+                      ? 'text-brand-red font-black'
                       : 'text-slate-700 hover:text-brand-red'
                   }`}
                 >

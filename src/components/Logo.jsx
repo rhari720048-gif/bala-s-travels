@@ -10,7 +10,7 @@ export const Logo = ({ variant = 'default', className = '' }) => {
         <img
           src="/logo.png"
           alt="Bala's Travels Logo"
-          className="h-16 sm:h-20 md:h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+          className="h-14 sm:h-16 md:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
         />
       </div>
       <div className="flex flex-col justify-center">
