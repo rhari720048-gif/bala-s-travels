@@ -19,7 +19,7 @@ const services = [
   {
     id: 4,
     title: 'Round Trips',
-    image: 'https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800',
+    image: '/images/services/round-trips.jpg',
   },
   {
     id: 5,
