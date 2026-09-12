@@ -4,7 +4,7 @@ export const actingDriversData = [
     title: '3 Hours City Driving',
     description: 'Hire an experienced, professional acting driver for 3 hours to navigate through city traffic, daily errands, or shopping.',
     image: '/images/acting-driver-3hrs.png',
-    price: '₹500 for 3 Hrs',
+    price: '₹500 (3 Hrs) | +₹100/Hr',
     badge: 'Popular'
   },
   {
