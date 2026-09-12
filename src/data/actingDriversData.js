@@ -1,10 +1,10 @@
 export const actingDriversData = [
   {
-    id: 'local-city',
-    title: 'Local City Driving',
-    description: 'Experienced drivers for navigating through Chennai city traffic for your daily errands, shopping, or office commutes.',
-    image: 'https://images.unsplash.com/photo-1514316454349-750a7fd3da3a?q=80&w=600&auto=format&fit=crop',
-    price: 'From ₹500',
+    id: 'local-3hrs',
+    title: '3 Hours City Driving',
+    description: 'Hire an experienced, professional acting driver for 3 hours to navigate through city traffic, daily errands, or shopping.',
+    image: '/images/acting-driver-3hrs.png',
+    price: '₹500 for 3 Hrs',
     badge: 'Popular'
   },
   {
