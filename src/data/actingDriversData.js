@@ -19,7 +19,7 @@ export const actingDriversData = [
     id: 'valet-events',
     title: 'Valet & Events',
     description: 'Reliable valet parking drivers for weddings, corporate events, and private house parties.',
-    image: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600&auto=format&fit=crop',
+    image: '/images/valet-event.png',
     price: 'Custom Quote',
     badge: 'Events'
   }
