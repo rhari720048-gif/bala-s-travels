@@ -27,14 +27,20 @@ export function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [initialFleetCategory, setInitialFleetCategory] = useState('all');
 
-  // Check URL pathname & hash on initial load & popstate for /admin route
+  // Check URL pathname & hash on initial load & popstate for all routes
   useEffect(() => {
     const checkRoute = () => {
-      const path = window.location.pathname.toLowerCase();
+      const path = window.location.pathname.toLowerCase().replace(/\/$/, '');
       const hash = window.location.hash.toLowerCase();
-      if (path === '/admin' || path === '/admin/' || hash === '#admin') {
-        setCurrentPage('admin');
-      }
+      
+      if (path === '/admin' || hash === '#admin') setCurrentPage('admin');
+      else if (path === '/fleet' || hash === '#fleet') setCurrentPage('fleet');
+      else if (path === '/locations' || hash === '#locations') setCurrentPage('locations');
+      else if (path === '/about' || hash === '#about') setCurrentPage('about');
+      else if (path === '/blogs' || hash === '#blogs') setCurrentPage('blogs');
+      else if (path === '/acting-drivers' || hash === '#acting-drivers') setCurrentPage('acting-drivers');
+      else if (path === '/enquiry' || hash === '#enquiry') setCurrentPage('enquiry');
+      else if (path === '' || path === '/') setCurrentPage('home');
     };
     checkRoute();
 
@@ -80,21 +86,27 @@ export function App() {
     if (sectionId === 'fleet') {
       setInitialFleetCategory('all');
       setCurrentPage('fleet');
+      window.history.pushState({}, '', '/fleet');
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     } else if (sectionId === 'locations') {
       setCurrentPage('locations');
+      window.history.pushState({}, '', '/locations');
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     } else if (sectionId === 'about') {
       setCurrentPage('about');
+      window.history.pushState({}, '', '/about');
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     } else if (sectionId === 'acting-drivers') {
       setCurrentPage('acting-drivers');
+      window.history.pushState({}, '', '/acting-drivers');
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     } else if (sectionId === 'enquiry') {
       setCurrentPage('enquiry');
+      window.history.pushState({}, '', '/enquiry');
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     } else if (sectionId === 'blogs') {
       setCurrentPage('blogs');
+      window.history.pushState({}, '', '/blogs');
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     } else if (sectionId === 'admin') {
       setCurrentPage('admin');
@@ -134,7 +146,10 @@ export function App() {
   const handleBackToFleet = (categoryId = 'all') => {
     setSelectedVehicleData(null);
     setInitialFleetCategory(categoryId);
-    if (currentPage !== 'fleet') setCurrentPage('fleet');
+    if (currentPage !== 'fleet') {
+      setCurrentPage('fleet');
+      window.history.pushState({}, '', '/fleet');
+    }
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   };
 
@@ -215,6 +230,7 @@ export function App() {
             onExploreFleet={() => {
               setInitialFleetCategory('all');
               setCurrentPage('fleet');
+              window.history.pushState({}, '', '/fleet');
               window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
             }}
           />
@@ -255,6 +271,7 @@ export function App() {
           <HeroSection onExploreFleet={() => {
             setInitialFleetCategory('all');
             setCurrentPage('fleet');
+            window.history.pushState({}, '', '/fleet');
             window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
           }} />
 
@@ -272,6 +289,7 @@ export function App() {
             onViewAllFleet={() => {
               setInitialFleetCategory('all');
               setCurrentPage('fleet');
+              window.history.pushState({}, '', '/fleet');
               window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
             }}
             onSelectVehicle={handleSelectVehicle}

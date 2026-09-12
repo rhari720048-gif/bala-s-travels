@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { getEnquiries, deleteEnquiry } from '../utils/enquiryStore';
 import { getAllFleetCategories, addCustomVehicle, deleteVehicle, deleteCategory } from '../utils/vehicleStore';
+import { getBlogs, addBlog, deleteBlog } from '../utils/blogStore';
 
 export const AdminPage = ({ onBackToHome }) => {
   // Read credentials from environment variables with exact requested defaults
@@ -31,6 +32,11 @@ export const AdminPage = ({ onBackToHome }) => {
   const [fleetCategories, setFleetCategories] = useState(() => getAllFleetCategories());
   const [selectedCatFilter, setSelectedCatFilter] = useState('all');
   const [showAddVehicleModal, setShowAddVehicleModal] = useState(false);
+
+  // Blogs State
+  const [blogs, setBlogs] = useState(() => getBlogs());
+  const [showAddBlogModal, setShowAddBlogModal] = useState(false);
+  const [newBlog, setNewBlog] = useState({ title: '', content: '' });
 
   // New Vehicle Form State
   const [newVehicle, setNewVehicle] = useState({
@@ -121,6 +127,7 @@ export const AdminPage = ({ onBackToHome }) => {
   const handleRefresh = () => {
     setEnquiries(getEnquiries());
     setFleetCategories(getAllFleetCategories());
+    setBlogs(getBlogs());
   };
 
   // Handle adding new vehicle to fleet
@@ -218,6 +225,18 @@ export const AdminPage = ({ onBackToHome }) => {
     });
   };
 
+  // Request Confirmation for Blog Delete
+  const requestBlogDelete = (e, blogId, blogTitle) => {
+    if (e) e.stopPropagation();
+    setDeleteConfirmModal({
+      isOpen: true,
+      title: 'Delete Blog Article?',
+      message: `Are you sure you want to delete the article "${blogTitle}"?`,
+      itemType: 'blog',
+      itemId: blogId
+    });
+  };
+
   // Execute Confirmed Delete
   const handleConfirmDelete = () => {
     const { itemType, itemId, catTitle } = deleteConfirmModal;
@@ -232,9 +251,26 @@ export const AdminPage = ({ onBackToHome }) => {
     } else if (itemType === 'enquiry' && itemId) {
       const updated = deleteEnquiry(itemId);
       setEnquiries([...updated]);
+    } else if (itemType === 'blog' && itemId) {
+      const updated = deleteBlog(itemId);
+      setBlogs([...updated]);
     }
 
     setDeleteConfirmModal({ isOpen: false, title: '', message: '', itemType: '', itemId: null, catTitle: '' });
+  };
+
+  // Handle adding new blog
+  const handleAddBlogSubmit = (e) => {
+    e.preventDefault();
+    if (!newBlog.title.trim() || !newBlog.content.trim()) return;
+    
+    const updated = addBlog({
+      title: newBlog.title.trim(),
+      content: newBlog.content.trim()
+    });
+    setBlogs(updated);
+    setShowAddBlogModal(false);
+    setNewBlog({ title: '', content: '' });
   };
 
   // Filtered Enquiries by search query
@@ -827,19 +863,39 @@ export const AdminPage = ({ onBackToHome }) => {
             <div className="bg-white rounded-3xl border border-slate-200 p-6 space-y-6 shadow-sm">
               <div className="border-b border-slate-100 pb-4 flex items-center justify-between">
                 <div>
-                  <h3 className="text-base font-black text-slate-900">Travel Blog Articles</h3>
-                  <p className="text-xs text-slate-500 font-medium">Manage published travel guides and SEO articles.</p>
+                  <h3 className="text-base font-black text-slate-900">Travel Blog & SEO Articles</h3>
+                  <p className="text-xs text-slate-500 font-medium">Manage text-only blogs. SEO keywords are injected automatically.</p>
                 </div>
-                <button className="px-4 py-2 bg-brand-red text-white text-xs font-extrabold rounded-xl shadow-xs">
+                <button 
+                  onClick={() => setShowAddBlogModal(true)}
+                  className="px-4 py-2 bg-brand-red hover:bg-brand-darkRed text-white text-xs font-extrabold rounded-xl shadow-xs transition-colors cursor-pointer"
+                >
                   + Add New Article
                 </button>
               </div>
 
               <div className="space-y-3 text-xs">
-                {['Complete Guide to South India Temple Tour Taxi Routes', 'Top 10 Tips for Renting Outstation Cabs in Chennai', 'Chennai Airport Pickup & Drop: Avoiding Delays'].map((title, i) => (
-                  <div key={i} className="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between">
-                    <div className="font-extrabold text-slate-900">{title}</div>
-                    <span className="text-[10px] font-bold text-slate-500">Published</span>
+                {blogs.length === 0 && (
+                  <div className="text-center p-8 text-slate-500 font-bold">No blogs found.</div>
+                )}
+                {blogs.map((blog) => (
+                  <div key={blog.id} className="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between gap-4">
+                    <div className="flex-1">
+                      <div className="font-extrabold text-slate-900 text-sm">{blog.title}</div>
+                      <div className="text-[10px] font-bold text-slate-500 mt-0.5">{blog.date} • {blog.readTime}</div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">
+                        SEO Optimized
+                      </span>
+                      <button
+                        onClick={(e) => requestBlogDelete(e, blog.id, blog.title)}
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 transition-colors cursor-pointer"
+                        title="Delete Article"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -1062,6 +1118,83 @@ export const AdminPage = ({ onBackToHome }) => {
                 Yes, Delete
               </button>
             </div>
+
+          </div>
+        </div>
+      )}
+
+      {/* ADD NEW BLOG MODAL */}
+      {showAddBlogModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-smooth-enter overflow-y-auto">
+          <div className="bg-white rounded-3xl p-6 max-w-xl w-full shadow-2xl border border-slate-100 relative my-8 space-y-4">
+            
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-xl bg-brand-red/10 text-brand-red flex items-center justify-center">
+                  <FileText className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-slate-900">New SEO Content Article</h3>
+                  <p className="text-[11px] text-slate-500 font-medium">Images are not needed. SEO tags & keywords will be auto-injected.</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowAddBlogModal(false)}
+                className="p-1.5 rounded-xl hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition-colors cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <form onSubmit={handleAddBlogSubmit} className="space-y-4 text-xs">
+              <div className="space-y-1">
+                <label className="text-slate-700 font-extrabold block">Article Title *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Best Cabs in Chennai for Outstation"
+                  value={newBlog.title}
+                  onChange={(e) => setNewBlog({ ...newBlog, title: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:outline-none"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-slate-700 font-extrabold block">Article Content *</label>
+                <textarea
+                  required
+                  rows={8}
+                  placeholder="Write your blog content here..."
+                  value={newBlog.content}
+                  onChange={(e) => setNewBlog({ ...newBlog, content: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:outline-none resize-none leading-relaxed"
+                />
+              </div>
+
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-[10px] font-medium text-slate-500 space-y-1">
+                <div className="flex items-center gap-1 font-bold text-emerald-600">
+                  <Sparkles className="w-3.5 h-3.5" /> <span>Auto SEO Booster Active</span>
+                </div>
+                <p>Keywords like "Balas Travels", "drop taxi Chennai", "Ashok Nagar", and "Innova rental" will be automatically embedded.</p>
+              </div>
+
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+                <button
+                  type="button"
+                  onClick={() => setShowAddBlogModal(false)}
+                  className="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 font-bold transition-colors cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-5 py-2.5 rounded-xl bg-brand-red hover:bg-brand-darkRed text-white font-extrabold shadow-sm transition-all inline-flex items-center gap-1.5 cursor-pointer"
+                >
+                  <Check className="w-4 h-4" />
+                  <span>Publish Article</span>
+                </button>
+              </div>
+            </form>
 
           </div>
         </div>

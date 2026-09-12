@@ -4,8 +4,15 @@ import {
   Car, Clock, CheckCircle2, MessageCircle, Phone, Award, Sparkles 
 } from 'lucide-react';
 import { openGeneralWhatsApp, PHONE_NUMBER } from '../utils/whatsapp';
+import { useSEO } from '../utils/useSEO';
 
 export const AboutPage = ({ onBackToHome, onExploreFleet }) => {
+  useSEO({
+    title: "About Bala's Travels | Best Taxi Service in Chennai & South India",
+    description: "Learn about Bala's Travels, South India's trusted cab rental service. Over 10 years of providing reliable outstation cabs, airport drops, and tempo travellers across Chennai, Coimbatore, Tirupur, Madurai, Bangalore & Kerala.",
+    keywords: "Balas Travels, about Bala's Travels, best travels in Ashok Nagar Chennai, best taxi service Chennai, outstation cab rentals, South India taxi, reliable cabs Coimbatore, Tirupur travel agency, airport drop taxi"
+  });
+
   const highlights = [
     {
       icon: ShieldCheck,

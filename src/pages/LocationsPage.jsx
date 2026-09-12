@@ -2,8 +2,15 @@ import React from 'react';
 import { MapPin, ArrowLeft } from 'lucide-react';
 import IndiaRedMap from '../components/IndiaRedMap';
 import indiaMapImg from '../assets/india-map-red.png';
+import { useSEO } from '../utils/useSEO';
 
 export const LocationsPage = ({ onBackToHome }) => {
+  useSEO({
+    title: "Locations We Serve | Chennai, Coimbatore, Madurai Drop Taxi | Bala's Travels",
+    description: "Book cabs across South India. We serve Chennai, Coimbatore, Madurai, Trichy, Tirupur, Kanyakumari, Bangalore, Kochi, Hyderabad. One way drop taxi & round trip outstation cabs.",
+    keywords: "Balas Travels locations, best travels in Ashok Nagar Chennai, taxi service Chennai, Coimbatore drop taxi, Bangalore outstation cabs, Madurai taxi rental, Tirupur cabs, Kerala tour taxi, Hyderabad airport taxi"
+  });
+
   const stateData = [
     {
       id: 'TN',

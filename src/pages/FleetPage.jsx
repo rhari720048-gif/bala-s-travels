@@ -6,8 +6,15 @@ import {
 } from 'lucide-react';
 import { getAllFleetCategories } from '../utils/vehicleStore';
 import { InteractiveCarCard } from '../components/InteractiveCarCard';
+import { useSEO } from '../utils/useSEO';
 
 export const FleetPage = ({ onBackToHome, onSelectVehicle }) => {
+  useSEO({
+    title: "Our Premium Fleet | Sedan, SUV & Tempo Rentals | Bala's Travels",
+    description: "Explore our premium fleet of vehicles including Innova Crysta, Kia Seltos, Hyundai Verna, and 14-seater Tempo Travellers for outstation trips & airport transfers in South India.",
+    keywords: "Balas Travels fleet, best travels in Ashok Nagar Chennai, Innova Crysta rental, Tempo Traveller hire Chennai, outstation SUV taxi, sedan cabs Chennai, luxury cabs South India, rent a car Coimbatore, Tirupur taxi"
+  });
+
   const [selectedCatId, setSelectedCatId] = useState('all');
   const [seaterFilter, setSeaterFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');

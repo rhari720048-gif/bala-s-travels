@@ -1,40 +1,23 @@
-import React from 'react';
-import { ArrowLeft, Calendar, User, Clock, ArrowRight, BookOpen, MapPin, Sparkles } from 'lucide-react';
-
-const BLOG_POSTS = [
-  {
-    id: 1,
-    title: "Complete Guide to South India Temple Tour Taxi Routes",
-    category: "Temple Tours",
-    date: "September 01, 2026",
-    readTime: "5 min read",
-    author: "Bala's Travels Desk",
-    excerpt: "Planning a pilgrimage tour across Madurai, Rameshwaram, Kanyakumari and Tanjore? Discover optimal travel routes and driver tips for a stress-free journey.",
-    image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=80&w=800"
-  },
-  {
-    id: 2,
-    title: "Top 10 Tips for Renting Outstation Cabs in Chennai & Bangalore",
-    category: "Travel Guide",
-    date: "August 28, 2026",
-    readTime: "4 min read",
-    author: "Travel Dispatch Team",
-    excerpt: "How to choose between Sedan, SUV and Tempo Traveller for inter-state highway travel. Toll charges, driver bata, and safety checkpoints explained.",
-    image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=800"
-  },
-  {
-    id: 3,
-    title: "Chennai Airport Pickup & Drop: Avoiding Delays & Surcharges",
-    category: "Airport Travel",
-    date: "August 22, 2026",
-    readTime: "3 min read",
-    author: "Operations Manager",
-    excerpt: "Seamless 24/7 airport transfer services across Chennai International Airport (MAA) and Kempegowda Airport (BLR) with zero hidden fees.",
-    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80&w=800"
-  }
-];
+import React, { useState, useEffect } from 'react';
+import { ArrowLeft, Calendar, User, Clock, BookOpen, MapPin, Sparkles, CheckCircle2 } from 'lucide-react';
+import { useSEO } from '../utils/useSEO';
+import { getBlogs } from '../utils/blogStore';
 
 export const BlogsPage = ({ onBackToHome }) => {
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    const fetchBlogs = () => setBlogs(getBlogs());
+    fetchBlogs();
+    window.addEventListener('storage', fetchBlogs);
+    return () => window.removeEventListener('storage', fetchBlogs);
+  }, []);
+  useSEO({
+    title: "Travel Blogs & Guides | South India Tourism & Cab Tips | Bala's Travels",
+    description: "Read travel tips, destination guides, and advice for traveling across South India. Discover the best outstation routes from Chennai, Bangalore, Coimbatore & Tirupur.",
+    keywords: "Balas Travels blogs, best travels in Ashok Nagar Chennai, travel blog South India, Tamil Nadu tourism guide, outstation travel tips, best places to visit Chennai, road trip South India"
+  });
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
@@ -64,60 +47,64 @@ export const BlogsPage = ({ onBackToHome }) => {
           </p>
         </div>
 
-        {/* FEATURED ARTICLES GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {BLOG_POSTS.map((post) => (
-            <article 
-              key={post.id}
-              className="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group"
-            >
-              {/* ARTICLE IMAGE */}
-              <div className="relative h-48 overflow-hidden bg-slate-100">
-                <img 
-                  src={post.image} 
-                  alt={post.title} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <span className="absolute top-3 left-3 bg-brand-red text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-lg shadow-sm">
-                  {post.category}
-                </span>
-              </div>
-
-              {/* ARTICLE CONTENT */}
-              <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                <div className="space-y-2">
-                  <div className="flex items-center gap-3 text-[11px] text-slate-400 font-semibold">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5" />
+        {/* ARTICLES LIST (TEXT-ONLY SEO FORMAT) */}
+        <div className="space-y-8 max-w-4xl mx-auto">
+          {blogs.length === 0 ? (
+            <div className="text-center p-12 bg-white rounded-3xl border border-slate-200">
+              <p className="text-slate-500 font-bold">No travel guides available at the moment.</p>
+            </div>
+          ) : (
+            blogs.map((post) => (
+              <article 
+                key={post.id}
+                className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-4"
+              >
+                {/* HEADER INFO */}
+                <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4">
+                  <span className="bg-brand-lightRed text-brand-red text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full border border-brand-red/10">
+                    {post.category}
+                  </span>
+                  
+                  <div className="flex items-center gap-3 text-[11px] text-slate-500 font-bold">
+                    <span className="flex items-center gap-1.5">
+                      <Calendar className="w-3.5 h-3.5 text-slate-400" />
                       {post.date}
                     </span>
                     <span>•</span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5" />
+                    <span className="flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5 text-slate-400" />
                       {post.readTime}
                     </span>
                   </div>
-
-                  <h3 className="text-base font-black text-slate-900 group-hover:text-brand-red transition-colors leading-snug">
-                    {post.title}
-                  </h3>
-
-                  <p className="text-xs text-slate-600 line-clamp-3 font-medium">
-                    {post.excerpt}
-                  </p>
                 </div>
 
-                <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-[11px] font-bold text-slate-500">
+                {/* TITLE & CONTENT */}
+                <div className="space-y-4 pt-2">
+                  <h2 className="text-xl sm:text-2xl font-black text-slate-900 leading-snug">
+                    {post.title}
+                  </h2>
+
+                  <div className="text-sm text-slate-700 leading-relaxed font-medium whitespace-pre-wrap">
+                    {/* Render content, allowing basic markdown-like bold text **text** to become HTML bold */}
+                    {post.content.split('\n').map((paragraph, idx) => (
+                      <p key={idx} className="mb-3" dangerouslySetInnerHTML={{ __html: paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+                    ))}
+                  </div>
+                </div>
+
+                {/* AUTHOR & SEO BADGE */}
+                <div className="pt-4 mt-2 border-t border-slate-100 flex items-center justify-between">
+                  <span className="text-[11px] font-bold text-slate-500 flex items-center gap-1.5">
+                    <User className="w-3.5 h-3.5" />
                     By {post.author}
                   </span>
-                  <span className="text-brand-red text-xs font-black flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                    Read Article <ArrowRight className="w-3.5 h-3.5" />
+                  <span className="text-emerald-600 text-[10px] font-black flex items-center gap-1 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-100">
+                    <CheckCircle2 className="w-3.5 h-3.5" /> SEO Verified Content
                   </span>
                 </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            ))
+          )}
         </div>
 
       </div>

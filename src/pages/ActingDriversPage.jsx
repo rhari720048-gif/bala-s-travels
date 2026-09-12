@@ -1,9 +1,16 @@
 import React from 'react';
 import { ArrowLeft, MapPin, User, MessageCircle, Clock, ShieldCheck } from 'lucide-react';
 import { openActingDriverWhatsApp } from '../utils/whatsapp';
+import { useSEO } from '../utils/useSEO';
 import { actingDriversData } from '../data/actingDriversData';
 
 export const ActingDriversPage = ({ onBackToHome }) => {
+  useSEO({
+    title: "Professional Acting Drivers in Chennai | Call Drivers | Bala's Travels",
+    description: "Hire reliable, background-verified acting drivers and call drivers in Chennai, Coimbatore, and Tamil Nadu for outstation trips, local errands, and night driving.",
+    keywords: "Balas Travels acting drivers, best travels in Ashok Nagar Chennai, acting drivers Chennai, call drivers Tamil Nadu, hire driver for outstation, temporary drivers Coimbatore, experienced drivers for rent"
+  });
+
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900 pb-20 animate-smooth-enter">
       {/* HEADER SECTION */}

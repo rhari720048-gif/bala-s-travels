@@ -2,8 +2,15 @@ import React from 'react';
 import { MessageCircle, Compass, ShieldCheck } from 'lucide-react';
 import FloatingEnquiryCard from './FloatingEnquiryCard';
 import { openGeneralWhatsApp } from '../utils/whatsapp';
+import { useSEO } from '../utils/useSEO';
 
 export const HeroSection = ({ onExploreFleet }) => {
+  useSEO({
+    title: "Bala's Travels | Premier Drop Taxi & Outstation Cabs Across South India",
+    description: "Book 24/7 reliable pickup & drop cabs, outstation taxi rentals, airport transfers across Chennai, Coimbatore, Tirupur, Madurai, Bangalore & Kerala. Lowest prices guaranteed.",
+    keywords: "Balas Travels, Bala's Travels, best travels in Ashok Nagar Chennai, top taxi service in Ashok Nagar, drop taxi Chennai, outstation cab rental Tamil Nadu, Innova Crysta rental, Tirupur cabs, Coimbatore outstation taxi, one way drop taxi, airport cab Chennai"
+  });
+
   return (
     <section id="home" className="relative min-h-[90vh] lg:min-h-[85vh] pt-40 pb-24 lg:pt-48 lg:pb-32 flex items-center overflow-hidden bg-slate-950 scroll-mt-28">
       

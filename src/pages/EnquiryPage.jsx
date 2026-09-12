@@ -1,8 +1,15 @@
 import React from 'react';
 import { ArrowLeft } from 'lucide-react';
 import FloatingEnquiryCard from '../components/FloatingEnquiryCard';
+import { useSEO } from '../utils/useSEO';
 
 export const EnquiryPage = ({ onBackToHome }) => {
+  useSEO({
+    title: "Contact & Enquiry | Book Your Cab Now | Bala's Travels",
+    description: "Contact Bala's Travels to book drop taxis, outstation cabs, and airport transfers. Get an instant quote via WhatsApp or phone call for your travel needs.",
+    keywords: "contact Balas Travels, best travels in Ashok Nagar Chennai, cab booking Chennai, outstation taxi quote, drop taxi enquiry, rent a car contact, book Innova Chennai, Tirupur taxi contact"
+  });
+
   return (
     <div className="min-h-screen bg-slate-50 pt-20 pb-16 relative flex flex-col items-center">
       
