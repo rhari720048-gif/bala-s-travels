@@ -11,8 +11,8 @@ export const actingDriversData = [
     id: 'outstation',
     title: 'Outstation Travel',
     description: 'Professional highway drivers for your family trips, native visits, and weekend getaways across South India.',
-    image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=600&auto=format&fit=crop',
-    price: '₹2000 / Day',
+    image: '/images/acting-driver-outstation.png',
+    price: '₹2250 / Day',
     badge: 'Long Trips'
   },
   {
