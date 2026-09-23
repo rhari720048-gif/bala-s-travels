@@ -1,9 +1,19 @@
 import React from 'react';
 import { MapPin, Phone, MessageCircle, ChevronRight, Share2, Globe } from 'lucide-react';
 import Logo from './Logo';
-import { openGeneralWhatsApp, PHONE_NUMBER } from '../utils/whatsapp';
+import { openGeneralWhatsApp } from '../utils/whatsapp';
+import { getCmsData } from '../utils/cmsStore';
 
 export const Footer = ({ onNavigate }) => {
+  const [cmsData, setCmsData] = React.useState(() => getCmsData());
+
+  React.useEffect(() => {
+    const handleCmsUpdate = () => {
+      setCmsData(getCmsData());
+    };
+    window.addEventListener('cms_update', handleCmsUpdate);
+    return () => window.removeEventListener('cms_update', handleCmsUpdate);
+  }, []);
   const quickLinks = [
     { id: 'home', label: 'Home', href: '#home' },
     { id: 'about', label: 'About', href: '#about' },
@@ -131,17 +141,14 @@ export const Footer = ({ onNavigate }) => {
               <div className="flex items-start gap-2.5">
                 <Phone className="w-4 h-4 text-brand-red flex-shrink-0 mt-0.5" />
                 <div className="flex flex-col gap-1.5">
-                  <a href={`tel:+91${PHONE_NUMBER.replace(/\s+/g, '')}`} className="hover:text-white font-bold transition-colors text-sm">
-                    +91 {PHONE_NUMBER}
+                  <a href={`tel:+91${cmsData.contact.phone1.replace(/\s+/g, '')}`} className="hover:text-white font-bold transition-colors text-sm">
+                    +91 {cmsData.contact.phone1}
                   </a>
-                  <a href="tel:+918072166761" className="hover:text-white font-bold transition-colors text-sm">
-                    +91 80721 66761
+                  <a href={`tel:+91${cmsData.contact.phone2.replace(/\s+/g, '')}`} className="hover:text-white font-bold transition-colors text-sm">
+                    +91 {cmsData.contact.phone2}
                   </a>
-                  <a href="tel:+919444705044" className="hover:text-white font-bold transition-colors text-sm">
-                    +91 94447 05044
-                  </a>
-                  <a href="tel:+917401441442" className="hover:text-white font-bold transition-colors text-sm">
-                    +91 74014 41442
+                  <a href={`tel:+91${cmsData.contact.phone3.replace(/\s+/g, '')}`} className="hover:text-white font-bold transition-colors text-sm">
+                    +91 {cmsData.contact.phone3}
                   </a>
                 </div>
               </div>

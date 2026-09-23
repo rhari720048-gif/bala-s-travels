@@ -2,12 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle, Menu, X, Phone } from 'lucide-react';
 import Logo from './Logo';
-import { openGeneralWhatsApp, PHONE_NUMBER } from '../utils/whatsapp';
+import { openGeneralWhatsApp } from '../utils/whatsapp';
+import { getSpecialOffer } from '../utils/offerStore';
+import { getCmsData } from '../utils/cmsStore';
 
 export const Navbar = ({ activeSection = 'home', onNavigate }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedTab, setSelectedTab] = useState(activeSection);
+  const [offerText, setOfferText] = useState(() => getSpecialOffer());
+  const [cmsData, setCmsData] = useState(() => getCmsData());
+
+  useEffect(() => {
+    const handleStorageChange = () => setOfferText(getSpecialOffer());
+    const handleCmsUpdate = () => setCmsData(getCmsData());
+    
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('cms_update', handleCmsUpdate);
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('cms_update', handleCmsUpdate);
+    };
+  }, []);
 
   // Sync selected tab with active section from scroll
   useEffect(() => {
@@ -65,8 +81,8 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
       {/* SCROLLING ANNOUNCEMENT BAR */}
       <div className="bg-brand-red text-white py-2 sm:py-2.5 overflow-hidden flex items-center shrink-0">
         <div className="whitespace-nowrap animate-marquee text-xs sm:text-sm font-black tracking-wide w-full inline-block uppercase">
-          <span className="mx-4 sm:mx-10">🔥 SPECIAL OFFER: Only Pickup & Drop! Sedan: ₹800 (10 km) | SUVs: ₹1100 (10 km) | 24/7 Acting Drivers Available in Chennai</span>
-          <span className="mx-4 sm:mx-10">🔥 SPECIAL OFFER: Only Pickup & Drop! Sedan: ₹800 (10 km) | SUVs: ₹1100 (10 km) | 24/7 Acting Drivers Available in Chennai</span>
+          <span className="mx-4 sm:mx-10">{offerText}</span>
+          <span className="mx-4 sm:mx-10">{offerText}</span>
         </div>
       </div>
 
@@ -104,9 +120,9 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
 
           {/* RIGHT ACTION: EMAIL & WHATSAPP ENQUIRY BUTTON */}
           <div className="hidden lg:flex items-center gap-3 xl:gap-4">
-            <a href="mailto:balastravels2023@gmail.com" className="hidden xl:flex text-[11px] xl:text-xs font-bold text-slate-600 hover:text-brand-red items-center gap-1.5 transition-colors">
+            <a href={`mailto:${cmsData.contact.email}`} className="hidden xl:flex text-[11px] xl:text-xs font-bold text-slate-600 hover:text-brand-red items-center gap-1.5 transition-colors">
               <svg className="w-3.5 h-3.5 xl:w-4 xl:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-              balastravels2023@gmail.com
+              {cmsData.contact.email}
             </a>
             <button
               onClick={(e) => {
@@ -171,21 +187,21 @@ export const Navbar = ({ activeSection = 'home', onNavigate }) => {
           </div>
 
           <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
-            <a href="tel:+919940099347" className="flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200">
+            <a href={`tel:+91${cmsData.contact.phone1.replace(/\s+/g, '')}`} className="flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200">
               <Phone className="w-3.5 h-3.5 text-brand-red" />
-              <span>Call: 99400 99347</span>
+              <span>Call: {cmsData.contact.phone1}</span>
             </a>
-            <a href="tel:+919444705044" className="flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200">
+            <a href={`tel:+91${cmsData.contact.phone2.replace(/\s+/g, '')}`} className="flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200">
               <Phone className="w-3.5 h-3.5 text-brand-red" />
-              <span>Call: 94447 05044</span>
+              <span>Call: {cmsData.contact.phone2}</span>
             </a>
-            <a href="tel:+917401441442" className="flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200">
+            <a href={`tel:+91${cmsData.contact.phone3.replace(/\s+/g, '')}`} className="flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200">
               <Phone className="w-3.5 h-3.5 text-brand-red" />
-              <span>Call: 74014 41442</span>
+              <span>Call: {cmsData.contact.phone3}</span>
             </a>
-            <a href="mailto:balastravels2023@gmail.com" className="flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200">
+            <a href={`mailto:${cmsData.contact.email}`} className="flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200">
               <svg className="w-3.5 h-3.5 text-brand-red" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-              <span>balastravels2023@gmail.com</span>
+              <span>{cmsData.contact.email}</span>
             </a>
 
             <button

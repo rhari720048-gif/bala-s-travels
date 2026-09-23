@@ -9,6 +9,9 @@ import {
 import { getEnquiries, deleteEnquiry } from '../utils/enquiryStore';
 import { getAllFleetCategories, addCustomVehicle, deleteVehicle, deleteCategory } from '../utils/vehicleStore';
 import { getBlogs, addBlog, deleteBlog } from '../utils/blogStore';
+import { getSpecialOffer, updateSpecialOffer } from '../utils/offerStore';
+import { getCmsData, updateCmsData } from '../utils/cmsStore';
+import { getSpecialOffer, updateSpecialOffer } from '../utils/offerStore';
 
 export const AdminPage = ({ onBackToHome }) => {
   // Read credentials from environment variables with exact requested defaults
@@ -37,6 +40,43 @@ export const AdminPage = ({ onBackToHome }) => {
   const [blogs, setBlogs] = useState(() => getBlogs());
   const [showAddBlogModal, setShowAddBlogModal] = useState(false);
   const [newBlog, setNewBlog] = useState({ title: '', content: '' });
+
+  // Offers State
+  const [offerText, setOfferText] = useState(() => getSpecialOffer());
+  const [offerSuccessMsg, setOfferSuccessMsg] = useState('');
+
+  const handleSaveOffer = () => {
+    updateSpecialOffer(offerText);
+    setOfferSuccessMsg('Special offer text updated and published instantly!');
+    setTimeout(() => setOfferSuccessMsg(''), 3000);
+  };
+
+  // CMS State
+  const [cmsData, setCmsData] = useState(() => getCmsData());
+  const [cmsSuccessMsg, setCmsSuccessMsg] = useState('');
+
+  const handleSaveCms = (section) => {
+    updateCmsData(section, cmsData[section]);
+    setCmsSuccessMsg(`${section.toUpperCase()} section updated successfully!`);
+    setTimeout(() => setCmsSuccessMsg(''), 3000);
+  };
+
+  const handleCmsImageUpload = (section, key, e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setCmsData(prev => ({
+          ...prev,
+          [section]: {
+            ...prev[section],
+            [key]: reader.result
+          }
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   // New Vehicle Form State
   const [newVehicle, setNewVehicle] = useState({
@@ -481,6 +521,30 @@ export const AdminPage = ({ onBackToHome }) => {
               <span>Travel Blogs</span>
             </button>
 
+            <button
+              onClick={() => setActiveTab('offers')}
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
+                activeTab === 'offers'
+                  ? 'bg-brand-red text-white shadow-sm'
+                  : 'text-slate-700 hover:bg-slate-100'
+              }`}
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>Offers & Promos</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('cms')}
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
+                activeTab === 'cms'
+                  ? 'bg-brand-red text-white shadow-sm'
+                  : 'text-slate-700 hover:bg-slate-100'
+              }`}
+            >
+              <Layers className="w-4 h-4" />
+              <span>Website Content</span>
+            </button>
+
           </div>
         </aside>
 
@@ -899,6 +963,156 @@ export const AdminPage = ({ onBackToHome }) => {
                   </div>
                 ))}
               </div>
+            </div>
+          )}
+
+          {/* TAB 4: OFFERS & PROMOS */}
+          {activeTab === 'offers' && (
+            <div className="space-y-6 animate-smooth-enter">
+              <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 space-y-4">
+                <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
+                  <div className="w-10 h-10 rounded-xl bg-brand-red/10 text-brand-red flex items-center justify-center">
+                    <Sparkles className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-black text-slate-900">Manage Special Offers</h3>
+                    <p className="text-xs text-slate-500 font-medium">Update the scrolling banner text shown on the public website.</p>
+                  </div>
+                </div>
+
+                {offerSuccessMsg && (
+                  <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs rounded-xl font-bold flex items-center gap-2">
+                    <Check className="w-4 h-4" />
+                    {offerSuccessMsg}
+                  </div>
+                )}
+
+                <div className="space-y-2">
+                  <label className="text-slate-700 font-extrabold block text-xs">Banner Scrolling Text</label>
+                  <textarea
+                    rows={3}
+                    value={offerText}
+                    onChange={(e) => setOfferText(e.target.value)}
+                    className="w-full px-4 py-3 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:outline-none text-xs leading-relaxed"
+                  />
+                  <p className="text-[10px] text-slate-500">Changes will instantly reflect in the header bar of the live website without reloading.</p>
+                </div>
+
+                <div className="pt-2">
+                  <button
+                    onClick={handleSaveOffer}
+                    className="px-5 py-2.5 rounded-xl bg-brand-red hover:bg-brand-darkRed text-white font-extrabold shadow-sm transition-all inline-flex items-center gap-1.5 cursor-pointer text-xs"
+                  >
+                    <Check className="w-4 h-4" />
+                    <span>Save & Publish Offer</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 5: WEBSITE CONTENT (CMS) */}
+          {activeTab === 'cms' && (
+            <div className="space-y-6 animate-smooth-enter">
+              
+              <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 space-y-2">
+                <h3 className="text-lg font-black text-slate-900 flex items-center gap-2">
+                  <Layers className="w-5 h-5 text-brand-red" />
+                  <span>Website Content Management (CMS)</span>
+                </h3>
+                <p className="text-xs text-slate-500 font-medium">Update text and images across the public website. Changes apply instantly.</p>
+                {cmsSuccessMsg && (
+                  <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs rounded-xl font-bold flex items-center gap-2 mt-4">
+                    <Check className="w-4 h-4" />
+                    {cmsSuccessMsg}
+                  </div>
+                )}
+              </div>
+
+              {/* HERO SECTION CMS */}
+              <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 space-y-4">
+                <h4 className="text-base font-black text-slate-900 border-b border-slate-100 pb-2">1. Home Page - Hero Section</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                  <div className="space-y-1">
+                    <label className="text-slate-700 font-extrabold block">Title Line 1</label>
+                    <input type="text" value={cmsData.hero.title1} onChange={e => setCmsData({...cmsData, hero: {...cmsData.hero, title1: e.target.value}})} className="w-full px-3 py-2 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:outline-none" />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-slate-700 font-extrabold block">Title Line 2</label>
+                    <input type="text" value={cmsData.hero.title2} onChange={e => setCmsData({...cmsData, hero: {...cmsData.hero, title2: e.target.value}})} className="w-full px-3 py-2 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:outline-none" />
+                  </div>
+                  <div className="space-y-1 md:col-span-2">
+                    <label className="text-slate-700 font-extrabold block">Subtitle / Description</label>
+                    <input type="text" value={cmsData.hero.subtitle} onChange={e => setCmsData({...cmsData, hero: {...cmsData.hero, subtitle: e.target.value}})} className="w-full px-3 py-2 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:outline-none" />
+                  </div>
+                  <div className="space-y-1 md:col-span-2">
+                    <label className="text-slate-700 font-extrabold block">Background Image</label>
+                    <input type="file" accept="image/*" onChange={(e) => handleCmsImageUpload('hero', 'bgImage', e)} className="w-full text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-slate-100 file:text-slate-700 cursor-pointer mb-2" />
+                    {cmsData.hero.bgImage && <img src={cmsData.hero.bgImage} className="h-20 rounded-xl object-cover" alt="Hero Bg" />}
+                  </div>
+                </div>
+                <button onClick={() => handleSaveCms('hero')} className="px-4 py-2 mt-2 rounded-xl bg-brand-red hover:bg-brand-darkRed text-white font-bold text-xs inline-flex items-center gap-1 cursor-pointer">
+                  <Check className="w-4 h-4" /> Save Hero Section
+                </button>
+              </div>
+
+              {/* ABOUT SECTION CMS */}
+              <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 space-y-4">
+                <h4 className="text-base font-black text-slate-900 border-b border-slate-100 pb-2">2. About Section</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                  <div className="space-y-1">
+                    <label className="text-slate-700 font-extrabold block">Title Line 1</label>
+                    <input type="text" value={cmsData.about.title1} onChange={e => setCmsData({...cmsData, about: {...cmsData.about, title1: e.target.value}})} className="w-full px-3 py-2 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:outline-none" />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-slate-700 font-extrabold block">Title Line 2</label>
+                    <input type="text" value={cmsData.about.title2} onChange={e => setCmsData({...cmsData, about: {...cmsData.about, title2: e.target.value}})} className="w-full px-3 py-2 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:outline-none" />
+                  </div>
+                  <div className="space-y-1 md:col-span-2">
+                    <label className="text-slate-700 font-extrabold block">Introduction Paragraph</label>
+                    <textarea rows={3} value={cmsData.about.intro} onChange={e => setCmsData({...cmsData, about: {...cmsData.about, intro: e.target.value}})} className="w-full px-3 py-2 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:outline-none" />
+                  </div>
+                  <div className="space-y-1 md:col-span-2">
+                    <label className="text-slate-700 font-extrabold block">Side Image</label>
+                    <input type="file" accept="image/*" onChange={(e) => handleCmsImageUpload('about', 'image', e)} className="w-full text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-slate-100 file:text-slate-700 cursor-pointer mb-2" />
+                    {cmsData.about.image && <img src={cmsData.about.image} className="h-20 rounded-xl object-cover" alt="About img" />}
+                  </div>
+                </div>
+                <button onClick={() => handleSaveCms('about')} className="px-4 py-2 mt-2 rounded-xl bg-brand-red hover:bg-brand-darkRed text-white font-bold text-xs inline-flex items-center gap-1 cursor-pointer">
+                  <Check className="w-4 h-4" /> Save About Section
+                </button>
+              </div>
+
+              {/* CONTACT & GLOBAL DETAILS CMS */}
+              <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 space-y-4">
+                <h4 className="text-base font-black text-slate-900 border-b border-slate-100 pb-2">3. Global Contact Details</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                  <div className="space-y-1">
+                    <label className="text-slate-700 font-extrabold block">Primary Phone 1</label>
+                    <input type="text" value={cmsData.contact.phone1} onChange={e => setCmsData({...cmsData, contact: {...cmsData.contact, phone1: e.target.value}})} className="w-full px-3 py-2 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:outline-none" />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-slate-700 font-extrabold block">Phone 2</label>
+                    <input type="text" value={cmsData.contact.phone2} onChange={e => setCmsData({...cmsData, contact: {...cmsData.contact, phone2: e.target.value}})} className="w-full px-3 py-2 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:outline-none" />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-slate-700 font-extrabold block">Phone 3</label>
+                    <input type="text" value={cmsData.contact.phone3} onChange={e => setCmsData({...cmsData, contact: {...cmsData.contact, phone3: e.target.value}})} className="w-full px-3 py-2 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:outline-none" />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-slate-700 font-extrabold block">WhatsApp Number (No spaces)</label>
+                    <input type="text" value={cmsData.contact.whatsapp} onChange={e => setCmsData({...cmsData, contact: {...cmsData.contact, whatsapp: e.target.value}})} className="w-full px-3 py-2 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:outline-none" />
+                  </div>
+                  <div className="space-y-1 md:col-span-2">
+                    <label className="text-slate-700 font-extrabold block">Email Address</label>
+                    <input type="email" value={cmsData.contact.email} onChange={e => setCmsData({...cmsData, contact: {...cmsData.contact, email: e.target.value}})} className="w-full px-3 py-2 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:border-brand-red focus:outline-none" />
+                  </div>
+                </div>
+                <button onClick={() => handleSaveCms('contact')} className="px-4 py-2 mt-2 rounded-xl bg-brand-red hover:bg-brand-darkRed text-white font-bold text-xs inline-flex items-center gap-1 cursor-pointer">
+                  <Check className="w-4 h-4" /> Save Contact Details
+                </button>
+              </div>
+
             </div>
           )}
 

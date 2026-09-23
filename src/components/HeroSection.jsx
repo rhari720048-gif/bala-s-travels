@@ -3,8 +3,18 @@ import { MessageCircle, Compass, ShieldCheck } from 'lucide-react';
 import FloatingEnquiryCard from './FloatingEnquiryCard';
 import { openGeneralWhatsApp } from '../utils/whatsapp';
 import { useSEO } from '../utils/useSEO';
+import { getCmsData } from '../utils/cmsStore';
 
 export const HeroSection = ({ onExploreFleet }) => {
+  const [cmsData, setCmsData] = React.useState(() => getCmsData());
+
+  React.useEffect(() => {
+    const handleCmsUpdate = () => {
+      setCmsData(getCmsData());
+    };
+    window.addEventListener('cms_update', handleCmsUpdate);
+    return () => window.removeEventListener('cms_update', handleCmsUpdate);
+  }, []);
   useSEO({
     title: "Bala's Travels | Premier Drop Taxi & Outstation Cabs Across South India",
     description: "Book 24/7 reliable pickup & drop cabs, outstation taxi rentals, airport transfers across Chennai, Coimbatore, Tirupur, Madurai, Bangalore & Kerala. Lowest prices guaranteed.",
@@ -17,7 +27,7 @@ export const HeroSection = ({ onExploreFleet }) => {
       {/* BACKGROUND IMAGE & CINEMATIC OVERLAY */}
       <div className="absolute inset-0 z-0 bg-slate-950">
         <img
-          src="/images/fleet/traveller/background-buses.jpg"
+          src={cmsData.hero.bgImage}
           alt="Bala's Travels Fleet"
           className="w-full h-full object-cover object-center filter brightness-[0.70] contrast-[1.10]"
         />
@@ -41,16 +51,16 @@ export const HeroSection = ({ onExploreFleet }) => {
             {/* STYLISH MAIN HEADING */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.3] flex flex-col items-center justify-center gap-y-2">
               <span className="font-black text-white drop-shadow-md text-2xl sm:text-3xl lg:text-4xl">
-                Over 10 Years of Leadership in Crafting
+                {cmsData.hero.title1}
               </span>
               <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-brand-red to-rose-500 drop-shadow-sm text-center">
-                The Finest Chauffeur-Driven Experiences.
+                {cmsData.hero.title2}
               </span>
             </h1>
 
             {/* DESCRIPTION */}
             <p className="text-sm sm:text-lg text-slate-200 max-w-2xl leading-relaxed font-semibold tracking-wide pt-4 text-center">
-              Luxury, Punctuality & Professionalism — The Balas Standard Since Over a Decade.
+              {cmsData.hero.subtitle}
             </p>
 
             {/* ACTION BUTTONS */}

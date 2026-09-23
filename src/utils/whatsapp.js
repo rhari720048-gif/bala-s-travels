@@ -1,5 +1,7 @@
-export const PHONE_NUMBER = "99400 99347";
-export const WHATSAPP_NUMBER = "919940099347";
+import { getCmsData } from './cmsStore';
+
+export const getPhoneNumber = () => getCmsData().contact.phone1;
+export const getWhatsAppNumber = () => "91" + getCmsData().contact.whatsapp.replace(/\D/g, "");
 
 export const formatWhatsAppMessage = ({ name, phone, pickup, drop, hours, vehicle }) => {
   let message = `Hi Bala's Travels,\n\nI would like to enquire about a trip.\n\n`;
@@ -12,21 +14,21 @@ export const formatWhatsAppMessage = ({ name, phone, pickup, drop, hours, vehicl
   
   message += `\nPlease contact me with more details.`;
 
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  return `https://wa.me/${getWhatsAppNumber()}?text=${encodeURIComponent(message)}`;
 };
 
 export const openGeneralWhatsApp = (customText = "") => {
   const text = customText || "Hi Bala's Travels, I would like to enquire about your Pickup & Drop transportation services across South India.";
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank");
+  window.open(`https://wa.me/${getWhatsAppNumber()}?text=${encodeURIComponent(text)}`, "_blank");
 };
 
 export const openRouteWhatsApp = (from, to) => {
   const message = `Hi Bala's Travels,\n\nI would like to enquire about taxi rental for the route:\n📍 Pickup: ${from}\n🎯 Drop: ${to}\n\nPlease share availability and fare details.`;
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank");
+  window.open(`https://wa.me/${getWhatsAppNumber()}?text=${encodeURIComponent(message)}`, "_blank");
 };
 
 export const openActingDriverWhatsApp = (driverType = "Acting Driver") => {
   const message = `Hi Bala's Travels,\n\nI am looking to book an ${driverType} in Chennai.\nPlease share the availability and charges.`;
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank");
+  window.open(`https://wa.me/${getWhatsAppNumber()}?text=${encodeURIComponent(message)}`, "_blank");
 };
 

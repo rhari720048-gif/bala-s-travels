@@ -1,7 +1,17 @@
 import React from 'react';
 import { ShieldCheck, UserCheck, HeartHandshake } from 'lucide-react';
+import { getCmsData } from '../utils/cmsStore';
 
 export const AboutSection = () => {
+  const [cmsData, setCmsData] = React.useState(() => getCmsData());
+
+  React.useEffect(() => {
+    const handleCmsUpdate = () => {
+      setCmsData(getCmsData());
+    };
+    window.addEventListener('cms_update', handleCmsUpdate);
+    return () => window.removeEventListener('cms_update', handleCmsUpdate);
+  }, []);
   const highlights = [
     {
       icon: ShieldCheck,
@@ -33,14 +43,14 @@ export const AboutSection = () => {
                 ABOUT BALA'S TRAVELS
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
-                Travel Made Simple. <br />
-                <span className="text-slate-900">Journeys Made Comfortable.</span>
+                {cmsData.about.title1} <br />
+                <span className="text-slate-900">{cmsData.about.title2}</span>
               </h2>
             </div>
 
             <div className="space-y-4 text-sm sm:text-base text-slate-600 leading-relaxed">
               <p>
-                Welcome to <strong className="text-slate-900 font-bold">Bala Travels</strong>, your trusted partner for safe, comfortable, and reliable transportation services. We specialize in turning every journey into a seamless experience, whether you are traveling locally or heading out of town.
+                {cmsData.about.intro}
               </p>
               <p>
                 Over the years, we have proudly served countless clients with a diverse range of specialized transportation and event solutions. Our core services include:
@@ -80,7 +90,7 @@ export const AboutSection = () => {
           <div className="lg:col-span-6 relative">
             <div className="relative mx-auto rounded-3xl overflow-hidden shadow-elevated group border border-slate-200">
               <img
-                src="/images/about-fleet.png"
+                src={cmsData.about.image}
                 alt="Bala's Travels Complete Fleet Lineup"
                 className="w-full h-auto object-contain transition-transform duration-700 ease-out group-hover:scale-105"
               />
